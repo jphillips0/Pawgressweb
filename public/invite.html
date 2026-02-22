@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="apple-itunes-app" content="app-id=6752368171" />
+  <title>Opening Pawgress…</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'DM Sans', sans-serif;
+      background: #fff;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+      text-align: center;
+      color: #1a1a1a;
+    }
+    .paw { font-size: 64px; margin-bottom: 16px; }
+    h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+    p  { font-size: 15px; color: #666; line-height: 1.5; margin-bottom: 32px; }
+    .btn {
+      display: block;
+      width: 100%;
+      max-width: 320px;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      margin: 8px auto;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary { background: #FF6B9D; color: #fff; }
+    .btn-secondary { background: #f2f2f7; color: #1a1a1a; }
+  </style>
+</head>
+<body>
+  <div class="paw">🐾</div>
+  <h1>Opening Pawgress…</h1>
+  <p>You've been invited to connect with a pet on Pawgress.<br>Download the app to see all the updates!</p>
+
+  <a id="appstore" class="btn btn-primary" href="https://apps.apple.com/app/pawgress/id6752368171">
+    Download on the App Store
+  </a>
+  <a id="playstore" class="btn btn-secondary" href="https://play.google.com/store/apps/details?id=com.timelinesllc.pawgress">
+    Get it on Google Play
+  </a>
+
+  <script>
+    // Extract invite token from URL path  e.g. /invite/ABC123
+    const token = window.location.pathname.split('/invite/')[1] || '';
+
+    // Try to open the app via custom scheme
+    if (token) {
+      const appLink = 'pawgress://invite/' + token;
+      const start = Date.now();
+
+      window.location.href = appLink;
+
+      // After a short pause, if still on this page the app isn't installed
+      setTimeout(function () {
+        // Only redirect to store if the page is still in focus (app didn't open)
+        if (Date.now() - start < 2500) {
+          const isAndroid = /android/i.test(navigator.userAgent);
+          if (isAndroid) {
+            document.getElementById('playstore').click();
+          }
+          // On iOS, Universal Links handle it automatically; custom scheme is fallback
+        }
+      }, 1500);
+    }
+  </script>
+</body>
+</html>

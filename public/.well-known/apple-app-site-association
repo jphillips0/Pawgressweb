@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["M4S64DM37W.com.timelinesllc.pawgress"],
+        "components": [
+          {
+            "/": "/invite/*",
+            "comment": "Handles Pawgress pet invite deep links"
+          }
+        ]
+      }
+    ]
+  }
+}
