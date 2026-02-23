@@ -23,8 +23,8 @@ export const metadata: Metadata = {
     icon: '/pawgress-logo.png',
     apple: '/pawgress-logo.png',
   },
-  appleItunesApp: {
-    appId: '6752368171',
+  other: {
+    'apple-itunes-app': 'app-id=6752368171',
   },
 };
 
