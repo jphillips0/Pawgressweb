@@ -1,11 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
-import ComingSoonPopup from './ComingSoonPopup';
+import DownloadButton from './DownloadButton';
 
 export default function Features() {
-  const [showPopup, setShowPopup] = useState(false);
   const features = [
     {
       icon: '\u{1F4CB}',
@@ -101,10 +99,10 @@ export default function Features() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-10 lg:mb-12">
-              <button onClick={() => setShowPopup(true)} className="group relative bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg shadow-xl shadow-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/40 transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto text-center overflow-hidden">
-                <span className="relative z-10">Get Started Today</span>
+              <DownloadButton className="group relative bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg shadow-xl shadow-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/40 transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto text-center overflow-hidden">
+                <span className="relative z-10">Download on the App Store</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-indigo-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </button>
+              </DownloadButton>
               
               <Link 
                 href="/mission" 
@@ -132,7 +130,6 @@ export default function Features() {
           </div>
         </div>
       
-      <ComingSoonPopup isOpen={showPopup} onClose={() => setShowPopup(false)} />
     </section>
   );
 }

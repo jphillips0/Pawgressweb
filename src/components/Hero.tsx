@@ -3,14 +3,13 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import SharedNav from './SharedNav';
-import ComingSoonPopup from './ComingSoonPopup';
+import DownloadButton from './DownloadButton';
 
 export default function Hero() {
   const [currentFeatureIndex, setCurrentFeatureIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [translateX, setTranslateX] = useState(0);
-  const [showPopup, setShowPopup] = useState(false);
   const animationRef = useRef<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -84,9 +83,9 @@ export default function Hero() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-start mb-8">
-              <button onClick={() => setShowPopup(true)} className="bg-blue-600 text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center">
-                Get Started Free
-              </button>
+              <DownloadButton className="bg-blue-600 text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center">
+                Download on the App Store
+              </DownloadButton>
               <a href="/about" className="border-2 border-blue-700 text-blue-700 px-8 py-4 rounded-full hover:bg-blue-700 hover:text-white transition-all duration-300 font-semibold text-lg text-center">
                 Learn More
               </a>
@@ -150,7 +149,6 @@ export default function Hero() {
         </svg>
       </div>
       
-      <ComingSoonPopup isOpen={showPopup} onClose={() => setShowPopup(false)} />
     </section>
   );
 }

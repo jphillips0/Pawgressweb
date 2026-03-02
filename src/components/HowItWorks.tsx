@@ -2,60 +2,17 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import ComingSoonPopup from './ComingSoonPopup';
 
 export default function HowItWorks() {
-  const [showPopup, setShowPopup] = useState(false);
   const [currentFeatureIndex, setCurrentFeatureIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [translateX, setTranslateX] = useState(0);
   const animationRef = useRef<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [expandedBuyerSteps, setExpandedBuyerSteps] = useState<Set<number>>(new Set());
-  const [expandedBreederSteps, setExpandedBreederSteps] = useState<Set<number>>(new Set());
-  const [expandedBuyerFeatures, setExpandedBuyerFeatures] = useState<Set<number>>(new Set());
-  const [expandedBreederFeatures, setExpandedBreederFeatures] = useState<Set<number>>(new Set());
+  const [activeTab, setActiveTab] = useState<'buyers' | 'breeders'>('breeders');
 
-  const toggleBuyerStep = (index: number) => {
-    const newSet = new Set(expandedBuyerSteps);
-    if (newSet.has(index)) {
-      newSet.delete(index);
-    } else {
-      newSet.add(index);
-    }
-    setExpandedBuyerSteps(newSet);
-  };
 
-  const toggleBreederStep = (index: number) => {
-    const newSet = new Set(expandedBreederSteps);
-    if (newSet.has(index)) {
-      newSet.delete(index);
-    } else {
-      newSet.add(index);
-    }
-    setExpandedBreederSteps(newSet);
-  };
-
-  const toggleBuyerFeature = (index: number) => {
-    const newSet = new Set(expandedBuyerFeatures);
-    if (newSet.has(index)) {
-      newSet.delete(index);
-    } else {
-      newSet.add(index);
-    }
-    setExpandedBuyerFeatures(newSet);
-  };
-
-  const toggleBreederFeature = (index: number) => {
-    const newSet = new Set(expandedBreederFeatures);
-    if (newSet.has(index)) {
-      newSet.delete(index);
-    } else {
-      newSet.add(index);
-    }
-    setExpandedBreederFeatures(newSet);
-  };
 
   useEffect(() => {
     if (!isDragging) {
@@ -312,336 +269,166 @@ export default function HowItWorks() {
 
       <div className="px-4 sm:px-6 lg:px-8 xl:px-12 max-w-[1800px] mx-auto">
         {/* How It Works Header */}
-        <div className="text-center mb-16 sm:mb-20 lg:mb-24">
-          <div className="inline-flex items-center bg-indigo-50 text-indigo-600 px-4 py-2 sm:px-6 rounded-full text-sm font-semibold tracking-wide mb-6">
-            <span>🚀</span> How It Works
+        <div className="text-center mb-10 sm:mb-14">
+          <div className="inline-flex items-center bg-indigo-50 text-indigo-600 px-4 py-2 sm:px-6 rounded-full text-sm font-semibold tracking-wide mb-5">
+            <span className="mr-2">🚀</span> How It Works
           </div>
-          
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 font-baloo mb-6">
-            How It Works
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 font-baloo mb-4">
+            Simple. Connected. Transparent.
           </h2>
+          <p className="text-lg text-gray-500 max-w-xl mx-auto">
+            Whether you're welcoming a new pet or raising one, Pawgress keeps everyone on the same page.
+          </p>
         </div>
 
-        {/* For Buyers Section */}
-        <div className="mb-12 sm:mb-16 lg:mb-20" id="buyers">
-          <div className="bg-gradient-to-br from-blue-500/5 via-indigo-500/5 to-purple-500/5 rounded-2xl p-6 sm:p-8 lg:p-10 backdrop-blur-sm border border-blue-100/50">
-            <div className="text-center mb-6 sm:mb-8">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 font-baloo mb-4 leading-tight">
-                For Buyers
-              </h3>
-            </div>
+        {/* Tab Switcher */}
+        <div className="flex justify-center mb-12">
+          <div className="relative flex bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-2 gap-2 shadow-xl shadow-blue-500/30">
+            {/* Breeders button — first / default */}
+            <button
+              onClick={() => setActiveTab('breeders')}
+              className={`relative flex items-center gap-3 px-8 py-4 rounded-xl font-bold text-base sm:text-lg transition-all duration-300 ${
+                activeTab === 'breeders'
+                  ? 'bg-white text-indigo-700 shadow-lg scale-[1.03]'
+                  : 'text-white/80 hover:text-white hover:bg-white/15'
+              }`}
+            >
+              <span className="text-2xl">🌱</span>
+              <span>For Breeders</span>
+            </button>
+            {/* Buyers button */}
+            <button
+              onClick={() => setActiveTab('buyers')}
+              className={`relative flex items-center gap-3 px-8 py-4 rounded-xl font-bold text-base sm:text-lg transition-all duration-300 ${
+                activeTab === 'buyers'
+                  ? 'bg-white text-blue-700 shadow-lg scale-[1.03]'
+                  : 'text-white/80 hover:text-white hover:bg-white/15'
+              }`}
+            >
+              <span className="text-2xl">🏠</span>
+              <span>For Buyers</span>
+            </button>
+          </div>
+        </div>
 
-            {/* Buyer Steps */}
-            <div className="mb-0">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        {/* For Buyers Panel */}
+        {activeTab === 'buyers' && (
+          <div key="buyers" id="buyers" className="panel-fade">
+            {/* Steps timeline */}
+            <div className="relative max-w-2xl mx-auto mb-10">
+              <div className="absolute left-[27px] sm:left-[31px] top-4 bottom-4 w-0.5 bg-gradient-to-b from-blue-300 via-indigo-300 to-purple-300" />
+              <div className="space-y-5">
                 {buyerSteps.map((step, index) => (
-                  <div 
-                    key={index} 
-                    className="group relative"
-                  >
-                    <div className="relative bg-white rounded-xl shadow-md shadow-gray-900/5 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 border border-gray-100/50 overflow-hidden h-full">
-                      {/* Gradient overlay on hover */}
-                      <div className={`absolute inset-0 bg-gradient-to-br ${step.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
-                      
-                      {/* Clickable header */}
-                      <button
-                        onClick={() => toggleBuyerStep(index)}
-                        className="w-full text-left p-4 sm:p-6 focus:outline-none rounded-xl"
-                      >
-                        {/* Icon in colored box */}
-                        <div className="relative flex justify-between items-start mb-3 sm:mb-4">
-                          <div className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br ${step.color} rounded-xl flex items-center justify-center text-xl sm:text-2xl shadow-lg shadow-blue-500/20`}>
-                            {step.icon}
-                          </div>
-                          <div className={`transition-transform duration-300 text-gray-400 ${expandedBuyerSteps.has(index) ? 'rotate-180' : ''}`}>
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                            </svg>
-                          </div>
-                        </div>
-
-                        {/* Content */}
-                        <h4 className="relative text-base sm:text-lg font-bold text-gray-900 leading-snug">
-                          {step.title}
-                        </h4>
-                      </button>
-                      
-                      {/* Expandable description */}
-                      <div 
-                        className={`overflow-hidden transition-all duration-300 ${
-                          expandedBuyerSteps.has(index) ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                        }`}
-                      >
-                        <p className="relative text-gray-600 leading-relaxed text-sm sm:text-base px-4 sm:px-6 pb-4 sm:pb-6">
-                          {step.description}
-                        </p>
-                      </div>
-
-                      {/* Decorative corner element */}
-                      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-500/5 to-transparent rounded-bl-[3rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                  <div key={index} className="relative flex gap-5 sm:gap-6 items-start">
+                    <div className={`relative flex-shrink-0 w-14 h-14 bg-gradient-to-br ${step.color} rounded-2xl flex flex-col items-center justify-center shadow-lg shadow-blue-500/20 z-10`}>
+                      <span className="text-white text-[10px] font-bold opacity-60 leading-none tracking-wider">{step.number}</span>
+                      <span className="text-2xl leading-none">{step.icon}</span>
+                    </div>
+                    <div className="flex-1 bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md hover:border-blue-100 transition-all duration-300 group">
+                      <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-1.5 leading-snug group-hover:text-blue-700 transition-colors">{step.title}</h4>
+                      <p className="text-sm sm:text-base text-gray-500 leading-relaxed">{step.description}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Search & Swipe Features */}
-            <div className="relative mt-6 sm:mt-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                {/* Search Feature */}
-                <div className="group relative bg-white rounded-xl shadow-md shadow-gray-900/5 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 border border-gray-100/50 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-indigo-600 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
-                  
-                  <button
-                    onClick={() => toggleBuyerFeature(0)}
-                    className="w-full text-left p-4 sm:p-6 focus:outline-none rounded-xl"
-                  >
-                    <div className="relative flex items-center justify-between mb-3 sm:mb-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center text-xl sm:text-2xl shadow-lg shadow-blue-500/20">
-                          🔍
-                        </div>
-                        <h5 className="text-base sm:text-lg font-bold text-gray-900">
-                          Smart Search
-                        </h5>
-                      </div>
-                      <div className={`transition-transform duration-300 text-gray-400 ${expandedBuyerFeatures.has(0) ? 'rotate-180' : ''}`}>
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </div>
-                    </div>
-                  </button>
-                  
-                  <div 
-                    className={`overflow-hidden transition-all duration-300 ${
-                      expandedBuyerFeatures.has(0) ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                    }`}
-                  >
-                    <p className="relative text-sm sm:text-base text-gray-600 leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6">
-                      Browse available pets with powerful filters by breed, location, age, and more. 
-                      Find exactly what you're looking for with our advanced search functionality that 
-                      connects you directly with ethical breeders.
-                    </p>
-                  </div>
-                  
-                  <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-tl from-blue-500/5 to-transparent rounded-tl-[3rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            {/* Feature highlight cards */}
+            <div className="max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+              <div className="flex items-start gap-4 bg-blue-50 border border-blue-100 rounded-2xl p-5 hover:shadow-md transition-all duration-300">
+                <div className="w-12 h-12 flex-shrink-0 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center text-2xl shadow-md">
+                  🔍
                 </div>
-
-                {/* Swipe Feature */}
-                <div className="group relative bg-white rounded-xl shadow-md shadow-gray-900/5 hover:shadow-lg hover:shadow-pink-500/10 transition-all duration-300 border border-gray-100/50 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-pink-500 to-purple-600 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
-                  
-                  <button
-                    onClick={() => toggleBuyerFeature(1)}
-                    className="w-full text-left p-4 sm:p-6 focus:outline-none rounded-xl"
-                  >
-                    <div className="relative flex items-center justify-between mb-3 sm:mb-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl flex items-center justify-center text-xl sm:text-2xl shadow-lg shadow-pink-500/20">
-                          💕
-                        </div>
-                        <h5 className="text-base sm:text-lg font-bold text-gray-900">
-                          Swipe to Match
-                        </h5>
-                      </div>
-                      <div className={`transition-transform duration-300 text-gray-400 ${expandedBuyerFeatures.has(1) ? 'rotate-180' : ''}`}>
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </div>
-                    </div>
-                  </button>
-                  
-                  <div 
-                    className={`overflow-hidden transition-all duration-300 ${
-                      expandedBuyerFeatures.has(1) ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                    }`}
-                  >
-                    <p className="relative text-sm sm:text-base text-gray-600 leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6">
-                      Swipe through adorable pet profiles in an intuitive, fun way. 
-                      Like what you see? Save favorites and connect with breeders instantly. 
-                      It's the modern way to find your new family member.
-                    </p>
-                  </div>
-                  
-                  <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-tl from-pink-500/5 to-transparent rounded-tl-[3rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <div>
+                  <h5 className="font-bold text-gray-900 mb-1">Smart Search</h5>
+                  <p className="text-sm text-gray-500 leading-relaxed">Filter by breed, location, age, and more to find your perfect match.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4 bg-pink-50 border border-pink-100 rounded-2xl p-5 hover:shadow-md transition-all duration-300">
+                <div className="w-12 h-12 flex-shrink-0 bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl flex items-center justify-center text-2xl shadow-md">
+                  💕
+                </div>
+                <div>
+                  <h5 className="font-bold text-gray-900 mb-1">Swipe to Match</h5>
+                  <p className="text-sm text-gray-500 leading-relaxed">Browse adorable profiles and connect with ethical breeders instantly.</p>
                 </div>
               </div>
             </div>
 
-            {/* Button */}
-            <div className="flex justify-center mt-6 sm:mt-8">
-              <Link href="/for-buyers">
-                <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 sm:px-8 py-3 rounded-full font-semibold text-sm sm:text-base shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 transform hover:-translate-y-0.5">
-                  See the full workflow
-                </button>
+            <div className="flex justify-center">
+              <Link
+                href="/for-buyers"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-3.5 rounded-full font-semibold shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/35 transition-all duration-300 hover:-translate-y-0.5"
+              >
+                See the full buyer workflow
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
               </Link>
             </div>
           </div>
-        </div>
+        )}
 
-        {/* For Breeders Section */}
-        <div className="mb-12 sm:mb-16 lg:mb-20" id="breeders">
-          <div className="bg-gradient-to-br from-emerald-500/5 via-orange-500/5 to-cyan-500/5 rounded-2xl p-6 sm:p-8 lg:p-10 backdrop-blur-sm border border-emerald-100/50">
-            <div className="text-center mb-6 sm:mb-8">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 font-baloo mb-4 leading-tight">
-                For Breeders
-              </h3>
-            </div>
-
-            {/* Breeder Steps */}
-            <div className="mb-0">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        {/* For Breeders Panel */}
+        {activeTab === 'breeders' && (
+          <div key="breeders" id="breeders" className="panel-fade">
+            {/* Steps timeline */}
+            <div className="relative max-w-2xl mx-auto mb-10">
+              <div className="absolute left-[27px] sm:left-[31px] top-4 bottom-4 w-0.5 bg-gradient-to-b from-emerald-300 via-teal-300 to-cyan-300" />
+              <div className="space-y-5">
                 {breederSteps.map((step, index) => (
-                  <div 
-                    key={index} 
-                    className="group relative"
-                  >
-                    <div className="relative bg-white rounded-xl shadow-md shadow-gray-900/5 hover:shadow-lg hover:shadow-emerald-500/10 transition-all duration-300 border border-gray-100/50 overflow-hidden h-full">
-                      {/* Gradient overlay on hover */}
-                      <div className={`absolute inset-0 bg-gradient-to-br ${step.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
-                      
-                      {/* Clickable header */}
-                      <button
-                        onClick={() => toggleBreederStep(index)}
-                        className="w-full text-left p-4 sm:p-6 focus:outline-none rounded-xl"
-                      >
-                        {/* Icon in colored box */}
-                        <div className="relative flex justify-between items-start mb-3 sm:mb-4">
-                          <div className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br ${step.color} rounded-xl flex items-center justify-center text-xl sm:text-2xl shadow-lg shadow-emerald-500/20`}>
-                            {step.icon}
-                          </div>
-                          <div className={`transition-transform duration-300 text-gray-400 ${expandedBreederSteps.has(index) ? 'rotate-180' : ''}`}>
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                            </svg>
-                          </div>
-                        </div>
-
-                        {/* Content */}
-                        <h4 className="relative text-base sm:text-lg font-bold text-gray-900 leading-snug">
-                          {step.title}
-                        </h4>
-                      </button>
-                      
-                      {/* Expandable description */}
-                      <div 
-                        className={`overflow-hidden transition-all duration-300 ${
-                          expandedBreederSteps.has(index) ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                        }`}
-                      >
-                        <p className="relative text-gray-600 leading-relaxed text-sm sm:text-base px-4 sm:px-6 pb-4 sm:pb-6">
-                          {step.description}
-                        </p>
-                      </div>
-
-                      {/* Decorative corner element */}
-                      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-emerald-500/5 to-transparent rounded-bl-[3rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                  <div key={index} className="relative flex gap-5 sm:gap-6 items-start">
+                    <div className={`relative flex-shrink-0 w-14 h-14 bg-gradient-to-br ${step.color} rounded-2xl flex flex-col items-center justify-center shadow-lg shadow-emerald-500/20 z-10`}>
+                      <span className="text-white text-[10px] font-bold opacity-60 leading-none tracking-wider">{step.number}</span>
+                      <span className="text-2xl leading-none">{step.icon}</span>
+                    </div>
+                    <div className="flex-1 bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md hover:border-emerald-100 transition-all duration-300 group">
+                      <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-1.5 leading-snug group-hover:text-emerald-700 transition-colors">{step.title}</h4>
+                      <p className="text-sm sm:text-base text-gray-500 leading-relaxed">{step.description}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Marketing Features */}
-            <div className="relative mt-6 sm:mt-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                {/* Profile Marketing */}
-                <div className="group relative bg-white rounded-xl shadow-md shadow-gray-900/5 hover:shadow-lg hover:shadow-orange-500/10 transition-all duration-300 border border-gray-100/50 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-red-600 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
-                  
-                  <button
-                    onClick={() => toggleBreederFeature(0)}
-                    className="w-full text-left p-4 sm:p-6 focus:outline-none rounded-xl"
-                  >
-                    <div className="relative flex items-center justify-between mb-3 sm:mb-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex items-center justify-center text-xl sm:text-2xl shadow-lg shadow-orange-500/20">
-                          👤
-                        </div>
-                        <h5 className="text-base sm:text-lg font-bold text-gray-900">
-                          Profile Showcase
-                        </h5>
-                      </div>
-                      <div className={`transition-transform duration-300 text-gray-400 ${expandedBreederFeatures.has(0) ? 'rotate-180' : ''}`}>
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </div>
-                    </div>
-                  </button>
-                  
-                  <div 
-                    className={`overflow-hidden transition-all duration-300 ${
-                      expandedBreederFeatures.has(0) ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                    }`}
-                  >
-                    <p className="relative text-sm sm:text-base text-gray-600 leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6">
-                      Display your available pets directly on your breeder profile. Potential buyers can 
-                      browse your entire catalog, view detailed information, and reach out instantly. 
-                      Your professional storefront is always open.
-                    </p>
-                  </div>
-                  
-                  <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-tl from-orange-500/5 to-transparent rounded-tl-[3rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            {/* Feature highlight cards */}
+            <div className="max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+              <div className="flex items-start gap-4 bg-orange-50 border border-orange-100 rounded-2xl p-5 hover:shadow-md transition-all duration-300">
+                <div className="w-12 h-12 flex-shrink-0 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex items-center justify-center text-2xl shadow-md">
+                  👤
                 </div>
-
-                {/* Swipe Page Marketing */}
-                <div className="group relative bg-white rounded-xl shadow-md shadow-gray-900/5 hover:shadow-lg hover:shadow-pink-500/10 transition-all duration-300 border border-gray-100/50 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-pink-500 to-purple-600 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
-                  
-                  <button
-                    onClick={() => toggleBreederFeature(1)}
-                    className="w-full text-left p-4 sm:p-6 focus:outline-none rounded-xl"
-                  >
-                    <div className="relative flex items-center justify-between mb-3 sm:mb-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl flex items-center justify-center text-xl sm:text-2xl shadow-lg shadow-pink-500/20">
-                          ✨
-                        </div>
-                        <h5 className="text-base sm:text-lg font-bold text-gray-900">
-                          Swipe Discovery
-                        </h5>
-                      </div>
-                      <div className={`transition-transform duration-300 text-gray-400 ${expandedBreederFeatures.has(1) ? 'rotate-180' : ''}`}>
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </div>
-                    </div>
-                  </button>
-                  
-                  <div 
-                    className={`overflow-hidden transition-all duration-300 ${
-                      expandedBreederFeatures.has(1) ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                    }`}
-                  >
-                    <p className="relative text-sm sm:text-base text-gray-600 leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6">
-                      Get featured on our swipe page where thousands of potential buyers discover their 
-                      perfect pet daily. Increase visibility, generate more interest, and connect with 
-                      qualified buyers who are actively searching.
-                    </p>
-                  </div>
-                  
-                  <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-tl from-pink-500/5 to-transparent rounded-tl-[3rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <div>
+                  <h5 className="font-bold text-gray-900 mb-1">Profile Showcase</h5>
+                  <p className="text-sm text-gray-500 leading-relaxed">Display your pets on your breeder profile — your storefront is always open.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4 bg-purple-50 border border-purple-100 rounded-2xl p-5 hover:shadow-md transition-all duration-300">
+                <div className="w-12 h-12 flex-shrink-0 bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl flex items-center justify-center text-2xl shadow-md">
+                  ✨
+                </div>
+                <div>
+                  <h5 className="font-bold text-gray-900 mb-1">Swipe Discovery</h5>
+                  <p className="text-sm text-gray-500 leading-relaxed">Get featured where buyers discover their perfect pet daily.</p>
                 </div>
               </div>
             </div>
 
-            {/* Button */}
-            <div className="flex justify-center mt-6 sm:mt-8">
-              <Link href="/for-breeders">
-                <button className="bg-gradient-to-r from-emerald-600 to-green-600 text-white px-6 sm:px-8 py-3 rounded-full font-semibold text-sm sm:text-base shadow-lg shadow-emerald-500/30 hover:shadow-xl hover:shadow-emerald-500/40 transition-all duration-300 transform hover:-translate-y-0.5">
-                  See the full workflow
-                </button>
+            <div className="flex justify-center">
+              <Link
+                href="/for-breeders"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-green-600 text-white px-8 py-3.5 rounded-full font-semibold shadow-lg shadow-emerald-500/25 hover:shadow-xl hover:shadow-emerald-500/35 transition-all duration-300 hover:-translate-y-0.5"
+              >
+                See the full breeder workflow
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
               </Link>
             </div>
-
           </div>
-        </div>
+        )}
 
         {/* Decorative separator */}
+        <div className="mb-12 sm:mb-16 lg:mb-20" />
         <div className="flex items-center justify-center my-16 sm:my-20 lg:my-24">
           <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
           <div className="px-6">
@@ -681,6 +468,13 @@ export default function HowItWorks() {
 
       </div>
 
+      <style jsx>{`
+        @keyframes panelFade {
+          from { opacity: 0; transform: translateY(10px); }
+          to   { opacity: 1; transform: translateY(0);    }
+        }
+        .panel-fade { animation: panelFade 0.3s ease-out both; }
+      `}</style>
     </section>
   );
 }

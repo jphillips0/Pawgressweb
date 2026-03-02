@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Baloo_2 } from 'next/font/google';
 import SharedNav from '@/components/SharedNav';
 import Footer from '@/components/Footer';
-import ComingSoonPopup from '@/components/ComingSoonPopup';
+import DownloadButton from '@/components/DownloadButton';
 
 const baloo = Baloo_2({
   subsets: ['latin'],
@@ -15,7 +15,6 @@ const baloo = Baloo_2({
 
 export default function FAQPage() {
   const [openItems, setOpenItems] = useState<string[]>([]);
-  const [showPopup, setShowPopup] = useState(false);
 
   const toggleItem = (id: string) => {
     setOpenItems(prev => 
@@ -549,15 +548,14 @@ export default function FAQPage() {
             <a href="mailto:dev@pawgressapp.com" className="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-50 transition-colors">
               Contact Support
             </a>
-            <button onClick={() => setShowPopup(true)} className="bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-800 transition-colors border-2 border-white">
-              Get Started Free
-            </button>
+            <DownloadButton className="bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-800 transition-colors border-2 border-white">
+              Download on the App Store
+            </DownloadButton>
           </div>
         </div>
       </section>
 
       <Footer />
-      <ComingSoonPopup isOpen={showPopup} onClose={() => setShowPopup(false)} />
     </main>
   );
 }

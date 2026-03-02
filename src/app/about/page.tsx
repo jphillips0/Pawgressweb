@@ -4,8 +4,8 @@ import Image from 'next/image';
 import SharedNav from '@/components/SharedNav';
 import Link from 'next/link';
 import { Baloo_2 } from 'next/font/google';
-import { useState } from 'react';
-import ComingSoonPopup from '@/components/ComingSoonPopup';
+import DownloadButton from '@/components/DownloadButton';
+
 
 const baloo = Baloo_2({
   subsets: ['latin'],
@@ -13,7 +13,6 @@ const baloo = Baloo_2({
 });
 
 export default function AboutPage() {
-  const [showPopup, setShowPopup] = useState(false);
   return (
     <main className="relative min-h-screen w-full bg-gradient-to-b from-blue-50 via-indigo-50/30 to-white">
       <SharedNav />
@@ -263,10 +262,10 @@ export default function AboutPage() {
               relationships stronger.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-              <button onClick={() => setShowPopup(true)} className="group relative bg-blue-600 text-white px-8 py-4 sm:px-10 sm:py-5 rounded-full hover:bg-blue-700 transition-all duration-300 font-semibold text-lg sm:text-xl text-center shadow-lg hover:shadow-xl hover:scale-105">
-                <span className="relative z-10">Get Started Today</span>
+              <DownloadButton className="group relative bg-blue-600 text-white px-8 py-4 sm:px-10 sm:py-5 rounded-full hover:bg-blue-700 transition-all duration-300 font-semibold text-lg sm:text-xl text-center shadow-lg hover:shadow-xl hover:scale-105">
+                <span className="relative z-10">Download on the App Store</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-indigo-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
-              </button>
+              </DownloadButton>
               <Link href="/mission" className="group relative border-2 border-blue-600 text-blue-600 px-8 py-4 sm:px-10 sm:py-5 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 font-semibold text-lg sm:text-xl text-center shadow-lg hover:shadow-xl hover:scale-105">
                 <span className="relative z-10">Learn More About Our Mission</span>
               </Link>
@@ -275,7 +274,6 @@ export default function AboutPage() {
         </div>
       </div>
       
-      <ComingSoonPopup isOpen={showPopup} onClose={() => setShowPopup(false)} />
     </main>
   );
 }

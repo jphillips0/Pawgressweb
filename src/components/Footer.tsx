@@ -1,11 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
-import ComingSoonPopup from './ComingSoonPopup';
 
 export default function Footer() {
-  const [showPopup, setShowPopup] = useState(false);
   const currentYear = new Date().getFullYear();
 
   return (
@@ -127,7 +124,6 @@ export default function Footer() {
         </div>
       </div>
       
-      <ComingSoonPopup isOpen={showPopup} onClose={() => setShowPopup(false)} />
     </footer>
   );
 }
