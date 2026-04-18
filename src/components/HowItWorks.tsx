@@ -2,6 +2,9 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
+import { animate, stagger, createSpring } from 'animejs';
+import { useInView } from '@/hooks/useInView';
 
 export default function HowItWorks() {
   const [currentFeatureIndex, setCurrentFeatureIndex] = useState(0);
@@ -11,6 +14,102 @@ export default function HowItWorks() {
   const animationRef = useRef<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState<'buyers' | 'breeders'>('breeders');
+
+  // Refs for scroll-triggered & ambient animations
+  const stepsRef = useRef<HTMLDivElement>(null);
+  const whatDoesRef = useRef<HTMLDivElement>(null);
+  const whatIsRef = useRef<HTMLDivElement>(null);
+  const transparencyRef = useRef<HTMLDivElement>(null);
+  const decoBallsRef = useRef<HTMLDivElement>(null);
+  const whatDoesBallsRef = useRef<HTMLDivElement>(null);
+
+  const stepsInView = useInView(stepsRef, { threshold: 0.15 });
+  const whatDoesInView = useInView(whatDoesRef, { threshold: 0.2 });
+  const whatIsInView = useInView(whatIsRef, { threshold: 0.2 });
+  const transparencyInView = useInView(transparencyRef, { threshold: 0.2 });
+
+  // Ambient orbital motion for decorative balls
+  useEffect(() => {
+    const groups = [decoBallsRef.current, whatDoesBallsRef.current].filter(Boolean) as HTMLElement[];
+    groups.forEach((group) => {
+      const balls = group.querySelectorAll<HTMLElement>('.deco-ball');
+      balls.forEach((ball, i) => {
+        const radius = 14 + i * 6;
+        animate(ball, {
+          translateX: [0, radius, 0, -radius, 0],
+          translateY: [0, -radius * 1.2, 0, radius * 1.2, 0],
+          duration: 5500 + i * 700,
+          loop: true,
+          ease: 'inOutSine',
+          delay: i * 250,
+        });
+        animate(ball, {
+          scale: [1, 1.3, 1],
+          duration: 2400 + i * 350,
+          loop: true,
+          ease: 'inOutQuad',
+        });
+      });
+    });
+  }, []);
+
+  // Step + feature-highlight entry animations are handled per-element via framer-motion
+  // (initial/animate on each card). Avoid animejs here because AnimatePresence mode="wait"
+  // unmounts the old panel before the new cards exist in the DOM, causing inline opacity:0
+  // to get stuck. The stepsInView ref is still kept for layout purposes.
+  void stepsInView;
+
+  // Animate "What Pawgress Does" panel
+  useEffect(() => {
+    if (!whatDoesInView || !whatDoesRef.current) return;
+    const heading = whatDoesRef.current.querySelector<HTMLElement>('.wpd-heading');
+    const text = whatDoesRef.current.querySelector<HTMLElement>('.wpd-text');
+    const img = whatDoesRef.current.querySelector<HTMLElement>('.wpd-image');
+    if (heading) animate(heading, { opacity: [0, 1], translateY: [30, 0], duration: 800, ease: 'out(3)' });
+    if (text) animate(text, { opacity: [0, 1], translateY: [20, 0], duration: 800, delay: 200, ease: 'out(3)' });
+    if (img) animate(img, {
+      opacity: [0, 1],
+      scale: [0.85, 1],
+      duration: 1100,
+      delay: 400,
+      ease: createSpring({ stiffness: 90, damping: 12 }),
+    });
+  }, [whatDoesInView]);
+
+  // Animate "What Pawgress Is" paragraphs
+  useEffect(() => {
+    if (!whatIsInView || !whatIsRef.current) return;
+    const items = whatIsRef.current.querySelectorAll<HTMLElement>('.wis-item');
+    items.forEach((el) => { el.style.opacity = '0'; });
+    animate(items, {
+      opacity: [0, 1],
+      translateY: [25, 0],
+      duration: 800,
+      delay: stagger(180),
+      ease: 'out(3)',
+    });
+  }, [whatIsInView]);
+
+  // Animate transparency section
+  useEffect(() => {
+    if (!transparencyInView || !transparencyRef.current) return;
+    const img = transparencyRef.current.querySelector<HTMLElement>('.tr-image');
+    const content = transparencyRef.current.querySelectorAll<HTMLElement>('.tr-content > *');
+    if (img) animate(img, {
+      opacity: [0, 1],
+      translateX: [-40, 0],
+      duration: 1000,
+      ease: createSpring({ stiffness: 90, damping: 14 }),
+    });
+    content.forEach((el) => { el.style.opacity = '0'; });
+    animate(content, {
+      opacity: [0, 1],
+      translateX: [40, 0],
+      duration: 800,
+      delay: stagger(150, { start: 200 }),
+      ease: 'out(3)',
+    });
+  }, [transparencyInView]);
 
 
 
@@ -92,6 +191,20 @@ export default function HowItWorks() {
       icon: '\u{1F4CB}',
       color: 'from-emerald-500 to-green-600',
     },
+    {
+      number: '05',
+      title: 'Smart Search',
+      description: 'Filter by breed, location, age, and more to find your perfect match.',
+      icon: '\u{1F50D}',
+      color: 'from-blue-500 to-indigo-600',
+    },
+    {
+      number: '06',
+      title: 'Swipe to Match',
+      description: 'Browse adorable profiles and connect with ethical breeders instantly.',
+      icon: '\u{1F495}',
+      color: 'from-pink-500 to-purple-600',
+    },
   ];
 
   const breederSteps = [
@@ -122,6 +235,20 @@ export default function HowItWorks() {
       description: 'Keep everything organized in one place for clear, focused communication.',
       icon: '\u{1F4AC}',
       color: 'from-purple-500 to-pink-600',
+    },
+    {
+      number: '05',
+      title: 'Profile Showcase',
+      description: 'Display your pets on your breeder profile — your storefront is always open.',
+      icon: '\u{1F464}',
+      color: 'from-orange-500 to-red-600',
+    },
+    {
+      number: '06',
+      title: 'Swipe Discovery',
+      description: 'Get featured where buyers discover their perfect pet daily.',
+      icon: '\u{2728}',
+      color: 'from-pink-500 to-purple-600',
     },
   ];
 
@@ -195,70 +322,269 @@ export default function HowItWorks() {
 
       <div className="px-4 sm:px-6 lg:px-8 xl:px-12 max-w-[1800px] mx-auto">
         
-        {/* What Pawgress Does Section */}
-        <div className="mb-20 sm:mb-24 lg:mb-32">
-          <div className="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-3xl lg:rounded-[2.5rem] p-8 sm:p-12 lg:p-16 backdrop-blur-sm border border-blue-100/50 overflow-hidden shadow-xl shadow-blue-900/5">
-            {/* Decorative background elements */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-400/10 to-transparent rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-indigo-400/10 to-transparent rounded-full blur-3xl"></div>
-            
-            {/* Animated bouncing balls */}
-            <div className="absolute top-8 right-12 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full opacity-70 animate-bounce shadow-lg" style={{animationDelay: '0s'}}></div>
-            <div className="absolute top-16 left-16 w-5 h-5 bg-gradient-to-br from-pink-400 to-rose-400 rounded-full opacity-70 animate-bounce shadow-lg" style={{animationDelay: '0.2s'}}></div>
-            <div className="absolute bottom-20 right-20 w-7 h-7 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full opacity-60 animate-bounce shadow-lg" style={{animationDelay: '0.4s'}}></div>
-            
-            {/* Floating emojis */}
-            <div className="absolute top-12 left-8 text-3xl opacity-40 animate-pulse">🐾</div>
-            <div className="absolute bottom-12 right-8 text-2xl opacity-40 animate-pulse" style={{animationDelay: '0.5s'}}>💙</div>
-            
-            <div className="relative text-center max-w-4xl mx-auto mb-12">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 font-baloo">
-                What Pawgress Does
-              </h2>
-              <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
-                Pawgress organizes the communication between breeder and buyer. Breeders post updates to one or multiple pets, and those updates automatically appear in their chat and timeline. Buyers connect to their specific pet and chat directly with the breeder on that pet's page, keeping conversations clear, organized, and easy to find.
-              </p>
+        {/* What Pawgress Does Section - Split layout with floating chips */}
+        <div ref={whatDoesRef} className="mb-20 sm:mb-24 lg:mb-32">
+          <div className="relative rounded-3xl lg:rounded-[2.5rem] border border-white/80 overflow-hidden shadow-2xl shadow-indigo-900/15"
+            style={{
+              background:
+                'linear-gradient(135deg, #eef2ff 0%, #f5f3ff 30%, #fdf2f8 65%, #fef3c7 100%)',
+            }}
+          >
+            {/* Soft glow accents */}
+            <div aria-hidden className="absolute -top-32 -right-32 w-96 h-96 rounded-full opacity-60 blur-3xl"
+              style={{ background: 'radial-gradient(closest-side, rgba(99,102,241,0.5), transparent)' }} />
+            <div aria-hidden className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full opacity-55 blur-3xl"
+              style={{ background: 'radial-gradient(closest-side, rgba(168,85,247,0.45), transparent)' }} />
+            <div aria-hidden className="absolute top-1/3 right-1/4 w-80 h-80 rounded-full opacity-40 blur-3xl"
+              style={{ background: 'radial-gradient(closest-side, rgba(244,114,182,0.4), transparent)' }} />
+            <div aria-hidden className="absolute bottom-1/4 right-1/3 w-72 h-72 rounded-full opacity-35 blur-3xl"
+              style={{ background: 'radial-gradient(closest-side, rgba(56,189,248,0.45), transparent)' }} />
+            {/* Top inner sheen */}
+            <div aria-hidden className="absolute inset-x-0 top-0 h-32 pointer-events-none"
+              style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.6), transparent)' }} />
+
+            <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center p-8 sm:p-12 lg:p-16">
+              {/* Left: copy */}
+              <div>
+                <div className="wpd-heading inline-flex items-center gap-2 bg-blue-50 text-blue-700 border border-blue-100 px-4 py-1.5 rounded-full text-sm font-semibold mb-5" style={{ opacity: 0 }}>
+                  <span>🐾</span> What Pawgress Does
+                </div>
+                <h2 className="wpd-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-5 font-baloo tracking-tight leading-[1.05]" style={{ opacity: 0 }}>
+                  One place for{' '}
+                  <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">every pet's story</span>
+                </h2>
+                <p className="wpd-text text-lg text-gray-600 leading-relaxed mb-8" style={{ opacity: 0 }}>
+                  Pawgress organizes the communication between breeder and buyer. Breeders post updates to one or multiple pets, and those updates automatically appear in their chat and timeline. Buyers connect to their specific pet and chat directly with the breeder on that pet's page, keeping conversations clear, organized, and easy to find.
+                </p>
+
+                {/* Feature pills */}
+                <div className="wpd-text flex flex-wrap gap-2.5" style={{ opacity: 0 }}>
+                  {[
+                    { i: '🔗', t: 'Per-pet invite links' },
+                    { i: '📸', t: 'Auto-built timeline' },
+                    { i: '💬', t: 'Focused chats' },
+                    { i: '📦', t: 'Bulk updates' },
+                    { i: '🏥', t: 'Health records' },
+                  ].map((p) => (
+                    <motion.span
+                      key={p.t}
+                      whileHover={{ y: -2, scale: 1.04 }}
+                      transition={{ type: 'spring', stiffness: 350, damping: 20 }}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-gray-200 text-sm font-semibold text-gray-700 shadow-sm hover:border-blue-300 hover:shadow-md transition-shadow"
+                    >
+                      <span>{p.i}</span> {p.t}
+                    </motion.span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right: image with floating chips */}
+              <div className="relative">
+                <motion.img
+                  src="https://pyv.hmu.temporary.site/wp-content/uploads/2026/01/cute-pet-collage-isolated-2-980x389.png"
+                  alt="Cute pets collage"
+                  style={{ opacity: 0 }}
+                  className="wpd-image relative w-full rounded-2xl shadow-2xl shadow-blue-900/15"
+                  whileHover={{ scale: 1.02, rotate: 0.5 }}
+                  transition={{ type: 'spring', stiffness: 200, damping: 18 }}
+                />
+
+                {/* Floating chips around image */}
+                <motion.div
+                  className="absolute -top-4 -left-4 sm:-left-6 bg-white rounded-2xl shadow-xl border border-gray-100 px-4 py-2.5 flex items-center gap-2.5"
+                  initial={{ opacity: 0, y: -10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4, duration: 0.5 }}
+                  animate={{ y: [0, -6, 0] }}
+                >
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white">📈</div>
+                  <div>
+                    <div className="text-xs text-gray-500 font-medium">Weight</div>
+                    <div className="text-sm font-bold text-gray-900">+0.4 kg this week</div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  className="absolute -bottom-4 -right-4 sm:-right-6 bg-white rounded-2xl shadow-xl border border-gray-100 px-4 py-2.5 flex items-center gap-2.5"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.6, duration: 0.5 }}
+                  animate={{ y: [0, 6, 0] }}
+                >
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white">💬</div>
+                  <div>
+                    <div className="text-xs text-gray-500 font-medium">New message</div>
+                    <div className="text-sm font-bold text-gray-900">From Sarah · Buddy</div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  className="hidden sm:flex absolute top-1/2 -right-6 -translate-y-1/2 bg-white rounded-2xl shadow-xl border border-gray-100 px-3.5 py-2 items-center gap-2"
+                  initial={{ opacity: 0, x: 10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.8, duration: 0.5 }}
+                >
+                  <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white text-sm">❤️</div>
+                  <span className="text-sm font-semibold text-gray-900">Milestone unlocked</span>
+                </motion.div>
+              </div>
             </div>
-            
-            <img
-              src="https://pyv.hmu.temporary.site/wp-content/uploads/2026/01/cute-pet-collage-isolated-2-980x389.png"
-              alt="Cute pets collage"
-              className="relative w-3/4 mx-auto rounded-2xl mt-32 sm:mt-40 lg:mt-48 shadow-xl"
-            />
           </div>
         </div>
       </div>
 
-      {/* What Pawgress Is Section - Full Width */}
-      <div className="mb-20 sm:mb-24 lg:mb-32 bg-blue-100 py-16 sm:py-20 lg:py-24 px-8 sm:px-12 lg:px-16 relative overflow-hidden">
+      {/* What Pawgress Is Section - Before/After comparison */}
+      <div ref={whatIsRef} className="mb-20 sm:mb-24 lg:mb-32 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-20 sm:py-24 lg:py-28 px-6 sm:px-12 lg:px-16 relative overflow-hidden">
         {/* Wave at top */}
-        <div className="absolute top-0 left-0 right-0 w-full overflow-hidden leading-none">
+        <div className="absolute top-0 left-0 right-0 w-full overflow-hidden leading-none z-10">
           <svg className="relative block w-full h-16 sm:h-20 md:h-24" viewBox="0 0 1200 120" preserveAspectRatio="none">
             <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#ffffff"></path>
           </svg>
         </div>
 
-        {/* Decorative animated bouncing balls */}
-        <div className="absolute top-24 left-1/4 w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full opacity-60 animate-bounce shadow-lg" style={{animationDelay: '0s'}}></div>
-        <div className="absolute top-28 right-1/4 w-6 h-6 bg-gradient-to-br from-pink-400 to-rose-400 rounded-full opacity-60 animate-bounce shadow-lg" style={{animationDelay: '0.3s'}}></div>
-        <div className="absolute bottom-28 left-1/3 w-7 h-7 bg-gradient-to-br from-blue-400 to-indigo-400 rounded-full opacity-50 animate-bounce shadow-lg" style={{animationDelay: '0.6s'}}></div>
-        <div className="absolute bottom-32 right-1/3 w-5 h-5 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full opacity-50 animate-bounce shadow-lg" style={{animationDelay: '0.9s'}}></div>
-        
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-8 font-baloo text-center relative z-10">
-          What Pawgress Is?
-        </h2>
-        <div className="max-w-4xl mx-auto space-y-6 text-lg sm:text-xl text-gray-700 leading-relaxed text-center">
-          <p>
-            Most breeders communicate with buyers through social media or messaging apps. Over time, this creates clutter: new inquiries push active conversations out of view, important messages get buried, and buyers repeatedly ask for the same updates.
-          </p>
-          <p>
-            When a single video includes multiple pets, breeders often have to resend it over and over, answering the same questions and sharing the same content again and again.
-          </p>
-          <p className="font-semibold text-blue-600">
-            Pawgress was built to fix this.
-          </p>
+        {/* Aurora blobs */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <motion.div aria-hidden className="absolute top-32 -left-20 w-[26rem] h-[26rem] rounded-full opacity-40 blur-3xl"
+            style={{ background: 'radial-gradient(closest-side, rgba(244,114,182,0.45), rgba(244,114,182,0))' }}
+            animate={{ x: [0, 40, -20, 0], y: [0, 20, -30, 0] }} transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }} />
+          <motion.div aria-hidden className="absolute bottom-32 -right-20 w-[28rem] h-[28rem] rounded-full opacity-40 blur-3xl"
+            style={{ background: 'radial-gradient(closest-side, rgba(99,102,241,0.5), rgba(99,102,241,0))' }}
+            animate={{ x: [0, -40, 20, 0], y: [0, -30, 20, 0] }} transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }} />
         </div>
-        
+
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="text-center mb-14 sm:mb-16">
+            <div className="wis-item inline-flex items-center gap-2 bg-white/80 backdrop-blur-md border border-blue-200/60 text-blue-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-5 shadow-sm" style={{ opacity: 0 }}>
+              <span>💡</span> Why Pawgress
+            </div>
+            <h2 className="wis-item text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-5 font-baloo tracking-tight" style={{ opacity: 0 }}>
+              From <span className="bg-gradient-to-r from-rose-500 to-orange-500 bg-clip-text text-transparent">chaos</span> to{' '}
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">clarity</span>
+            </h2>
+            <p className="wis-item text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto" style={{ opacity: 0 }}>
+              Most breeders juggle inquiries across DMs, texts, and emails. Pawgress was built to fix that.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+            {/* BEFORE card */}
+            <motion.div
+              className="wis-item relative rounded-3xl border border-rose-200/60 bg-white/70 backdrop-blur-md p-6 sm:p-8 shadow-xl shadow-rose-900/5 overflow-hidden"
+              style={{ opacity: 0 }}
+              whileHover={{ y: -4 }}
+              transition={{ type: 'spring', stiffness: 250, damping: 20 }}
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-500 to-orange-500 flex items-center justify-center text-white font-bold shadow-md">
+                  ✗
+                </div>
+                <div>
+                  <div className="text-xs uppercase tracking-wider text-rose-600 font-bold">Before</div>
+                  <div className="text-xl font-bold text-gray-900 font-baloo">Scattered & overwhelmed</div>
+                </div>
+              </div>
+
+              {/* Chaos visual: floating message bubbles */}
+              <div className="relative h-44 sm:h-52 mb-6">
+                {[
+                  { txt: '💬 Insta DM', x: '4%', y: '8%', rot: -8, delay: 0 },
+                  { txt: '✉️ Email #14', x: '55%', y: '4%', rot: 6, delay: 0.4 },
+                  { txt: '📱 Text', x: '32%', y: '36%', rot: -3, delay: 0.8 },
+                  { txt: '📞 Voicemail', x: '68%', y: '44%', rot: 9, delay: 1.2 },
+                  { txt: '💬 FB Msgr', x: '8%', y: '62%', rot: 4, delay: 1.6 },
+                  { txt: '📩 "Photos pls?"', x: '48%', y: '70%', rot: -5, delay: 2.0 },
+                ].map((b, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute px-3 py-1.5 rounded-xl bg-white border border-gray-200 shadow-md text-sm font-medium text-gray-700 whitespace-nowrap"
+                    style={{ left: b.x, top: b.y, rotate: b.rot }}
+                    animate={{ y: [0, -4, 0, 4, 0], rotate: [b.rot, b.rot + 2, b.rot, b.rot - 2, b.rot] }}
+                    transition={{ duration: 4 + i * 0.3, repeat: Infinity, ease: 'easeInOut', delay: b.delay }}
+                  >
+                    {b.txt}
+                  </motion.div>
+                ))}
+              </div>
+
+              <ul className="space-y-2.5 text-gray-600">
+                {[
+                  'Updates buried under new inquiries',
+                  'Same questions asked over and over',
+                  'No central record of a pet\'s history',
+                  'Photos & videos lost in chat threads',
+                ].map((t) => (
+                  <li key={t} className="flex items-start gap-2.5">
+                    <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-xs font-bold">✗</span>
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* AFTER card */}
+            <motion.div
+              className="wis-item relative rounded-3xl border border-blue-200/60 bg-gradient-to-br from-white via-blue-50/40 to-indigo-50/40 backdrop-blur-md p-6 sm:p-8 shadow-2xl shadow-blue-900/10 overflow-hidden"
+              style={{ opacity: 0 }}
+              whileHover={{ y: -4 }}
+              transition={{ type: 'spring', stiffness: 250, damping: 20 }}
+            >
+              {/* Glow */}
+              <div aria-hidden className="absolute -top-20 -right-20 w-64 h-64 rounded-full opacity-50 blur-3xl"
+                style={{ background: 'radial-gradient(closest-side, rgba(99,102,241,0.4), transparent)' }} />
+
+              <div className="relative flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold shadow-md">
+                  ✓
+                </div>
+                <div>
+                  <div className="text-xs uppercase tracking-wider text-blue-600 font-bold">With Pawgress</div>
+                  <div className="text-xl font-bold text-gray-900 font-baloo">Organized & in sync</div>
+                </div>
+              </div>
+
+              {/* Organized timeline visual */}
+              <div className="relative mb-6 rounded-2xl bg-white border border-gray-100 shadow-inner p-4 space-y-2.5">
+                {[
+                  { dot: 'bg-blue-500', label: 'Buddy · Week 6 update', time: '2h' },
+                  { dot: 'bg-purple-500', label: 'Daisy · Vet visit added', time: '1d' },
+                  { dot: 'bg-emerald-500', label: 'Litter · Photos shared', time: '3d' },
+                  { dot: 'bg-pink-500', label: 'Rocky · New milestone', time: '5d' },
+                ].map((row, i) => (
+                  <motion.div
+                    key={i}
+                    className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50/60 transition-colors"
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 * i, duration: 0.4 }}
+                  >
+                    <span className={`w-2.5 h-2.5 rounded-full ${row.dot}`} />
+                    <span className="flex-1 text-sm font-medium text-gray-700">{row.label}</span>
+                    <span className="text-xs text-gray-400">{row.time}</span>
+                  </motion.div>
+                ))}
+              </div>
+
+              <ul className="space-y-2.5 text-gray-700">
+                {[
+                  'Every update auto-saved to the right pet',
+                  'One-to-one chat per pet, never lost',
+                  'Lifetime timeline that travels with the pet',
+                  'Send to one pet or an entire litter at once',
+                ].map((t) => (
+                  <li key={t} className="flex items-start gap-2.5">
+                    <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold">✓</span>
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
+        </div>
+
         {/* Wave at bottom */}
         <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none">
           <svg className="relative block w-full h-16 sm:h-20 md:h-24" viewBox="0 0 1200 120" preserveAspectRatio="none" style={{ transform: 'rotate(180deg)' }}>
@@ -283,28 +609,38 @@ export default function HowItWorks() {
 
         {/* Tab Switcher */}
         <div className="flex justify-center mb-12">
-          <div className="relative flex bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-2 gap-2 shadow-xl shadow-blue-500/30">
+          <div className="relative flex bg-white border border-gray-200 rounded-2xl p-1.5 gap-1 shadow-lg shadow-blue-900/5">
             {/* Breeders button — first / default */}
             <button
               onClick={() => setActiveTab('breeders')}
-              className={`relative flex items-center gap-3 px-8 py-4 rounded-xl font-bold text-base sm:text-lg transition-all duration-300 ${
-                activeTab === 'breeders'
-                  ? 'bg-white text-indigo-700 shadow-lg scale-[1.03]'
-                  : 'text-white/80 hover:text-white hover:bg-white/15'
+              className={`relative flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg transition-colors duration-300 z-10 ${
+                activeTab === 'breeders' ? 'text-white' : 'text-gray-600 hover:text-gray-900'
               }`}
             >
+              {activeTab === 'breeders' && (
+                <motion.span
+                  layoutId="tab-pill"
+                  className="absolute inset-0 -z-10 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/30"
+                  transition={{ type: 'spring', stiffness: 400, damping: 32 }}
+                />
+              )}
               <span className="text-2xl">🌱</span>
               <span>For Breeders</span>
             </button>
             {/* Buyers button */}
             <button
               onClick={() => setActiveTab('buyers')}
-              className={`relative flex items-center gap-3 px-8 py-4 rounded-xl font-bold text-base sm:text-lg transition-all duration-300 ${
-                activeTab === 'buyers'
-                  ? 'bg-white text-blue-700 shadow-lg scale-[1.03]'
-                  : 'text-white/80 hover:text-white hover:bg-white/15'
+              className={`relative flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg transition-colors duration-300 z-10 ${
+                activeTab === 'buyers' ? 'text-white' : 'text-gray-600 hover:text-gray-900'
               }`}
             >
+              {activeTab === 'buyers' && (
+                <motion.span
+                  layoutId="tab-pill"
+                  className="absolute inset-0 -z-10 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 shadow-lg shadow-blue-500/30"
+                  transition={{ type: 'spring', stiffness: 400, damping: 32 }}
+                />
+              )}
               <span className="text-2xl">🏠</span>
               <span>For Buyers</span>
             </button>
@@ -312,47 +648,48 @@ export default function HowItWorks() {
         </div>
 
         {/* For Buyers Panel */}
+        <div ref={stepsRef} className="mb-20 sm:mb-24 lg:mb-32">
+        <AnimatePresence mode="wait">
         {activeTab === 'buyers' && (
-          <div key="buyers" id="buyers" className="panel-fade">
-            {/* Steps timeline */}
-            <div className="relative max-w-2xl mx-auto mb-10">
-              <div className="absolute left-[27px] sm:left-[31px] top-4 bottom-4 w-0.5 bg-gradient-to-b from-blue-300 via-indigo-300 to-purple-300" />
-              <div className="space-y-5">
-                {buyerSteps.map((step, index) => (
-                  <div key={index} className="relative flex gap-5 sm:gap-6 items-start">
-                    <div className={`relative flex-shrink-0 w-14 h-14 bg-gradient-to-br ${step.color} rounded-2xl flex flex-col items-center justify-center shadow-lg shadow-blue-500/20 z-10`}>
-                      <span className="text-white text-[10px] font-bold opacity-60 leading-none tracking-wider">{step.number}</span>
-                      <span className="text-2xl leading-none">{step.icon}</span>
+          <motion.div
+            key="buyers"
+            id="buyers"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.35, ease: 'easeOut' }}
+          >
+            {/* Steps grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-5xl mx-auto mb-10">
+              {buyerSteps.map((step, index) => (
+                <motion.div
+                  key={index}
+                  className="timeline-step group relative rounded-3xl border border-gray-100 bg-white p-6 sm:p-7 shadow-lg shadow-blue-900/5 overflow-hidden"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ type: 'spring', stiffness: 220, damping: 22, delay: index * 0.08 }}
+                  whileHover={{ y: -6 }}
+                >
+                  {/* Hover glow */}
+                  <div aria-hidden className={`absolute -top-20 -right-20 w-48 h-48 rounded-full opacity-0 group-hover:opacity-60 blur-3xl transition-opacity duration-500 bg-gradient-to-br ${step.color}`} />
+                  {/* Big watermark number */}
+                  <span className={`absolute -top-2 right-3 text-7xl sm:text-8xl font-black bg-gradient-to-br ${step.color} bg-clip-text text-transparent opacity-10 select-none leading-none`}>
+                    {step.number}
+                  </span>
+                  <div className="relative">
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center text-3xl shadow-lg mb-5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}>
+                      {step.icon}
                     </div>
-                    <div className="flex-1 bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md hover:border-blue-100 transition-all duration-300 group">
-                      <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-1.5 leading-snug group-hover:text-blue-700 transition-colors">{step.title}</h4>
-                      <p className="text-sm sm:text-base text-gray-500 leading-relaxed">{step.description}</p>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className={`text-xs font-bold tracking-wider bg-gradient-to-r ${step.color} bg-clip-text text-transparent`}>
+                        STEP {step.number}
+                      </span>
                     </div>
+                    <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 leading-snug font-baloo">{step.title}</h4>
+                    <p className="text-sm sm:text-base text-gray-500 leading-relaxed">{step.description}</p>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Feature highlight cards */}
-            <div className="max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-              <div className="flex items-start gap-4 bg-blue-50 border border-blue-100 rounded-2xl p-5 hover:shadow-md transition-all duration-300">
-                <div className="w-12 h-12 flex-shrink-0 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center text-2xl shadow-md">
-                  🔍
-                </div>
-                <div>
-                  <h5 className="font-bold text-gray-900 mb-1">Smart Search</h5>
-                  <p className="text-sm text-gray-500 leading-relaxed">Filter by breed, location, age, and more to find your perfect match.</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4 bg-pink-50 border border-pink-100 rounded-2xl p-5 hover:shadow-md transition-all duration-300">
-                <div className="w-12 h-12 flex-shrink-0 bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl flex items-center justify-center text-2xl shadow-md">
-                  💕
-                </div>
-                <div>
-                  <h5 className="font-bold text-gray-900 mb-1">Swipe to Match</h5>
-                  <p className="text-sm text-gray-500 leading-relaxed">Browse adorable profiles and connect with ethical breeders instantly.</p>
-                </div>
-              </div>
+                </motion.div>
+              ))}
             </div>
 
             <div className="flex justify-center">
@@ -366,51 +703,48 @@ export default function HowItWorks() {
                 </svg>
               </Link>
             </div>
-          </div>
+          </motion.div>
         )}
 
         {/* For Breeders Panel */}
         {activeTab === 'breeders' && (
-          <div key="breeders" id="breeders" className="panel-fade">
-            {/* Steps timeline */}
-            <div className="relative max-w-2xl mx-auto mb-10">
-              <div className="absolute left-[27px] sm:left-[31px] top-4 bottom-4 w-0.5 bg-gradient-to-b from-emerald-300 via-teal-300 to-cyan-300" />
-              <div className="space-y-5">
-                {breederSteps.map((step, index) => (
-                  <div key={index} className="relative flex gap-5 sm:gap-6 items-start">
-                    <div className={`relative flex-shrink-0 w-14 h-14 bg-gradient-to-br ${step.color} rounded-2xl flex flex-col items-center justify-center shadow-lg shadow-emerald-500/20 z-10`}>
-                      <span className="text-white text-[10px] font-bold opacity-60 leading-none tracking-wider">{step.number}</span>
-                      <span className="text-2xl leading-none">{step.icon}</span>
+          <motion.div
+            key="breeders"
+            id="breeders"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.35, ease: 'easeOut' }}
+          >
+            {/* Steps grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-5xl mx-auto mb-10">
+              {breederSteps.map((step, index) => (
+                <motion.div
+                  key={index}
+                  className="timeline-step group relative rounded-3xl border border-gray-100 bg-white p-6 sm:p-7 shadow-lg shadow-emerald-900/5 overflow-hidden"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ type: 'spring', stiffness: 220, damping: 22, delay: index * 0.08 }}
+                  whileHover={{ y: -6 }}
+                >
+                  <div aria-hidden className={`absolute -top-20 -right-20 w-48 h-48 rounded-full opacity-0 group-hover:opacity-60 blur-3xl transition-opacity duration-500 bg-gradient-to-br ${step.color}`} />
+                  <span className={`absolute -top-2 right-3 text-7xl sm:text-8xl font-black bg-gradient-to-br ${step.color} bg-clip-text text-transparent opacity-10 select-none leading-none`}>
+                    {step.number}
+                  </span>
+                  <div className="relative">
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center text-3xl shadow-lg mb-5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}>
+                      {step.icon}
                     </div>
-                    <div className="flex-1 bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md hover:border-emerald-100 transition-all duration-300 group">
-                      <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-1.5 leading-snug group-hover:text-emerald-700 transition-colors">{step.title}</h4>
-                      <p className="text-sm sm:text-base text-gray-500 leading-relaxed">{step.description}</p>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className={`text-xs font-bold tracking-wider bg-gradient-to-r ${step.color} bg-clip-text text-transparent`}>
+                        STEP {step.number}
+                      </span>
                     </div>
+                    <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 leading-snug font-baloo">{step.title}</h4>
+                    <p className="text-sm sm:text-base text-gray-500 leading-relaxed">{step.description}</p>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Feature highlight cards */}
-            <div className="max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-              <div className="flex items-start gap-4 bg-orange-50 border border-orange-100 rounded-2xl p-5 hover:shadow-md transition-all duration-300">
-                <div className="w-12 h-12 flex-shrink-0 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex items-center justify-center text-2xl shadow-md">
-                  👤
-                </div>
-                <div>
-                  <h5 className="font-bold text-gray-900 mb-1">Profile Showcase</h5>
-                  <p className="text-sm text-gray-500 leading-relaxed">Display your pets on your breeder profile — your storefront is always open.</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4 bg-purple-50 border border-purple-100 rounded-2xl p-5 hover:shadow-md transition-all duration-300">
-                <div className="w-12 h-12 flex-shrink-0 bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl flex items-center justify-center text-2xl shadow-md">
-                  ✨
-                </div>
-                <div>
-                  <h5 className="font-bold text-gray-900 mb-1">Swipe Discovery</h5>
-                  <p className="text-sm text-gray-500 leading-relaxed">Get featured where buyers discover their perfect pet daily.</p>
-                </div>
-              </div>
+                </motion.div>
+              ))}
             </div>
 
             <div className="flex justify-center">
@@ -424,43 +758,116 @@ export default function HowItWorks() {
                 </svg>
               </Link>
             </div>
-          </div>
+          </motion.div>
         )}
-
-        {/* Decorative separator */}
-        <div className="mb-12 sm:mb-16 lg:mb-20" />
-        <div className="flex items-center justify-center my-16 sm:my-20 lg:my-24">
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
-          <div className="px-6">
-            <div className="w-3 h-3 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 animate-pulse"></div>
-          </div>
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+        </AnimatePresence>
         </div>
 
         {/* Built On Transparency Section */}
-        <div className="mb-20 sm:mb-24 lg:mb-32">
+        <div ref={transparencyRef} className="mb-20 sm:mb-24 lg:mb-32">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Left Image */}
-            <div>
-              <img
-                src="https://pyv.hmu.temporary.site/wp-content/uploads/2026/01/african-american-woman-wearing-pink-sweater-holding-puppies-1-1-980x653.png"
-                alt="Woman with puppies"
-                className="w-full rounded-2xl shadow-2xl"
-              />
+            {/* Left Image with floating trust badges */}
+            <div className="relative">
+              {/* Background blob */}
+              <div aria-hidden className="absolute -inset-6 rounded-[2.5rem] opacity-60 blur-2xl"
+                style={{ background: 'radial-gradient(closest-side, rgba(99,102,241,0.35), transparent 70%)' }} />
+
+              <motion.div
+                style={{ opacity: 0 }}
+                className="tr-image relative"
+                whileHover={{ rotate: 0, scale: 1.01 }}
+                initial={{ rotate: -2 }}
+                transition={{ type: 'spring', stiffness: 200, damping: 18 }}
+              >
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-blue-900/20 border-4 border-white">
+                  <img
+                    src="https://pyv.hmu.temporary.site/wp-content/uploads/2026/01/african-american-woman-wearing-pink-sweater-holding-puppies-1-1-980x653.png"
+                    alt="Woman with puppies"
+                    className="w-full block"
+                  />
+                </div>
+              </motion.div>
+
+              {/* Floating trust badges */}
+              <motion.div
+                className="absolute -top-4 -left-4 sm:-left-8 bg-white rounded-2xl shadow-xl border border-gray-100 px-4 py-3 flex items-center gap-3"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+                animate={{ y: [0, -6, 0] }}
+              >
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white shadow-md">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
+                </div>
+                <div>
+                  <div className="text-xs text-gray-500 font-medium">Verified</div>
+                  <div className="text-sm font-bold text-gray-900">Ethical breeders only</div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="absolute top-1/2 -right-4 sm:-right-8 -translate-y-1/2 bg-white rounded-2xl shadow-xl border border-gray-100 px-4 py-3 flex items-center gap-3"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                animate={{ y: [0, 6, 0] }}
+              >
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white shadow-md">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" /></svg>
+                </div>
+                <div>
+                  <div className="text-xs text-gray-500 font-medium">Private</div>
+                  <div className="text-sm font-bold text-gray-900">Invite-only timelines</div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="absolute -bottom-4 left-6 sm:left-12 bg-white rounded-2xl shadow-xl border border-gray-100 px-4 py-3 flex items-center gap-3"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.7, duration: 0.5 }}
+                animate={{ y: [0, -5, 0] }}
+              >
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white shadow-md">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" /></svg>
+                </div>
+                <div>
+                  <div className="text-xs text-gray-500 font-medium">Secure</div>
+                  <div className="text-sm font-bold text-gray-900">Encrypted records</div>
+                </div>
+              </motion.div>
             </div>
             
             {/* Right Content */}
-            <div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 font-baloo">
-                Built On Transparency
+            <div className="tr-content">
+              <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 border border-blue-100 px-4 py-1.5 rounded-full text-sm font-semibold mb-5">
+                <span>🛡️</span> Built On Transparency
+              </div>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-baloo tracking-tight leading-[1.05]">
+                Trust isn't a feature.{' '}
+                <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">It's the foundation.</span>
               </h2>
-              <div className="space-y-4 text-lg sm:text-xl text-gray-700 leading-relaxed">
+              <div className="space-y-4 text-lg text-gray-600 leading-relaxed mb-8">
                 <p>
-                  Pawgress is designed to support responsible breeding and long-term pet care. We prioritize clear documentation, honest communication, and organized records, and we do not support puppy mills or non-transparent practices.
+                  Pawgress is designed to support responsible breeding and long-term pet care. We prioritize clear documentation, honest communication, and organized records — and we do not support puppy mills or non-transparent practices.
                 </p>
-                <p className="font-semibold text-blue-600">
-                  Every pet's timeline is private, secure, and only accessible to the people invited.
-                </p>
+              </div>
+
+              {/* Trust feature list */}
+              <div className="space-y-3">
+                {[
+                  { i: '✓', t: 'Every timeline is private and invite-only' },
+                  { i: '✓', t: 'Records travel with the pet for life' },
+                  { i: '✓', t: 'Breeders are reviewed for ethical standards' },
+                ].map((row) => (
+                  <div key={row.t} className="flex items-center gap-3">
+                    <span className="flex-shrink-0 w-7 h-7 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center font-bold shadow-md">{row.i}</span>
+                    <span className="text-gray-700 font-medium">{row.t}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

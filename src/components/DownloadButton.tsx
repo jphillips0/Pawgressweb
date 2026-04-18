@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import DownloadModal from './DownloadModal';
 
 const APP_STORE_URL = 'https://apps.apple.com/app/pawgress/id6752368171';
@@ -44,9 +45,9 @@ export default function DownloadButton({ className, children }: DownloadButtonPr
           {children}
         </button>
 
-        {showAndroidPopup && (
+        {showAndroidPopup && typeof document !== 'undefined' && createPortal((
           <div
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/50 backdrop-blur-sm"
             onClick={() => setShowAndroidPopup(false)}
           >
             <div
@@ -90,7 +91,7 @@ export default function DownloadButton({ className, children }: DownloadButtonPr
               .animate-popup { animation: popup 0.25s ease-out; }
             `}</style>
           </div>
-        )}
+        ), document.body)}
       </>
     );
   }
