@@ -263,7 +263,7 @@ export default function ForBuyersPage() {
                     x: { delay: 0.7, duration: 0.5 },
                     y: { duration: 3, repeat: Infinity, ease: 'easeInOut' },
                   }}
-                  className="hidden sm:flex absolute top-8 -left-2 lg:-left-6 bg-white rounded-2xl shadow-xl border border-gray-100 px-4 py-2.5 items-center gap-2.5 z-20"
+                  className="hidden lg:flex absolute -top-4 -left-4 xl:-left-10 bg-white rounded-2xl shadow-xl border border-gray-100 px-4 py-2.5 items-center gap-2.5 z-20"
                 >
                   <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white text-lg shadow-md">
                     ✓
@@ -282,7 +282,7 @@ export default function ForBuyersPage() {
                     x: { delay: 0.9, duration: 0.5 },
                     y: { duration: 3.4, repeat: Infinity, ease: 'easeInOut' },
                   }}
-                  className="hidden sm:flex absolute bottom-12 -right-2 lg:-right-6 bg-white rounded-2xl shadow-xl border border-gray-100 px-4 py-2.5 items-center gap-2.5 z-20"
+                  className="hidden lg:flex absolute -bottom-4 -right-4 xl:-right-10 bg-white rounded-2xl shadow-xl border border-gray-100 px-4 py-2.5 items-center gap-2.5 z-20"
                 >
                   <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center text-white text-lg shadow-md">
                     ❤
