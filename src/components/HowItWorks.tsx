@@ -391,44 +391,44 @@ export default function HowItWorks() {
 
                 {/* Floating chips around image */}
                 <motion.div
-                  className="absolute -top-4 -left-4 sm:-left-6 bg-white rounded-2xl shadow-xl border border-gray-100 px-4 py-2.5 flex items-center gap-2.5"
+                  className="absolute -top-2 -left-1 lg:-top-4 lg:-left-6 bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2 py-1.5 lg:px-4 lg:py-2.5 flex items-center gap-2 lg:gap-2.5 max-w-[55%] lg:max-w-none"
                   initial={{ opacity: 0, y: -10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.4, duration: 0.5 }}
                   animate={{ y: [0, -6, 0] }}
                 >
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white">📈</div>
-                  <div>
-                    <div className="text-xs text-gray-500 font-medium">Weight</div>
-                    <div className="text-sm font-bold text-gray-900">+0.4 kg this week</div>
+                  <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-md lg:rounded-lg bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white text-xs lg:text-base flex-shrink-0">📈</div>
+                  <div className="min-w-0">
+                    <div className="text-[10px] lg:text-xs text-gray-500 font-medium leading-tight">Weight</div>
+                    <div className="text-xs lg:text-sm font-bold text-gray-900 leading-tight">+0.4 kg this week</div>
                   </div>
                 </motion.div>
 
                 <motion.div
-                  className="absolute -bottom-4 -right-4 sm:-right-6 bg-white rounded-2xl shadow-xl border border-gray-100 px-4 py-2.5 flex items-center gap-2.5"
+                  className="absolute -bottom-2 -right-1 lg:-bottom-4 lg:-right-6 bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2 py-1.5 lg:px-4 lg:py-2.5 flex items-center gap-2 lg:gap-2.5 max-w-[55%] lg:max-w-none"
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.6, duration: 0.5 }}
                   animate={{ y: [0, 6, 0] }}
                 >
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white">💬</div>
-                  <div>
-                    <div className="text-xs text-gray-500 font-medium">New message</div>
-                    <div className="text-sm font-bold text-gray-900">From Sarah · Buddy</div>
+                  <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-md lg:rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-xs lg:text-base flex-shrink-0">💬</div>
+                  <div className="min-w-0">
+                    <div className="text-[10px] lg:text-xs text-gray-500 font-medium leading-tight">New message</div>
+                    <div className="text-xs lg:text-sm font-bold text-gray-900 leading-tight">From Sarah · Buddy</div>
                   </div>
                 </motion.div>
 
                 <motion.div
-                  className="hidden sm:flex absolute top-1/2 -right-6 -translate-y-1/2 bg-white rounded-2xl shadow-xl border border-gray-100 px-3.5 py-2 items-center gap-2"
+                  className="hidden sm:flex absolute top-1/2 -right-1 lg:-right-6 -translate-y-1/2 bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2 py-1.5 lg:px-3.5 lg:py-2 items-center gap-1.5 lg:gap-2 max-w-[55%] lg:max-w-none"
                   initial={{ opacity: 0, x: 10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.8, duration: 0.5 }}
                 >
-                  <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white text-sm">❤️</div>
-                  <span className="text-sm font-semibold text-gray-900">Milestone unlocked</span>
+                  <div className="w-5 h-5 lg:w-7 lg:h-7 rounded-md lg:rounded-lg bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white text-[10px] lg:text-sm flex-shrink-0">❤️</div>
+                  <span className="text-xs lg:text-sm font-semibold text-gray-900 leading-tight">Milestone unlocked</span>
                 </motion.div>
               </div>
             </div>
@@ -790,53 +790,53 @@ export default function HowItWorks() {
 
               {/* Floating trust badges */}
               <motion.div
-                className="absolute -top-4 -left-4 sm:-left-8 bg-white rounded-2xl shadow-xl border border-gray-100 px-4 py-3 flex items-center gap-3"
+                className="absolute -top-2 -left-1 lg:-top-4 lg:-left-8 bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2 py-1.5 lg:px-4 lg:py-3 flex items-center gap-2 lg:gap-3 max-w-[60%] lg:max-w-none"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3, duration: 0.5 }}
                 animate={{ y: [0, -6, 0] }}
               >
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white shadow-md">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
+                <div className="w-7 h-7 lg:w-10 lg:h-10 rounded-lg lg:rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white shadow-md flex-shrink-0">
+                  <svg className="w-3.5 h-3.5 lg:w-5 lg:h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
                 </div>
-                <div>
-                  <div className="text-xs text-gray-500 font-medium">Verified</div>
-                  <div className="text-sm font-bold text-gray-900">Ethical breeders only</div>
+                <div className="min-w-0">
+                  <div className="text-[10px] lg:text-xs text-gray-500 font-medium leading-tight">Verified</div>
+                  <div className="text-xs lg:text-sm font-bold text-gray-900 leading-tight">Ethical breeders only</div>
                 </div>
               </motion.div>
 
               <motion.div
-                className="absolute top-1/2 -right-4 sm:-right-8 -translate-y-1/2 bg-white rounded-2xl shadow-xl border border-gray-100 px-4 py-3 flex items-center gap-3"
+                className="absolute top-1/2 -right-1 lg:-right-8 -translate-y-1/2 bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2 py-1.5 lg:px-4 lg:py-3 flex items-center gap-2 lg:gap-3 max-w-[60%] lg:max-w-none"
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.5, duration: 0.5 }}
                 animate={{ y: [0, 6, 0] }}
               >
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white shadow-md">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" /></svg>
+                <div className="w-7 h-7 lg:w-10 lg:h-10 rounded-lg lg:rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white shadow-md flex-shrink-0">
+                  <svg className="w-3.5 h-3.5 lg:w-5 lg:h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" /></svg>
                 </div>
-                <div>
-                  <div className="text-xs text-gray-500 font-medium">Private</div>
-                  <div className="text-sm font-bold text-gray-900">Invite-only timelines</div>
+                <div className="min-w-0">
+                  <div className="text-[10px] lg:text-xs text-gray-500 font-medium leading-tight">Private</div>
+                  <div className="text-xs lg:text-sm font-bold text-gray-900 leading-tight">Invite-only timelines</div>
                 </div>
               </motion.div>
 
               <motion.div
-                className="absolute -bottom-4 left-6 sm:left-12 bg-white rounded-2xl shadow-xl border border-gray-100 px-4 py-3 flex items-center gap-3"
+                className="absolute -bottom-2 left-2 lg:-bottom-4 lg:left-12 bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2 py-1.5 lg:px-4 lg:py-3 flex items-center gap-2 lg:gap-3 max-w-[60%] lg:max-w-none"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.7, duration: 0.5 }}
                 animate={{ y: [0, -5, 0] }}
               >
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white shadow-md">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" /></svg>
+                <div className="w-7 h-7 lg:w-10 lg:h-10 rounded-lg lg:rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white shadow-md flex-shrink-0">
+                  <svg className="w-3.5 h-3.5 lg:w-5 lg:h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" /></svg>
                 </div>
-                <div>
-                  <div className="text-xs text-gray-500 font-medium">Secure</div>
-                  <div className="text-sm font-bold text-gray-900">Encrypted records</div>
+                <div className="min-w-0">
+                  <div className="text-[10px] sm:text-xs text-gray-500 font-medium leading-tight">Secure</div>
+                  <div className="text-xs sm:text-sm font-bold text-gray-900 leading-tight">Encrypted records</div>
                 </div>
               </motion.div>
             </div>
