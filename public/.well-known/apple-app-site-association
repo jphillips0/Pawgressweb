@@ -7,9 +7,20 @@
           {
             "/": "/invite/*",
             "comment": "Handles Pawgress pet invite deep links"
+          },
+          {
+            "/": "/reset-password",
+            "comment": "Handles Supabase password recovery links"
+          },
+          {
+            "/": "/reset-password/*",
+            "comment": "Handles Supabase password recovery links"
           }
         ]
       }
     ]
+  },
+  "webcredentials": {
+    "apps": ["M4S64DM37W.com.timelinesllc.pawgress"]
   }
 }
