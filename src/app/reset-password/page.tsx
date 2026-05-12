@@ -4,6 +4,10 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { supabase } from '@/lib/supabase';
 
+// Don't try to prerender this page — it relies on the URL hash, which only
+// exists in the browser, and on runtime Supabase env vars.
+export const dynamic = 'force-dynamic';
+
 export default function ResetPasswordPage() {
   const [ready, setReady] = useState(false);
   const [checking, setChecking] = useState(true);
@@ -13,18 +17,7 @@ export default function ResetPasswordPage() {
   const [status, setStatus] = useState<'idle' | 'saving' | 'done'>('idle');
   const [error, setError] = useState('');
 
-  // TEMP: ?preview=1 shows the form UI without a real recovery link. Remove before launch.
-  const isPreview =
-    typeof window !== 'undefined' &&
-    new URLSearchParams(window.location.search).get('preview') === '1';
-
   useEffect(() => {
-    if (isPreview) {
-      setReady(true);
-      setChecking(false);
-      return;
-    }
-
     // PASSWORD_RECOVERY fires after Supabase parses the URL hash
     const { data: sub } = supabase.auth.onAuthStateChange((event) => {
       if (event === 'PASSWORD_RECOVERY') {
@@ -40,7 +33,7 @@ export default function ResetPasswordPage() {
     });
 
     return () => sub.subscription.unsubscribe();
-  }, [isPreview]);
+  }, []);
 
   // Live password requirement checks
   const reqs = [
@@ -59,12 +52,6 @@ export default function ResetPasswordPage() {
     if (pw !== confirm) return setError('Passwords do not match.');
 
     setStatus('saving');
-
-    // TEMP: in preview mode, simulate a successful update without calling Supabase.
-    if (isPreview) {
-      setTimeout(() => setStatus('done'), 700);
-      return;
-    }
 
     const { error: updErr } = await supabase.auth.updateUser({ password: pw });
     if (updErr) {
