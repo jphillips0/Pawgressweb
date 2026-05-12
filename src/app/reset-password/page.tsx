@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { supabase } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabase';
 
 // Don't try to prerender this page — it relies on the URL hash, which only
 // exists in the browser, and on runtime Supabase env vars.
@@ -16,8 +16,16 @@ export default function ResetPasswordPage() {
   const [showPw, setShowPw] = useState(false);
   const [status, setStatus] = useState<'idle' | 'saving' | 'done'>('idle');
   const [error, setError] = useState('');
+  const [configError, setConfigError] = useState(false);
 
   useEffect(() => {
+    const supabase = getSupabase();
+    if (!supabase) {
+      setConfigError(true);
+      setChecking(false);
+      return;
+    }
+
     // PASSWORD_RECOVERY fires after Supabase parses the URL hash
     const { data: sub } = supabase.auth.onAuthStateChange((event) => {
       if (event === 'PASSWORD_RECOVERY') {
@@ -50,6 +58,12 @@ export default function ResetPasswordPage() {
     setError('');
     if (!allReqsMet) return setError('Please meet all password requirements.');
     if (pw !== confirm) return setError('Passwords do not match.');
+
+    const supabase = getSupabase();
+    if (!supabase) {
+      setError('Service is misconfigured. Please contact support.');
+      return;
+    }
 
     setStatus('saving');
 
@@ -90,6 +104,20 @@ export default function ResetPasswordPage() {
             <div className="flex flex-col items-center py-8">
               <div className="w-10 h-10 border-4 border-blue-600/20 border-t-blue-600 rounded-full animate-spin" />
               <p className="mt-4 text-gray-600 text-sm">Verifying your reset link…</p>
+            </div>
+          ) : configError ? (
+            <div className="text-center">
+              <div className="mx-auto w-14 h-14 rounded-full bg-amber-100 flex items-center justify-center mb-4">
+                <svg className="w-7 h-7 text-amber-600" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3m0 4h.01M4.93 19.07A10 10 0 1119.07 4.93 10 10 0 014.93 19.07z" />
+                </svg>
+              </div>
+              <h1 className="font-baloo text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+                Service unavailable
+              </h1>
+              <p className="text-gray-600 leading-relaxed">
+                Password reset is temporarily unavailable. Please try again later or contact support.
+              </p>
             </div>
           ) : !ready ? (
             <div className="text-center">
