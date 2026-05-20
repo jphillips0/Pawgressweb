@@ -421,7 +421,7 @@ export default function HowItWorks() {
                 </motion.div>
 
                 <motion.div
-                  className="hidden sm:flex absolute top-1/2 -right-1 lg:-right-6 -translate-y-1/2 bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2 py-1.5 lg:px-3.5 lg:py-2 items-center gap-1.5 lg:gap-2 max-w-[55%] lg:max-w-none"
+                  className="hidden sm:flex absolute top-3 lg:top-4 -right-1 lg:-right-6 bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2 py-1.5 lg:px-3.5 lg:py-2 items-center gap-1.5 lg:gap-2 max-w-[55%] lg:max-w-none"
                   initial={{ opacity: 0, x: 10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}

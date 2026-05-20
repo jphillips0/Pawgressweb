@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Baloo_2 } from 'next/font/google';
 import SharedNav from '@/components/SharedNav';
 import Footer from '@/components/Footer';
@@ -34,13 +35,19 @@ export default function FAQPage() {
       <section className="pt-32 pb-20 bg-gradient-to-b from-blue-50 to-white">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+            <motion.h1
+              className="text-5xl md:text-6xl font-bold text-gray-900 mb-6"
+              initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}
+            >
               Frequently Asked <span className="text-blue-600">Questions</span>
-            </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
+            </motion.h1>
+            <motion.p
+              className="text-xl text-gray-600 leading-relaxed"
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}
+            >
               Everything you need to know about Pawgress. Can't find the answer you're looking for? 
               <a href="mailto:dev@pawgressapp.com" className="text-blue-600 hover:underline ml-1">Contact us</a>.
-            </p>
+            </motion.p>
           </div>
         </div>
       </section>
@@ -49,9 +56,15 @@ export default function FAQPage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-gray-900">General</h2>
+            <motion.h2
+              className="text-3xl font-bold mb-8 text-gray-900"
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45 }}
+            >General</motion.h2>
             
-            <div className="space-y-4">
+            <motion.div
+              className="space-y-4"
+              initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+            >
               <div className="bg-gradient-to-r from-blue-50 to-white rounded-xl shadow-md overflow-hidden">
                 <button
                   onClick={() => toggleItem('general-1')}
@@ -198,6 +211,15 @@ export default function FAQPage() {
                   </svg>
                 </button>
                 {isOpen('general-7') && (
+                  <AnimatePresence>
+                    <motion.div
+                      key="general-7"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="overflow-hidden"
+                    >
                   <div className="px-6 pb-6">
                     <p className="text-gray-600 leading-relaxed">
                       Absolutely. Pawgress was built specifically to support responsible, transparent breeding practices. Our platform 
@@ -205,9 +227,11 @@ export default function FAQPage() {
                       We believe ethical breeding is about transparency, care, and commitment to each animal's well-being.
                     </p>
                   </div>
+                    </motion.div>
+                  </AnimatePresence>
                 )}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -216,9 +240,15 @@ export default function FAQPage() {
       <section className="py-20 bg-gradient-to-b from-blue-50 to-white">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-gray-900">For Breeders</h2>
+            <motion.h2
+              className="text-3xl font-bold mb-8 text-gray-900"
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45 }}
+            >For Breeders</motion.h2>
             
-            <div className="space-y-4">
+            <motion.div
+              className="space-y-4"
+              initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+            >
               <div className="bg-white rounded-xl shadow-md overflow-hidden">
                 <button
                   onClick={() => toggleItem('breeders-1')}
@@ -385,6 +415,15 @@ export default function FAQPage() {
                   </svg>
                 </button>
                 {isOpen('breeders-7') && (
+                  <AnimatePresence>
+                    <motion.div
+                      key="breeders-7"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="overflow-hidden"
+                    >
                   <div className="px-6 pb-6">
                     <p className="text-gray-600 leading-relaxed">
                       Communication in Pawgress is organized around each individual pet. Each pet has its own dedicated chat thread 
@@ -392,9 +431,11 @@ export default function FAQPage() {
                       communicate with multiple buyers at once.
                     </p>
                   </div>
+                    </motion.div>
+                  </AnimatePresence>
                 )}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -403,9 +444,15 @@ export default function FAQPage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-gray-900">For Buyers</h2>
+            <motion.h2
+              className="text-3xl font-bold mb-8 text-gray-900"
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45 }}
+            >For Buyers</motion.h2>
             
-            <div className="space-y-4">
+            <motion.div
+              className="space-y-4"
+              initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+            >
               <div className="bg-gradient-to-r from-purple-50 to-white rounded-xl shadow-md overflow-hidden">
                 <button
                   onClick={() => toggleItem('buyers-1')}
@@ -523,6 +570,15 @@ export default function FAQPage() {
                   </svg>
                 </button>
                 {isOpen('buyers-5') && (
+                  <AnimatePresence>
+                    <motion.div
+                      key="buyers-5"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="overflow-hidden"
+                    >
                   <div className="px-6 pb-6">
                     <p className="text-gray-600 leading-relaxed">
                       After pickup, your pet's timeline continues! You can keep adding updates, photos, and milestones. If you choose, 
@@ -530,9 +586,11 @@ export default function FAQPage() {
                       lifelong record of your pet's life.
                     </p>
                   </div>
+                    </motion.div>
+                  </AnimatePresence>
                 )}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -540,18 +598,22 @@ export default function FAQPage() {
       {/* CTA Section */}
       <section className="py-20 bg-blue-600 text-white">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-6">Still Have Questions?</h2>
-          <p className="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
-            We're here to help! Contact our friendly support team anytime.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="mailto:dev@pawgressapp.com" className="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-50 transition-colors">
-              Contact Support
-            </a>
-            <DownloadButton className="bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-800 transition-colors border-2 border-white">
-              Download on the App Store
-            </DownloadButton>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-4xl font-bold mb-6">Still Have Questions?</h2>
+            <p className="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
+              We're here to help! Contact our friendly support team anytime.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="mailto:dev@pawgressapp.com" className="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-50 transition-colors">
+                Contact Support
+              </a>
+              <DownloadButton className="bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-800 transition-colors border-2 border-white">
+                Download the App
+              </DownloadButton>
+            </div>
+          </motion.div>
         </div>
       </section>
 

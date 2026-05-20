@@ -1,4 +1,7 @@
+'use client';
+
 import { Baloo_2 } from 'next/font/google';
+import { motion, type Variants } from 'framer-motion';
 import SharedNav from '@/components/SharedNav';
 
 const baloo = Baloo_2({
@@ -8,369 +11,353 @@ const baloo = Baloo_2({
   adjustFontFallback: true,
 });
 
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 32 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: 'easeOut' } },
+};
+
+const buyerFeatures = [
+  'Discover available pets from ethical breeders',
+  'Follow your pet\'s timeline before pickup',
+  'Chat directly with your breeder',
+  'Access health records, milestones, and updates',
+  'Continue tracking your pet\'s information for life',
+];
+
+const whyCards = [
+  {
+    gradient: 'from-blue-500 to-indigo-600',
+    bg: 'from-blue-50 to-indigo-50',
+    border: 'border-blue-100',
+    icon: (
+      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+      </svg>
+    ),
+    text: 'You stay in control of your business',
+  },
+  {
+    gradient: 'from-pink-500 to-rose-500',
+    bg: 'from-pink-50 to-rose-50',
+    border: 'border-pink-100',
+    icon: (
+      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+      </svg>
+    ),
+    text: 'Buyers keep lifelong access to their pet\'s records',
+  },
+  {
+    gradient: 'from-emerald-500 to-teal-500',
+    bg: 'from-emerald-50 to-teal-50',
+    border: 'border-emerald-100',
+    icon: (
+      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+      </svg>
+    ),
+    text: 'Pawgress focuses on communication, organization, and transparency',
+  },
+];
+
 export default function PricingPage() {
   return (
     <main className={`min-h-screen ${baloo.className}`}>
       <SharedNav />
       
-      {/* Hero Section */}
-      <section className="pt-32 pb-24 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 relative overflow-hidden">
-        {/* Bouncing balls */}
-        <div className="absolute left-[10%] top-24 w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full opacity-40 animate-bounce z-0" style={{ animationDuration: '3s', animationDelay: '0s' }}></div>
-        <div className="absolute right-[15%] top-32 w-8 h-8 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full opacity-40 animate-bounce z-0" style={{ animationDuration: '4s', animationDelay: '0.5s' }}></div>
-        <div className="absolute left-[20%] bottom-20 w-6 h-6 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-full opacity-40 animate-bounce z-0" style={{ animationDuration: '3.5s', animationDelay: '1s' }}></div>
-        <div className="absolute right-[25%] bottom-32 w-9 h-9 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full opacity-40 animate-bounce z-0" style={{ animationDuration: '4.5s', animationDelay: '0.3s' }}></div>
-        
-        {/* Decorative elements */}
-        <div className="absolute top-20 right-0 w-96 h-96 bg-gradient-to-br from-blue-400/10 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-indigo-400/10 to-transparent rounded-full blur-3xl"></div>
-        
-        {/* Wave at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none">
-          <svg className="relative block w-full h-12 sm:h-16 md:h-20" viewBox="0 0 1200 120" preserveAspectRatio="none" style={{transform: 'rotate(180deg)'}}>
-            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#ffffff"></path>
-          </svg>
-        </div>
-        
+      {/* Hero */}
+      <section className="pt-32 pb-28 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-blue-400/15 to-purple-400/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-indigo-400/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+
         <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col lg:flex-row items-center gap-12">
-              {/* Text Content */}
-              <div className="lg:w-1/2 text-center lg:text-left">
-                <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm text-indigo-600 px-5 py-2.5 rounded-full text-sm font-semibold mb-8 border border-indigo-200/50 shadow-lg">
-                  <span>💎</span>
-                  <span>Transparent Pricing</span>
-                </div>
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-                  <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                    Pricing
-                  </span>
-                </h1>
-                <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed">
-                  Pawgress is designed to support breeder–buyer communication without interfering with how breeders run their businesses. Pricing is structured as a subscription for the services Pawgress provides, while buyers always have free access to their pet's information.
-                </p>
-              </div>
-              
-              {/* Image */}
-              <div className="lg:w-1/2 relative">
-                {/* Decorative Paw */}
-                <div className="absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 opacity-15 pointer-events-none">
-                  <svg viewBox="0 0 512 512" className="w-full h-full">
-                    <defs>
-                      <linearGradient id="pawGradientHero" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style={{ stopColor: '#3b82f6', stopOpacity: 1 }} />
-                        <stop offset="100%" style={{ stopColor: '#8b5cf6', stopOpacity: 1 }} />
-                      </linearGradient>
-                    </defs>
-                    <path fill="url(#pawGradientHero)" d="M226.5 92.9c14.3 42.9-.3 86.2-32.6 96.8s-70.1-15.6-84.4-58.5s.3-86.2 32.6-96.8s70.1 15.6 84.4 58.5zM100.4 198.6c18.9 32.4 14.3 70.1-10.2 84.1s-59.7-.9-78.5-33.3S-2.7 179.3 21.8 165.3s59.7 .9 78.5 33.3zM69.2 401.2C121.6 259.9 214.7 224 256 224s134.4 35.9 186.8 177.2c3.6 9.7 5.2 20.1 5.2 30.5v1.6c0 25.8-20.9 46.7-46.7 46.7c-11.5 0-22.9-1.4-34-4.2l-88-22c-15.3-3.8-31.3-3.8-46.6 0l-88 22c-11.1 2.8-22.5 4.2-34 4.2C84.9 480 64 459.1 64 433.3v-1.6c0-10.4 1.6-20.8 5.2-30.5zM421.8 282.7c-24.5-14-29.1-51.7-10.2-84.1s54-47.3 78.5-33.3s29.1 51.7 10.2 84.1s-54 47.3-78.5 33.3zM310.1 189.7c-32.3-10.6-46.9-53.9-32.6-96.8s52.1-69.1 84.4-58.5s46.9 53.9 32.6 96.8s-52.1 69.1-84.4 58.5z" />
-                  </svg>
-                </div>
-                <img
-                  src="/Bear dog.png"
-                  alt="Bear dog"
-                  className="w-full h-auto max-w-lg mx-auto relative z-10"
-                />
-              </div>
+          <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+
+            {/* Text */}
+            <div className="lg:w-1/2 text-center lg:text-left">
+              <motion.div
+                initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0 }}
+                className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-sm text-indigo-600 px-5 py-2 rounded-full text-sm font-semibold mb-6 border border-indigo-200/60 shadow-sm"
+              >
+                <span>💎</span><span>Transparent Pricing</span>
+              </motion.div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+                className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6"
+              >
+                <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Simple,</span>
+                <br />
+                <span className="text-gray-900">Fair Pricing</span>
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
+                className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0"
+              >
+                Pawgress supports breeder–buyer communication without interfering with how breeders run their businesses. Buyers always have free access to their pet's information.
+              </motion.p>
             </div>
+
+            {/* Image */}
+            <motion.div
+              className="lg:w-1/2 relative"
+              initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-3xl blur-2xl scale-95" />
+              <img
+                src="/Pricing.png"
+                alt="Pricing"
+                className="w-full h-auto max-w-lg mx-auto relative z-10 drop-shadow-2xl rounded-2xl"
+              />
+            </motion.div>
           </div>
+        </div>
+
+        {/* Wave */}
+        <div className="absolute bottom-0 left-0 right-0 overflow-hidden leading-none">
+          <svg className="block w-full h-14 sm:h-20" viewBox="0 0 1200 120" preserveAspectRatio="none" style={{ transform: 'rotate(180deg)' }}>
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#ffffff" />
+          </svg>
         </div>
       </section>
 
-      {/* For Pet Buyers Section */}
-      <section className="py-20 bg-white">
+      {/* For Pet Buyers */}
+      <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12">
-              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">For Pet</span>{' '}
-              <span className="text-gray-900">Buyers</span>
-            </h2>
-            
-            <div className="flex flex-col lg:flex-row items-center gap-12 mb-12">
-              <div className="lg:w-1/2">
-                <div className="bg-gradient-to-br from-green-50 to-teal-50 rounded-3xl p-10 shadow-xl border border-green-100 hover:shadow-2xl transition-shadow duration-300">
-                  <div className="flex items-center justify-center mb-6">
-                    <div className="bg-green-100 text-green-700 px-6 py-3 rounded-full text-xl font-bold shadow-lg transform hover:scale-110 transition-all duration-300">
-                      ✨ Always Free ✨
-                    </div>
+            <motion.div
+              initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+              className="text-center mb-16"
+            >
+              <span className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 px-4 py-1.5 rounded-full text-sm font-semibold border border-emerald-200/60 mb-4">
+                🐾 Pet Buyers
+              </span>
+              <h2 className="text-4xl sm:text-5xl font-bold">
+                <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">Always</span>{' '}
+                <span className="text-gray-900">Free for Buyers</span>
+              </h2>
+            </motion.div>
+
+            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+              {/* Card */}
+              <motion.div
+                className="lg:w-1/2 w-full"
+                initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl p-8 sm:p-10 border border-emerald-100 shadow-xl">
+                  <div className="inline-flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-full text-base font-bold mb-8 shadow-lg shadow-emerald-500/30">
+                    ✨ Always Free
                   </div>
-                  
-                  <p className="text-xl text-gray-700 text-center mb-8 font-semibold">
-                    Buyers never pay to use Pawgress.
+                  <p className="text-lg text-gray-700 font-semibold mb-8">
+                    Buyers never pay to use Pawgress. No hidden fees, no paywalls — ever.
                   </p>
-                  
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-3">
-                      <svg className="w-7 h-7 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span className="text-lg text-gray-700">Discover available pets from ethical breeders</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <svg className="w-7 h-7 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span className="text-lg text-gray-700">Follow your pet's timeline before pickup</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <svg className="w-7 h-7 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span className="text-lg text-gray-700">Chat directly with your breeder</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <svg className="w-7 h-7 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span className="text-lg text-gray-700">Access health records, milestones, and updates</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <svg className="w-7 h-7 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span className="text-lg text-gray-700">Continue tracking your pet's information for life</span>
-                    </div>
-                  </div>
-                  
-                  <p className="text-center text-gray-600 text-lg font-medium mt-8">
-                    There are no hidden fees and no paywalls for buyers.
-                  </p>
+                  <ul className="space-y-4">
+                    {buyerFeatures.map((feature, i) => (
+                      <motion.li
+                        key={i}
+                        className="flex items-start gap-3"
+                        initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.08 + 0.2 }}
+                      >
+                        <div className="w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                        <span className="text-gray-700 text-lg">{feature}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
-              
+              </motion.div>
+
               {/* Image */}
-              <div className="lg:w-1/2 relative">
-                {/* Decorative paw behind image */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] opacity-15 z-0">
-                  <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                    <defs>
-                      <linearGradient id="pawGradientBuyers" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style={{ stopColor: 'rgb(16, 185, 129)', stopOpacity: 1 }} />
-                        <stop offset="50%" style={{ stopColor: 'rgb(6, 182, 212)', stopOpacity: 1 }} />
-                        <stop offset="100%" style={{ stopColor: 'rgb(34, 211, 238)', stopOpacity: 1 }} />
-                      </linearGradient>
-                    </defs>
-                    <path fill="url(#pawGradientBuyers)" d="M226.5 92.9c14.3 42.9-.3 86.2-32.6 96.8s-70.1-15.6-84.4-58.5s.3-86.2 32.6-96.8s70.1 15.6 84.4 58.5zM100.4 198.6c18.9 32.4 14.3 70.1-10.2 84.1s-59.7-.9-78.5-33.3S-2.7 179.3 21.8 165.3s59.7 .9 78.5 33.3zM69.2 401.2C121.6 259.9 214.7 224 256 224s134.4 35.9 186.8 177.2c3.6 9.7 5.2 20.1 5.2 30.5v1.6c0 25.8-20.9 46.7-46.7 46.7c-11.5 0-22.9-1.4-34-4.2l-88-22c-15.3-3.8-31.3-3.8-46.6 0l-88 22c-11.1 2.8-22.5 4.2-34 4.2C84.9 480 64 459.1 64 433.3v-1.6c0-10.4 1.6-20.8 5.2-30.5zM421.8 282.7c-24.5-14-29.1-51.7-10.2-84.1s54-47.3 78.5-33.3s29.1 51.7 10.2 84.1s-54 47.3-78.5 33.3zM310.1 189.7c-32.3-10.6-46.9-53.9-32.6-96.8s52.1-69.1 84.4-58.5s46.9 53.9 32.6 96.8s-52.1 69.1-84.4 58.5z" />
-                  </svg>
-                </div>
-                <div className="rounded-3xl overflow-hidden transform hover:scale-105 transition-all duration-300 max-w-md mx-auto relative z-10">
-                  <img
-                    src="/Black Dog2.png"
-                    alt="Black Dog"
-                    className="w-full h-auto"
-                  />
-                </div>
-              </div>
+              <motion.div
+                className="lg:w-1/2 relative"
+                initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+                transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-teal-400/10 rounded-3xl blur-2xl scale-95" />
+                <img
+                  src="/Black Dog2.png"
+                  alt="Happy dog"
+                  className="w-full h-auto max-w-md mx-auto relative z-10 drop-shadow-xl rounded-2xl"
+                />
+              </motion.div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Divider */}
-      <div className="flex items-center justify-center py-8 bg-white">
+      <div className="flex items-center justify-center py-6 bg-white">
         <div className="flex items-center gap-4 w-full max-w-2xl px-6">
-          <div className="h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-blue-300 flex-1"></div>
-          <div className="text-2xl">🐾</div>
-          <div className="h-0.5 bg-gradient-to-r from-blue-300 via-blue-400 to-transparent flex-1"></div>
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-gray-200 flex-1" />
+          <span className="text-2xl">🐾</span>
+          <div className="h-px bg-gradient-to-r from-gray-200 via-gray-200 to-transparent flex-1" />
         </div>
       </div>
 
-      {/* For Breeders Section */}
-      <section className="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
+      {/* For Breeders */}
+      <section className="py-24 bg-gradient-to-br from-purple-50 via-indigo-50 to-pink-50">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12">
-              <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">For</span>{' '}
-              <span className="text-gray-900">Breeders</span>
-            </h2>
-            
-            <div className="flex flex-col lg:flex-row-reverse items-center gap-12">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+              className="text-center mb-16"
+            >
+              <span className="inline-flex items-center gap-2 bg-purple-50 text-purple-700 px-4 py-1.5 rounded-full text-sm font-semibold border border-purple-200/60 mb-4">
+                🏡 Breeders
+              </span>
+              <h2 className="text-4xl sm:text-5xl font-bold">
+                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Pricing</span>{' '}
+                <span className="text-gray-900">for Breeders</span>
+              </h2>
+            </motion.div>
+
+            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
               {/* Content */}
-              <div className="lg:w-1/2 space-y-4 w-full">
-                {/* Header */}
-                <div className="mb-8">
-                  <h3 className="text-3xl font-bold mb-3 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                    Early Access / Beta
-                  </h3>
-                  <p className="text-xl text-gray-600">
-                    Join us in shaping the future of ethical breeding
-                  </p>
-                </div>
-                
-                {/* Content Box */}
-                <div className="bg-white rounded-3xl p-8 shadow-lg border border-purple-200 space-y-6">
-                  {/* Free During Beta */}
-                  <div>
-                    <h4 className="text-2xl font-bold text-gray-900 mb-3">Free During Beta</h4>
-                    <p className="text-lg text-gray-700 leading-relaxed">
-                      During beta, breeders have full access to Pawgress at no cost while we continue building and refining the platform with early users.
-                    </p>
-                  </div>
-                  
-                  <div className="border-t border-gray-200"></div>
-                  
-                  {/* No Commissions */}
-                  <div>
-                    <h4 className="text-2xl font-bold text-gray-900 mb-3">No Commissions. No Sales Cuts.</h4>
-                    <p className="text-lg text-gray-700 leading-relaxed mb-3">
-                      Pawgress does not take a percentage of your pet sales. Breeders maintain full control over how they conduct business with buyers, including pricing, deposits, contracts, and payments.
-                    </p>
-                    <p className="text-lg text-gray-700 leading-relaxed">
-                      Pawgress operates on a subscription model, not by taking a cut of your sales.
-                    </p>
-                  </div>
-                  
-                  <div className="border-t border-gray-200"></div>
-                  
-                  {/* Planned Subscription */}
+              <motion.div
+                className="lg:w-1/2 w-full order-2 lg:order-1"
+                initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                <div className="bg-white rounded-3xl p-8 sm:p-10 shadow-xl border border-purple-100 space-y-7">
+                  {/* Free Beta */}
                   <div>
                     <div className="flex items-center gap-3 mb-3">
-                      <h4 className="text-2xl font-bold text-gray-900">Planned Subscription Pricing</h4>
-                      <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-semibold">
-                        Coming Soon
-                      </span>
+                      <h3 className="text-2xl font-bold text-gray-900">Free During Beta</h3>
+                      <span className="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">Active Now</span>
                     </div>
-                    <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                      After beta, Pawgress will offer three subscription tiers, each granting different levels of access to features and services. While final details are still being shaped, plans are expected to:
+                    <p className="text-gray-600 text-lg leading-relaxed">
+                      During beta, breeders have full access to Pawgress at no cost while we build and refine the platform with early users.
                     </p>
-                    <ul className="space-y-2 text-lg text-gray-700">
-                      <li className="flex items-start gap-3">
-                        <span className="text-purple-600 font-bold">•</span>
-                        <span>Scale based on the size of your breeding operation</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="text-purple-600 font-bold">•</span>
-                        <span>Offer increasing levels of access to tools like pet profiles, public listings, bulk updates, health tracking, and AI features</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="text-purple-600 font-bold">•</span>
-                        <span>Avoid per-sale, per-message, or per-buyer fees</span>
-                      </li>
+                  </div>
+
+                  <div className="h-px bg-gray-100" />
+
+                  {/* No commissions */}
+                  <div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">No Commissions. No Sales Cuts.</h3>
+                    <p className="text-gray-600 text-lg leading-relaxed">
+                      Pawgress never takes a percentage of your pet sales. You maintain full control over pricing, deposits, contracts, and payments. We operate on a subscription model — not by taking a cut of your business.
+                    </p>
+                  </div>
+
+                  <div className="h-px bg-gray-100" />
+
+                  {/* Planned pricing */}
+                  <div>
+                    <div className="flex items-center gap-3 mb-3 flex-wrap">
+                      <h3 className="text-2xl font-bold text-gray-900">Planned Subscription Pricing</h3>
+                      <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">Coming Soon</span>
+                    </div>
+                    <p className="text-gray-600 text-lg leading-relaxed mb-4">
+                      After beta, Pawgress will offer three tiers that scale with your operation. Plans are expected to:
+                    </p>
+                    <ul className="space-y-3">
+                      {[
+                        'Scale based on the size of your breeding operation',
+                        'Offer increasing access to pet profiles, listings, health tracking, and AI features',
+                        'Avoid per-sale, per-message, or per-buyer fees',
+                      ].map((item, i) => (
+                        <motion.li
+                          key={i}
+                          className="flex items-start gap-3"
+                          initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.08 + 0.2 }}
+                        >
+                          <div className="w-5 h-5 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 mt-1">
+                            <div className="w-2 h-2 rounded-full bg-purple-500" />
+                          </div>
+                          <span className="text-gray-700">{item}</span>
+                        </motion.li>
+                      ))}
                     </ul>
-                    <p className="text-lg text-gray-700 leading-relaxed mt-4 italic">
+                    <p className="text-gray-500 text-sm italic mt-5">
                       Early users will receive advance notice and preferred access before any pricing changes take effect.
                     </p>
                   </div>
                 </div>
-              </div>
-              
+              </motion.div>
+
               {/* Image */}
-              <div className="lg:w-1/2 relative">
-                {/* Decorative paw behind image */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] opacity-15 z-0">
-                  <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                    <defs>
-                      <linearGradient id="pawGradientBreeders" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style={{ stopColor: 'rgb(168, 85, 247)', stopOpacity: 1 }} />
-                        <stop offset="50%" style={{ stopColor: 'rgb(219, 39, 119)', stopOpacity: 1 }} />
-                        <stop offset="100%" style={{ stopColor: 'rgb(236, 72, 153)', stopOpacity: 1 }} />
-                      </linearGradient>
-                    </defs>
-                    <path fill="url(#pawGradientBreeders)" d="M226.5 92.9c14.3 42.9-.3 86.2-32.6 96.8s-70.1-15.6-84.4-58.5s.3-86.2 32.6-96.8s70.1 15.6 84.4 58.5zM100.4 198.6c18.9 32.4 14.3 70.1-10.2 84.1s-59.7-.9-78.5-33.3S-2.7 179.3 21.8 165.3s59.7 .9 78.5 33.3zM69.2 401.2C121.6 259.9 214.7 224 256 224s134.4 35.9 186.8 177.2c3.6 9.7 5.2 20.1 5.2 30.5v1.6c0 25.8-20.9 46.7-46.7 46.7c-11.5 0-22.9-1.4-34-4.2l-88-22c-15.3-3.8-31.3-3.8-46.6 0l-88 22c-11.1 2.8-22.5 4.2-34 4.2C84.9 480 64 459.1 64 433.3v-1.6c0-10.4 1.6-20.8 5.2-30.5zM421.8 282.7c-24.5-14-29.1-51.7-10.2-84.1s54-47.3 78.5-33.3s29.1 51.7 10.2 84.1s-54 47.3-78.5 33.3zM310.1 189.7c-32.3-10.6-46.9-53.9-32.6-96.8s52.1-69.1 84.4-58.5s46.9 53.9 32.6 96.8s-52.1 69.1-84.4 58.5z" />
-                  </svg>
-                </div>
-                <div className="rounded-3xl overflow-hidden shadow-2xl transform hover:scale-105 transition-all duration-300 max-w-md mx-auto relative z-10">
-                  <img
-                    src="https://pyv.hmu.temporary.site/wp-content/uploads/2026/01/young-lightskinned-brunette-woman-kisses-her-beloved-dog-tightly-while-holding-arms-pink-background-love-pets-joy-tenderness-1-832x1024.png"
-                    alt="Woman with her dog"
-                    className="w-full h-auto"
-                  />
-                </div>
-              </div>
+              <motion.div
+                className="lg:w-1/2 relative order-1 lg:order-2"
+                initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+                transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-pink-400/10 rounded-3xl blur-2xl scale-95" />
+                <img
+                  src="https://pyv.hmu.temporary.site/wp-content/uploads/2026/01/young-lightskinned-brunette-woman-kisses-her-beloved-dog-tightly-while-holding-arms-pink-background-love-pets-joy-tenderness-1-832x1024.png"
+                  alt="Woman with her dog"
+                  className="w-full h-auto max-w-sm mx-auto relative z-10 drop-shadow-xl rounded-2xl"
+                />
+              </motion.div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Divider */}
-      <div className="flex items-center justify-center py-8 bg-gradient-to-br from-purple-50 to-pink-50">
-        <div className="flex items-center gap-4 w-full max-w-2xl px-6">
-          <div className="h-0.5 bg-gradient-to-r from-transparent via-purple-400 to-purple-300 flex-1"></div>
-          <div className="text-2xl">💜</div>
-          <div className="h-0.5 bg-gradient-to-r from-purple-300 via-purple-400 to-transparent flex-1"></div>
-        </div>
-      </div>
-
-      {/* Why This Model Section */}
-      <section className="py-20 bg-white">
+      {/* Why This Model */}
+      <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12">
-              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Why This</span>{' '}
-              <span className="text-gray-900">Model</span>
-            </h2>
-            
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl p-10 shadow-xl border border-blue-100 hover:shadow-2xl transition-shadow duration-300">
-              <p className="text-xl text-gray-700 leading-relaxed mb-8 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl sm:text-5xl font-bold">
+                <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Why This</span>{' '}
+                <span className="text-gray-900">Model</span>
+              </h2>
+              <p className="text-lg text-gray-500 mt-4 max-w-2xl mx-auto">
                 Pawgress is built to support ethical breeders and responsible ownership without inserting itself into private transactions.
               </p>
-              
-              <p className="text-lg text-gray-700 leading-relaxed mb-6 font-semibold">
-                That means:
-              </p>
-              
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-blue-100">
-                  <div className="flex items-center justify-center w-14 h-14 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full mb-4 mx-auto shadow-md">
-                    <svg className="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
-                    </svg>
+            </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {whyCards.map((card, i) => (
+                <motion.div
+                  key={i}
+                  className={`bg-gradient-to-br ${card.bg} rounded-2xl p-8 border ${card.border} shadow-sm`}
+                  initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.12 }}
+                  whileHover={{ y: -6, transition: { type: 'spring', stiffness: 350, damping: 22 } }}
+                >
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${card.gradient} flex items-center justify-center mb-5 shadow-lg`}>
+                    {card.icon}
                   </div>
-                  <p className="text-lg text-gray-700 text-center leading-relaxed font-semibold">You stay in control of your business</p>
-                </div>
-                <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-pink-100">
-                  <div className="flex items-center justify-center w-14 h-14 bg-gradient-to-br from-pink-100 to-rose-100 rounded-full mb-4 mx-auto shadow-md">
-                    <svg className="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
-                  </div>
-                  <p className="text-lg text-gray-700 text-center leading-relaxed font-semibold">Buyers keep lifelong access to their pet's records</p>
-                </div>
-                <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-green-100">
-                  <div className="flex items-center justify-center w-14 h-14 bg-gradient-to-br from-green-100 to-teal-100 rounded-full mb-4 mx-auto shadow-md">
-                    <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                    </svg>
-                  </div>
-                  <p className="text-lg text-gray-700 text-center leading-relaxed font-semibold">Pawgress focuses on improving communication, organization, and transparency</p>
-                </div>
-              </div>
+                  <p className="text-gray-800 font-semibold text-lg leading-snug">{card.text}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Questions Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 relative overflow-hidden">
-        {/* Wave at top */}
-        <div className="absolute top-0 left-0 right-0 w-full overflow-hidden leading-[0]">
-          <svg className="relative block w-full h-12 sm:h-16" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="fill-white"></path>
-          </svg>
-        </div>
-        
-        {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-purple-400/10 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-blue-400/10 to-transparent rounded-full blur-3xl"></div>
-        
-        <div className="container mx-auto px-6 relative">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Questions About</span>{' '}
-              <span className="text-gray-900">Pricing</span>
-            </h2>
-            <p className="text-xl text-gray-700 leading-relaxed mb-8">
-              If you have questions or want to discuss which future plan might fit your operation best, contact us at{' '}
-              <a href="mailto:dev@pawgressapp.com" className="text-blue-600 hover:text-blue-700 underline font-semibold">
+      {/* CTA */}
+      <section className="py-24 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, white 0%, transparent 60%), radial-gradient(circle at 80% 20%, white 0%, transparent 50%)' }} />
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            className="max-w-3xl mx-auto text-center"
+            initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">Questions About Pricing?</h2>
+            <p className="text-blue-100 text-lg leading-relaxed mb-10">
+              If you want to discuss which future plan might fit your operation, reach out at{' '}
+              <a href="mailto:dev@pawgressapp.com" className="text-white underline underline-offset-2 hover:text-blue-200 transition-colors font-semibold">
                 dev@pawgressapp.com
               </a>
             </p>
-            <a
-              href="/contact-us"
-              className="inline-block bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-10 py-4 rounded-full text-lg font-bold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
+            <motion.a
+              href="/contact"
+              whileHover={{ y: -3, scale: 1.03 }} whileTap={{ scale: 0.97 }}
+              transition={{ type: 'spring', stiffness: 350, damping: 22 }}
+              className="inline-block bg-white text-indigo-600 px-10 py-4 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl transition-shadow"
             >
               Contact Us
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
         </div>
       </section>
     </main>

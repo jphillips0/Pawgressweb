@@ -5,6 +5,7 @@ import SharedNav from '@/components/SharedNav';
 import Link from 'next/link';
 import { Baloo_2 } from 'next/font/google';
 import DownloadButton from '@/components/DownloadButton';
+import { motion } from 'framer-motion';
 
 
 const baloo = Baloo_2({
@@ -39,7 +40,10 @@ export default function AboutPage() {
           <div className="relative w-full md:w-1/2 h-[35vh] md:h-[80vh] flex items-center justify-center px-6 md:px-16 lg:px-20 xl:px-24">
             <div className="w-full max-w-4xl text-center">
               {/* Glass-morphism badge with paws */}
-              <div className="relative inline-block mb-3 sm:mb-4 md:mb-6">
+              <motion.div
+                className="relative inline-block mb-3 sm:mb-4 md:mb-6"
+                initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+              >
                 <div className="absolute -left-16 sm:-left-24 md:-left-32 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 animate-paw-fade" style={{animationDelay: '0s', transform: 'translateY(-50%) rotate(-15deg)'}}>
                   <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                     <path fill="#9333EA" d="M226.5 92.9c14.3 42.9-.3 86.2-32.6 96.8s-70.1-15.6-84.4-58.5s.3-86.2 32.6-96.8s70.1 15.6 84.4 58.5zM100.4 198.6c18.9 32.4 14.3 70.1-10.2 84.1s-59.7-.9-78.5-33.3S-2.7 179.3 21.8 165.3s59.7 .9 78.5 33.3zM69.2 401.2C121.6 259.9 214.7 224 256 224s134.4 35.9 186.8 177.2c3.6 9.7 5.2 20.1 5.2 30.5v1.6c0 25.8-20.9 46.7-46.7 46.7c-11.5 0-22.9-1.4-34-4.2l-88-22c-15.3-3.8-31.3-3.8-46.6 0l-88 22c-11.1 2.8-22.5 4.2-34 4.2C84.9 480 64 459.1 64 433.3v-1.6c0-10.4 1.6-20.8 5.2-30.5zM421.8 282.7c-24.5-14-29.1-51.7-10.2-84.1s54-47.3 78.5-33.3s29.1 51.7 10.2 84.1s-54 47.3-78.5 33.3zM310.1 189.7c-32.3-10.6-46.9-53.9-32.6-96.8s52.1-69.1 84.4-58.5s46.9 53.9 32.6 96.8s-52.1 69.1-84.4 58.5z"/>
@@ -53,16 +57,19 @@ export default function AboutPage() {
                     <path fill="#EC4899" d="M226.5 92.9c14.3 42.9-.3 86.2-32.6 96.8s-70.1-15.6-84.4-58.5s.3-86.2 32.6-96.8s70.1 15.6 84.4 58.5zM100.4 198.6c18.9 32.4 14.3 70.1-10.2 84.1s-59.7-.9-78.5-33.3S-2.7 179.3 21.8 165.3s59.7 .9 78.5 33.3zM69.2 401.2C121.6 259.9 214.7 224 256 224s134.4 35.9 186.8 177.2c3.6 9.7 5.2 20.1 5.2 30.5v1.6c0 25.8-20.9 46.7-46.7 46.7c-11.5 0-22.9-1.4-34-4.2l-88-22c-15.3-3.8-31.3-3.8-46.6 0l-88 22c-11.1 2.8-22.5 4.2-34 4.2C84.9 480 64 459.1 64 433.3v-1.6c0-10.4 1.6-20.8 5.2-30.5zM421.8 282.7c-24.5-14-29.1-51.7-10.2-84.1s54-47.3 78.5-33.3s29.1 51.7 10.2 84.1s-54 47.3-78.5 33.3zM310.1 189.7c-32.3-10.6-46.9-53.9-32.6-96.8s52.1-69.1 84.4-58.5s46.9 53.9 32.6 96.8s-52.1 69.1-84.4 58.5z"/>
                   </svg>
                 </div>
-              </div>
+              </motion.div>
               
-              <h1 className="tracking-tight font-baloo">
+              <motion.h1
+                className="tracking-tight font-baloo"
+                initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.15 }}
+              >
                 <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl leading-tight font-bold">
                   <span className="bg-gradient-to-r from-gray-800 to-gray-900 bg-clip-text text-transparent">Building bridges between </span>
                   <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">ethical breeders</span>
                   <span className="bg-gradient-to-r from-gray-800 to-gray-900 bg-clip-text text-transparent"> and </span>
                   <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">devoted pet owners</span>
                 </span>
-              </h1>
+              </motion.h1>
 
               {/* Scroll indicator */}
               <div className="mt-8 flex justify-center">
@@ -85,7 +92,10 @@ export default function AboutPage() {
           <div className="max-w-[90rem] mx-auto px-6 py-20 relative z-10">
             
             {/* Our Story */}
-            <div className="max-w-4xl mx-auto mb-20">
+            <motion.div
+              className="max-w-4xl mx-auto mb-20"
+              initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55 }}
+            >
               <div className="inline-flex items-center backdrop-blur-sm bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border border-blue-300/30 px-4 py-2 sm:px-6 sm:py-3 rounded-full text-sm sm:text-base lg:text-lg font-semibold tracking-wide mb-4 sm:mb-6 shadow-lg hover:shadow-xl transition-all duration-300 group">
                 <span className="text-xl sm:text-2xl mr-2 group-hover:scale-110 transition-transform duration-300">🐾</span>
                 <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Our Story</span>
@@ -106,11 +116,14 @@ export default function AboutPage() {
                   strengthen the relationship between breeders and pet owners?"
                 </p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Three Pillars */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-              <div className="group relative backdrop-blur-sm bg-gradient-to-br from-blue-50 to-white border border-blue-100 rounded-3xl p-8 sm:p-10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer">
+              <motion.div
+                className="group relative backdrop-blur-sm bg-gradient-to-br from-blue-50 to-white border border-blue-100 rounded-3xl p-8 sm:p-10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer"
+                initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0 }}
+              >
                 <div className="relative z-10">
                   <div className="text-4xl sm:text-5xl mb-4 sm:mb-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">💬</div>
                   <h3 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-3 sm:mb-4">Communication First</h3>
@@ -120,9 +133,12 @@ export default function AboutPage() {
                     answers easy to find.
                   </p>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="group relative backdrop-blur-sm bg-gradient-to-br from-green-50 to-white border border-green-100 rounded-3xl p-8 sm:p-10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer">
+              <motion.div
+                className="group relative backdrop-blur-sm bg-gradient-to-br from-green-50 to-white border border-green-100 rounded-3xl p-8 sm:p-10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer"
+                initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+              >
                 <div className="relative z-10">
                   <div className="text-4xl sm:text-5xl mb-4 sm:mb-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">🎯</div>
                   <h3 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-3 sm:mb-4">User-Friendly Design</h3>
@@ -132,9 +148,12 @@ export default function AboutPage() {
                     buyers checking in on their future companion.
                   </p>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="group relative backdrop-blur-sm bg-gradient-to-br from-purple-50 to-white border border-purple-100 rounded-3xl p-8 sm:p-10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer">
+              <motion.div
+                className="group relative backdrop-blur-sm bg-gradient-to-br from-purple-50 to-white border border-purple-100 rounded-3xl p-8 sm:p-10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer"
+                initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
+              >
                 <div className="relative z-10">
                   <div className="text-4xl sm:text-5xl mb-4 sm:mb-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">🤝</div>
                   <h3 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3 sm:mb-4">Relationship Focused</h3>
@@ -144,11 +163,14 @@ export default function AboutPage() {
                     the lifetime of your pet.
                   </p>
                 </div>
-              </div>
+              </motion.div>
             </div>
 
             {/* How We Help */}
-            <div className="relative bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-3xl p-12 md:p-16 text-white mb-20 shadow-2xl overflow-hidden group">
+            <motion.div
+              className="relative bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-3xl p-12 md:p-16 text-white mb-20 shadow-2xl overflow-hidden group"
+              initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+            >
               {/* Animated overlay */}
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
               
@@ -205,9 +227,12 @@ export default function AboutPage() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
             {/* Why Communication Matters */}
-            <div className="max-w-4xl mx-auto text-center">
+            <motion.div
+              className="max-w-4xl mx-auto text-center"
+              initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55 }}
+            >
               <div className="inline-flex items-center backdrop-blur-sm bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-300/30 px-4 py-2 sm:px-6 sm:py-3 rounded-full text-sm sm:text-base lg:text-lg font-semibold tracking-wide mb-4 sm:mb-6 shadow-lg hover:shadow-xl transition-all duration-300 group">
                 <span className="text-xl sm:text-2xl mr-2 group-hover:scale-110 transition-transform duration-300">💡</span>
                 <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Our Philosophy</span>
@@ -220,32 +245,44 @@ export default function AboutPage() {
                 lay the groundwork for a lifetime. During this critical period, clear communication ensures:
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 text-left">
-                <div className="group relative backdrop-blur-sm bg-gradient-to-br from-blue-50 to-white border border-blue-100 rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+                <motion.div
+                  className="group relative backdrop-blur-sm bg-gradient-to-br from-blue-50 to-white border border-blue-100 rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0 }}
+                >
                   <div className="relative z-10">
                     <h4 className="font-bold text-gray-900 mb-2 sm:mb-3 text-lg sm:text-xl">✓ Informed Decisions</h4>
                     <p className="text-gray-600 text-base sm:text-lg">Pet owners can make confident choices with complete visibility into their pet's early life.</p>
                   </div>
-                </div>
-                <div className="group relative backdrop-blur-sm bg-gradient-to-br from-green-50 to-white border border-green-100 rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+                </motion.div>
+                <motion.div
+                  className="group relative backdrop-blur-sm bg-gradient-to-br from-green-50 to-white border border-green-100 rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.08 }}
+                >
                   <div className="relative z-10">
                     <h4 className="font-bold text-gray-900 mb-2 sm:mb-3 text-lg sm:text-xl">✓ Trust & Transparency</h4>
                     <p className="text-gray-600 text-base sm:text-lg">Open communication builds lasting relationships based on honesty and mutual respect.</p>
                   </div>
-                </div>
-                <div className="group relative backdrop-blur-sm bg-gradient-to-br from-purple-50 to-white border border-purple-100 rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+                </motion.div>
+                <motion.div
+                  className="group relative backdrop-blur-sm bg-gradient-to-br from-purple-50 to-white border border-purple-100 rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.16 }}
+                >
                   <div className="relative z-10">
                     <h4 className="font-bold text-gray-900 mb-2 sm:mb-3 text-lg sm:text-xl">✓ Better Care</h4>
                     <p className="text-gray-600 text-base sm:text-lg">Breeders can share critical health information, ensuring seamless transitions and ongoing wellness.</p>
                   </div>
-                </div>
-                <div className="group relative backdrop-blur-sm bg-gradient-to-br from-orange-50 to-white border border-orange-100 rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+                </motion.div>
+                <motion.div
+                  className="group relative backdrop-blur-sm bg-gradient-to-br from-orange-50 to-white border border-orange-100 rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.24 }}
+                >
                   <div className="relative z-10">
                     <h4 className="font-bold text-gray-900 mb-2 sm:mb-3 text-lg sm:text-xl">✓ Lasting Connections</h4>
                     <p className="text-gray-600 text-base sm:text-lg">Strong breeder-owner relationships continue long after adoption, supporting pets throughout their lives.</p>
                   </div>
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
 
           </div>
         </div>
@@ -253,23 +290,32 @@ export default function AboutPage() {
         {/* Call to Action */}
         <div className="w-full bg-gradient-to-b from-blue-50 via-indigo-50/30 to-white py-20">
           <div className="max-w-4xl mx-auto text-center px-6">
-            <h2 className="font-baloo text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
+            <motion.h2
+              className="font-baloo text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6"
+              initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+            >
               <span className="bg-gradient-to-r from-gray-800 to-gray-900 bg-clip-text text-transparent">Join Us in Building Better Relationships</span>
-            </h2>
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-600 mb-8 sm:mb-10 leading-relaxed">
+            </motion.h2>
+            <motion.p
+              className="text-lg sm:text-xl md:text-2xl text-gray-600 mb-8 sm:mb-10 leading-relaxed"
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+            >
               Whether you're an ethical breeder looking to streamline your operations or a pet owner 
               wanting to stay connected, Pawgress is here to make communication effortless and 
               relationships stronger.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+            </motion.p>
+            <motion.div
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center"
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
+            >
               <DownloadButton className="group relative bg-blue-600 text-white px-8 py-4 sm:px-10 sm:py-5 rounded-full hover:bg-blue-700 transition-all duration-300 font-semibold text-lg sm:text-xl text-center shadow-lg hover:shadow-xl hover:scale-105">
-                <span className="relative z-10">Download on the App Store</span>
+                <span className="relative z-10">Download the App</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-indigo-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
               </DownloadButton>
               <Link href="/mission" className="group relative border-2 border-blue-600 text-blue-600 px-8 py-4 sm:px-10 sm:py-5 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 font-semibold text-lg sm:text-xl text-center shadow-lg hover:shadow-xl hover:scale-105">
                 <span className="relative z-10">Learn More About Our Mission</span>
               </Link>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

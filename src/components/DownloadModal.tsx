@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 const APP_STORE_URL = 'https://apps.apple.com/app/pawgress/id6752368171';
+const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.timelinesllc.pawgress';
 
 interface DownloadModalProps {
   isOpen: boolean;
@@ -58,7 +59,7 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
             Pawgress is live!
           </h3>
           <p className="text-blue-100 text-sm mt-1">
-            Now available on the App Store
+            Now available on iOS &amp; Android
           </p>
         </div>
 
@@ -92,14 +93,14 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
               </svg>
             </a>
 
-            {/* Google Play — coming soon */}
-            <div className="relative flex items-center gap-4 px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl text-gray-400 cursor-not-allowed select-none overflow-hidden">
-              {/* Coming soon badge */}
-              <span className="absolute top-2.5 right-3 text-[10px] font-semibold bg-amber-100 text-amber-600 px-2 py-0.5 rounded-full tracking-wide uppercase">
-                Coming soon
-              </span>
-
-              <svg className="w-9 h-9 flex-shrink-0 opacity-40" viewBox="0 0 24 24">
+            {/* Google Play — live */}
+            <a
+              href={PLAY_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-4 px-5 py-4 bg-black rounded-2xl text-white hover:bg-gray-900 active:scale-[0.98] transition-all duration-150 shadow-lg shadow-black/20"
+            >
+              <svg className="w-9 h-9 flex-shrink-0" viewBox="0 0 24 24">
                 <defs>
                   <linearGradient id="gpB" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stopColor="#00D7FE" />
@@ -123,16 +124,19 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
                 <path fill="url(#gpR)" d="M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81Z" />
                 <path fill="url(#gpY)" d="M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
               </svg>
-              <div className="text-left pr-16">
-                <div className="text-[11px] leading-tight">Get it on</div>
+              <div className="flex-1 text-left">
+                <div className="text-[11px] leading-tight text-gray-400">Get it on</div>
                 <div className="text-lg font-semibold leading-tight tracking-tight">Google Play</div>
               </div>
-            </div>
+              <svg className="w-5 h-5 text-gray-500 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
           </div>
 
           {/* Divider + footnote */}
           <p className="text-center text-xs text-gray-400 mt-5">
-            Free to download &nbsp;·&nbsp; iOS 16+ required
+            Free to download &nbsp;·&nbsp; iOS &amp; Android
           </p>
         </div>
       </div>

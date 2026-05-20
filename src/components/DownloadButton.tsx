@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import DownloadModal from './DownloadModal';
 
 const APP_STORE_URL = 'https://apps.apple.com/app/pawgress/id6752368171';
+const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.timelinesllc.pawgress';
 
 type Platform = 'ios' | 'android' | 'web';
 
@@ -37,8 +38,17 @@ export default function DownloadButton({ className, children }: DownloadButtonPr
     );
   }
 
-  // Android — Coming Soon popup
+  // Android — direct link to Play Store
   if (platform === 'android') {
+    return (
+      <a href={PLAY_STORE_URL} target="_blank" rel="noopener noreferrer" className={className}>
+        {children}
+      </a>
+    );
+  }
+
+  // (kept for reference, no longer shown)
+  if (false && platform === 'android') {
     return (
       <>
         <button onClick={() => setShowAndroidPopup(true)} className={className}>
