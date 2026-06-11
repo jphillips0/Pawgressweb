@@ -260,11 +260,11 @@ export default function Hero() {
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-20 px-6 sm:px-8 lg:px-16 xl:px-32 2xl:px-48 pt-24 sm:pt-28 lg:pt-32 pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center max-w-[1400px] mx-auto">
+      <div className="relative z-20 px-5 sm:px-8 lg:px-16 xl:px-32 2xl:px-48 pt-24 sm:pt-28 lg:pt-32 pb-8 sm:pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 xl:gap-16 items-center max-w-[1400px] mx-auto">
 
           {/* Left Content */}
-          <div className="order-2 lg:order-1 text-left">
+          <div className="order-1 text-center lg:text-left">
             {/* Badge */}
             <motion.a
               href="#features"
@@ -293,14 +293,14 @@ export default function Hero() {
             </h1>
 
             {/* Subtitle */}
-            <p ref={subtitleRef} style={{ opacity: 0 }} className="text-lg sm:text-xl md:text-2xl text-blue-900/80 mb-8 sm:mb-10 leading-relaxed max-w-xl">
+            <p ref={subtitleRef} style={{ opacity: 0 }} className="text-base sm:text-xl md:text-2xl text-blue-900/80 mb-8 sm:mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
               Track your pet's journey, from their first steps to forever. Pawgress gives ethical breeders and pet parents a shared, transparent timeline for every pet, with updates, photos, and health records all in one place.
             </p>
 
             {/* CTA Buttons */}
-            <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 justify-start mb-10">
-              <motion.div whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.97 }} transition={{ type: 'spring', stiffness: 350, damping: 22 }}>
-                <DownloadButton className="relative inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl shadow-blue-600/30 hover:shadow-2xl hover:shadow-blue-600/40 transition-shadow text-center">
+            <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-8 sm:mb-10 max-w-md mx-auto sm:max-w-none">
+              <motion.div className="w-full sm:w-auto" whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.97 }} transition={{ type: 'spring', stiffness: 350, damping: 22 }}>
+                <DownloadButton className="relative inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl shadow-blue-600/30 hover:shadow-2xl hover:shadow-blue-600/40 transition-shadow text-center">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                   Download the App
                 </DownloadButton>
@@ -310,7 +310,7 @@ export default function Hero() {
                 whileHover={{ y: -3, scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: 'spring', stiffness: 350, damping: 22 }}
-                className="inline-flex items-center justify-center gap-2 border-2 border-blue-700/30 bg-white/60 backdrop-blur-md text-blue-800 px-8 py-4 rounded-full hover:bg-white hover:border-blue-700/60 transition-colors font-semibold text-lg text-center"
+                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 border-2 border-blue-700/30 bg-white/60 backdrop-blur-md text-blue-800 px-8 py-4 rounded-full hover:bg-white hover:border-blue-700/60 transition-colors font-semibold text-lg text-center"
               >
                 Learn More
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
@@ -318,19 +318,19 @@ export default function Hero() {
             </div>
 
             {/* Social Proof — glass card */}
-            <div ref={socialRef} style={{ opacity: 0 }} className="inline-flex items-center gap-4 sm:gap-5 rounded-2xl border border-white/60 bg-white/60 backdrop-blur-md px-4 sm:px-5 py-3 shadow-lg shadow-blue-900/5">
+            <div ref={socialRef} style={{ opacity: 0 }} className="flex w-full sm:w-auto sm:inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-5 rounded-2xl border border-white/60 bg-white/60 backdrop-blur-md px-4 sm:px-5 py-4 sm:py-3 shadow-lg shadow-blue-900/5 max-w-md mx-auto lg:mx-0">
               <div ref={avatarsRef} className="flex -space-x-2">
                 {[1, 2, 3, 4, 5].map((i) => (
-                  <div key={i} style={{ opacity: 0 }} className="w-10 h-10 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full border-2 border-white flex items-center justify-center text-white font-bold text-sm shadow-sm">
+                  <div key={i} style={{ opacity: 0 }} className="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full border-2 border-white flex items-center justify-center text-white font-bold text-sm shadow-sm">
                     {String.fromCharCode(65 + i)}
                   </div>
                 ))}
               </div>
-              <div className="text-left">
+              <div className="text-center sm:text-left">
                 <p className="text-sm text-blue-900/80 font-medium">
                   Trusted by <span className="font-bold text-blue-900">500+</span> breeders & shelters
                 </p>
-                <div className="flex items-center gap-1 mt-1">
+                <div className="flex items-center justify-center sm:justify-start gap-1 mt-1">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <svg key={star} className="w-4 h-4 text-yellow-500 fill-current" viewBox="0 0 20 20">
                       <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
@@ -343,8 +343,8 @@ export default function Hero() {
           </div>
 
           {/* Right Content - Dog Image */}
-          <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-lg">
+          <div className="order-2 flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-[280px] sm:max-w-sm lg:max-w-lg">
               {/* Soft gradient halo behind dog */}
               <motion.div
                 aria-hidden

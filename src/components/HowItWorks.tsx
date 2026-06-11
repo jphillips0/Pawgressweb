@@ -343,17 +343,17 @@ export default function HowItWorks() {
             <div aria-hidden className="absolute inset-x-0 top-0 h-32 pointer-events-none"
               style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.6), transparent)' }} />
 
-            <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center p-8 sm:p-12 lg:p-16">
+            <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center p-5 sm:p-12 lg:p-16">
               {/* Left: copy */}
               <div>
                 <div className="wpd-heading inline-flex items-center gap-2 bg-blue-50 text-blue-700 border border-blue-100 px-4 py-1.5 rounded-full text-sm font-semibold mb-5" style={{ opacity: 0 }}>
                   <span>🐾</span> What Pawgress Does
                 </div>
-                <h2 className="wpd-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-5 font-baloo tracking-tight leading-[1.05]" style={{ opacity: 0 }}>
+                <h2 className="wpd-heading text-3xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-5 font-baloo tracking-tight leading-[1.1]" style={{ opacity: 0 }}>
                   One place for{' '}
                   <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">every pet's story</span>
                 </h2>
-                <p className="wpd-text text-lg text-gray-600 leading-relaxed mb-8" style={{ opacity: 0 }}>
+                <p className="wpd-text text-base sm:text-lg text-gray-600 leading-relaxed mb-6 sm:mb-8" style={{ opacity: 0 }}>
                   Pawgress organizes the communication between breeder and buyer. Breeders post updates to one or multiple pets, and those updates automatically appear in their chat and timeline. Buyers connect to their specific pet and chat directly with the breeder on that pet's page, keeping conversations clear, organized, and easy to find.
                 </p>
 
@@ -381,17 +381,18 @@ export default function HowItWorks() {
               {/* Right: image with floating chips */}
               <div className="relative">
                 <motion.img
-                  src="https://pyv.hmu.temporary.site/wp-content/uploads/2026/01/cute-pet-collage-isolated-2-980x389.png"
-                  alt="Cute pets collage"
+                  src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1200&q=80"
+                  alt="Dog and cat resting together"
                   style={{ opacity: 0 }}
-                  className="wpd-image relative w-full rounded-2xl shadow-2xl shadow-blue-900/15"
+                  className="wpd-image relative w-full h-56 sm:h-72 lg:h-80 object-cover rounded-2xl shadow-2xl shadow-blue-900/15"
                   whileHover={{ scale: 1.02, rotate: 0.5 }}
                   transition={{ type: 'spring', stiffness: 200, damping: 18 }}
                 />
 
-                {/* Floating chips around image */}
+                {/* Floating chips — overlay on desktop, in-flow row on mobile */}
+                <div className="mt-4 flex flex-wrap gap-2.5 lg:mt-0 lg:contents">
                 <motion.div
-                  className="absolute -top-2 -left-1 lg:-top-4 lg:-left-6 bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2 py-1.5 lg:px-4 lg:py-2.5 flex items-center gap-2 lg:gap-2.5 max-w-[55%] lg:max-w-none"
+                  className="bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2.5 py-1.5 lg:px-4 lg:py-2.5 flex items-center gap-2 lg:gap-2.5 lg:absolute lg:-top-4 lg:-left-6"
                   initial={{ opacity: 0, y: -10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -406,7 +407,7 @@ export default function HowItWorks() {
                 </motion.div>
 
                 <motion.div
-                  className="absolute -bottom-2 -right-1 lg:-bottom-4 lg:-right-6 bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2 py-1.5 lg:px-4 lg:py-2.5 flex items-center gap-2 lg:gap-2.5 max-w-[55%] lg:max-w-none"
+                  className="bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2.5 py-1.5 lg:px-4 lg:py-2.5 flex items-center gap-2 lg:gap-2.5 lg:absolute lg:-bottom-4 lg:-right-6"
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -421,7 +422,7 @@ export default function HowItWorks() {
                 </motion.div>
 
                 <motion.div
-                  className="hidden sm:flex absolute top-3 lg:top-4 -right-1 lg:-right-6 bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2 py-1.5 lg:px-3.5 lg:py-2 items-center gap-1.5 lg:gap-2 max-w-[55%] lg:max-w-none"
+                  className="bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2.5 py-1.5 lg:px-3.5 lg:py-2 flex items-center gap-1.5 lg:gap-2 lg:absolute lg:top-4 lg:-right-6"
                   initial={{ opacity: 0, x: 10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -430,6 +431,7 @@ export default function HowItWorks() {
                   <div className="w-5 h-5 lg:w-7 lg:h-7 rounded-md lg:rounded-lg bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white text-[10px] lg:text-sm flex-shrink-0">❤️</div>
                   <span className="text-xs lg:text-sm font-semibold text-gray-900 leading-tight">Milestone unlocked</span>
                 </motion.div>
+                </div>
               </div>
             </div>
           </div>
@@ -437,7 +439,7 @@ export default function HowItWorks() {
       </div>
 
       {/* What Pawgress Is Section - Before/After comparison */}
-      <div ref={whatIsRef} className="mb-20 sm:mb-24 lg:mb-32 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-20 sm:py-24 lg:py-28 px-6 sm:px-12 lg:px-16 relative overflow-hidden">
+      <div ref={whatIsRef} className="mb-20 sm:mb-24 lg:mb-32 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-16 sm:py-24 lg:py-28 px-4 sm:px-12 lg:px-16 relative overflow-hidden">
         {/* Wave at top */}
         <div className="absolute top-0 left-0 right-0 w-full overflow-hidden leading-none z-10">
           <svg className="relative block w-full h-16 sm:h-20 md:h-24" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -460,11 +462,11 @@ export default function HowItWorks() {
             <div className="wis-item inline-flex items-center gap-2 bg-white/80 backdrop-blur-md border border-blue-200/60 text-blue-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-5 shadow-sm" style={{ opacity: 0 }}>
               <span>💡</span> Why Pawgress
             </div>
-            <h2 className="wis-item text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-5 font-baloo tracking-tight" style={{ opacity: 0 }}>
+            <h2 className="wis-item text-3xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-5 font-baloo tracking-tight" style={{ opacity: 0 }}>
               From <span className="bg-gradient-to-r from-rose-500 to-orange-500 bg-clip-text text-transparent">chaos</span> to{' '}
               <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">clarity</span>
             </h2>
-            <p className="wis-item text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto" style={{ opacity: 0 }}>
+            <p className="wis-item text-base sm:text-xl text-gray-600 max-w-2xl mx-auto" style={{ opacity: 0 }}>
               Most breeders juggle inquiries across DMs, texts, and emails. Pawgress was built to fix that.
             </p>
           </div>
@@ -595,25 +597,25 @@ export default function HowItWorks() {
 
       <div className="px-4 sm:px-6 lg:px-8 xl:px-12 max-w-[1800px] mx-auto">
         {/* How It Works Header */}
-        <div className="text-center mb-10 sm:mb-14">
+        <div className="text-center mb-10 sm:mb-14 px-2">
           <div className="inline-flex items-center bg-indigo-50 text-indigo-600 px-4 py-2 sm:px-6 rounded-full text-sm font-semibold tracking-wide mb-5">
             <span className="mr-2">🚀</span> How It Works
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 font-baloo mb-4">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-gray-900 font-baloo mb-4">
             Simple. Connected. Transparent.
           </h2>
-          <p className="text-lg text-gray-500 max-w-xl mx-auto">
+          <p className="text-base sm:text-lg text-gray-500 max-w-xl mx-auto">
             Whether you're welcoming a new pet or raising one, Pawgress keeps everyone on the same page.
           </p>
         </div>
 
         {/* Tab Switcher */}
-        <div className="flex justify-center mb-12">
-          <div className="relative flex bg-white border border-gray-200 rounded-2xl p-1.5 gap-1 shadow-lg shadow-blue-900/5">
+        <div className="flex justify-center mb-10 sm:mb-12">
+          <div className="relative flex w-full max-w-md sm:w-auto sm:max-w-none bg-white border border-gray-200 rounded-2xl p-1.5 gap-1 shadow-lg shadow-blue-900/5">
             {/* Breeders button — first / default */}
             <button
               onClick={() => setActiveTab('breeders')}
-              className={`relative flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg transition-colors duration-300 z-10 ${
+              className={`relative flex flex-1 sm:flex-none items-center justify-center gap-2 sm:gap-3 px-3 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-sm sm:text-lg transition-colors duration-300 z-10 ${
                 activeTab === 'breeders' ? 'text-white' : 'text-gray-600 hover:text-gray-900'
               }`}
             >
@@ -624,13 +626,13 @@ export default function HowItWorks() {
                   transition={{ type: 'spring', stiffness: 400, damping: 32 }}
                 />
               )}
-              <span className="text-2xl">🌱</span>
-              <span>For Breeders</span>
+              <span className="text-xl sm:text-2xl">🌱</span>
+              <span className="whitespace-nowrap">For Breeders</span>
             </button>
             {/* Buyers button */}
             <button
               onClick={() => setActiveTab('buyers')}
-              className={`relative flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg transition-colors duration-300 z-10 ${
+              className={`relative flex flex-1 sm:flex-none items-center justify-center gap-2 sm:gap-3 px-3 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-sm sm:text-lg transition-colors duration-300 z-10 ${
                 activeTab === 'buyers' ? 'text-white' : 'text-gray-600 hover:text-gray-900'
               }`}
             >
@@ -641,8 +643,8 @@ export default function HowItWorks() {
                   transition={{ type: 'spring', stiffness: 400, damping: 32 }}
                 />
               )}
-              <span className="text-2xl">🏠</span>
-              <span>For Buyers</span>
+              <span className="text-xl sm:text-2xl">🏠</span>
+              <span className="whitespace-nowrap">For Buyers</span>
             </button>
           </div>
         </div>
@@ -788,9 +790,10 @@ export default function HowItWorks() {
                 </div>
               </motion.div>
 
-              {/* Floating trust badges */}
+              {/* Floating trust badges — overlay on desktop, in-flow row on mobile */}
+              <div className="relative z-10 mt-4 flex flex-wrap gap-2.5 lg:mt-0 lg:contents">
               <motion.div
-                className="absolute -top-2 -left-1 lg:-top-4 lg:-left-8 bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2 py-1.5 lg:px-4 lg:py-3 flex items-center gap-2 lg:gap-3 max-w-[60%] lg:max-w-none"
+                className="bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2.5 py-1.5 lg:px-4 lg:py-3 flex items-center gap-2 lg:gap-3 lg:absolute lg:-top-4 lg:-left-8"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -807,7 +810,7 @@ export default function HowItWorks() {
               </motion.div>
 
               <motion.div
-                className="absolute top-1/2 -right-1 lg:-right-8 -translate-y-1/2 bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2 py-1.5 lg:px-4 lg:py-3 flex items-center gap-2 lg:gap-3 max-w-[60%] lg:max-w-none"
+                className="bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2.5 py-1.5 lg:px-4 lg:py-3 flex items-center gap-2 lg:gap-3 lg:absolute lg:top-1/2 lg:-right-8 lg:-translate-y-1/2"
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -824,7 +827,7 @@ export default function HowItWorks() {
               </motion.div>
 
               <motion.div
-                className="absolute -bottom-2 left-2 lg:-bottom-4 lg:left-12 bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2 py-1.5 lg:px-4 lg:py-3 flex items-center gap-2 lg:gap-3 max-w-[60%] lg:max-w-none"
+                className="bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2.5 py-1.5 lg:px-4 lg:py-3 flex items-center gap-2 lg:gap-3 lg:absolute lg:-bottom-4 lg:left-12"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -839,6 +842,7 @@ export default function HowItWorks() {
                   <div className="text-xs sm:text-sm font-bold text-gray-900 leading-tight">Encrypted records</div>
                 </div>
               </motion.div>
+              </div>
             </div>
             
             {/* Right Content */}
@@ -846,11 +850,11 @@ export default function HowItWorks() {
               <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 border border-blue-100 px-4 py-1.5 rounded-full text-sm font-semibold mb-5">
                 <span>🛡️</span> Built On Transparency
               </div>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-baloo tracking-tight leading-[1.05]">
+              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-baloo tracking-tight leading-[1.1]">
                 Trust isn't a feature.{' '}
                 <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">It's the foundation.</span>
               </h2>
-              <div className="space-y-4 text-lg text-gray-600 leading-relaxed mb-8">
+              <div className="space-y-4 text-base sm:text-lg text-gray-600 leading-relaxed mb-8">
                 <p>
                   Pawgress is designed to support responsible breeding and long-term pet care. We prioritize clear documentation, honest communication, and organized records — and we do not support puppy mills or non-transparent practices.
                 </p>

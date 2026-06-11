@@ -169,7 +169,7 @@ export default function Features() {
   return (
     <section ref={sectionRef} className="py-0 bg-white overflow-visible" id="features">
       {/* Bottom CTA Section with Blue Background and Waves */}
-      <div className="bg-gradient-to-br from-blue-50 via-indigo-100 to-purple-100 py-16 sm:py-20 lg:py-24 px-8 sm:px-12 lg:px-16 relative overflow-hidden">
+      <div className="bg-gradient-to-br from-blue-50 via-indigo-100 to-purple-100 py-16 sm:py-20 lg:py-24 px-5 sm:px-12 lg:px-16 relative overflow-hidden">
         {/* Wave at top */}
         <div className="absolute top-0 left-0 right-0 w-full overflow-hidden leading-none z-10">
           <svg className="relative block w-full h-16 sm:h-24 lg:h-32" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -216,7 +216,7 @@ export default function Features() {
               </div>
             </div>
 
-            <h3 ref={headingRef} style={{ opacity: 0 }} className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 font-baloo leading-tight">
+            <h3 ref={headingRef} style={{ opacity: 0 }} className="text-3xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 font-baloo leading-tight">
               Ready to Start
               <br className="sm:hidden" />
               {' '}<span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
@@ -249,17 +249,17 @@ export default function Features() {
             </div>
 
             {/* Stats */}
-            <div ref={statsRef} className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-              <motion.div whileHover={{ y: -4 }} transition={{ type: 'spring', stiffness: 300, damping: 22 }} className="stat-card text-center group rounded-2xl border border-white/60 bg-white/60 backdrop-blur-md p-5 sm:p-6 shadow-lg shadow-blue-900/5 hover:shadow-xl hover:shadow-blue-900/10 transition-shadow" style={{ opacity: 0 }}>
-                <div className="stat-number text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-baloo mb-2" data-target="500" data-suffix="+">0+</div>
+            <div ref={statsRef} className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6">
+              <motion.div whileHover={{ y: -4 }} transition={{ type: 'spring', stiffness: 300, damping: 22 }} className="stat-card group rounded-2xl border border-white/60 bg-white/60 backdrop-blur-md p-4 sm:p-6 shadow-lg shadow-blue-900/5 hover:shadow-xl hover:shadow-blue-900/10 transition-shadow flex items-center justify-between gap-3 text-left sm:block sm:text-center" style={{ opacity: 0 }}>
+                <div className="stat-number text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-baloo sm:mb-2" data-target="500" data-suffix="+">0+</div>
                 <div className="text-sm sm:text-base text-gray-600 font-semibold">Ethical Breeders</div>
               </motion.div>
-              <motion.div whileHover={{ y: -4 }} transition={{ type: 'spring', stiffness: 300, damping: 22 }} className="stat-card text-center group rounded-2xl border border-white/60 bg-white/60 backdrop-blur-md p-5 sm:p-6 shadow-lg shadow-blue-900/5 hover:shadow-xl hover:shadow-blue-900/10 transition-shadow" style={{ opacity: 0 }}>
-                <div className="stat-number text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent font-baloo mb-2" data-target="10" data-suffix="K+">0K+</div>
+              <motion.div whileHover={{ y: -4 }} transition={{ type: 'spring', stiffness: 300, damping: 22 }} className="stat-card group rounded-2xl border border-white/60 bg-white/60 backdrop-blur-md p-4 sm:p-6 shadow-lg shadow-blue-900/5 hover:shadow-xl hover:shadow-blue-900/10 transition-shadow flex items-center justify-between gap-3 text-left sm:block sm:text-center" style={{ opacity: 0 }}>
+                <div className="stat-number text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent font-baloo sm:mb-2" data-target="10" data-suffix="K+">0K+</div>
                 <div className="text-sm sm:text-base text-gray-600 font-semibold">Pet Journeys Documented</div>
               </motion.div>
-              <motion.div whileHover={{ y: -4 }} transition={{ type: 'spring', stiffness: 300, damping: 22 }} className="stat-card text-center group rounded-2xl border border-white/60 bg-white/60 backdrop-blur-md p-5 sm:p-6 shadow-lg shadow-blue-900/5 hover:shadow-xl hover:shadow-blue-900/10 transition-shadow" style={{ opacity: 0 }}>
-                <div className="stat-number text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-baloo mb-2" data-target="98" data-suffix="%">0%</div>
+              <motion.div whileHover={{ y: -4 }} transition={{ type: 'spring', stiffness: 300, damping: 22 }} className="stat-card group rounded-2xl border border-white/60 bg-white/60 backdrop-blur-md p-4 sm:p-6 shadow-lg shadow-blue-900/5 hover:shadow-xl hover:shadow-blue-900/10 transition-shadow flex items-center justify-between gap-3 text-left sm:block sm:text-center" style={{ opacity: 0 }}>
+                <div className="stat-number text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-baloo sm:mb-2" data-target="98" data-suffix="%">0%</div>
                 <div className="text-sm sm:text-base text-gray-600 font-semibold">Trust & Transparency</div>
               </motion.div>
             </div>

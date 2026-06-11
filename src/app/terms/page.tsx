@@ -1,6 +1,7 @@
 import React from 'react';
 import SharedNav from '@/components/SharedNav';
 import { Baloo_2 } from 'next/font/google';
+import { PageTransition, RevealGroup } from '@/components/motion';
 
 const baloo = Baloo_2({
   subsets: ['latin'],
@@ -17,10 +18,10 @@ export default function TermsOfService() {
       {/* Hero Section */}
       <div className="relative overflow-hidden pt-32 sm:pt-40 pb-16 sm:pb-20">
         {/* Decorative Elements */}
-        <div className="absolute top-20 left-10 w-20 h-20 sm:w-32 sm:h-32 bg-blue-400/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-40 right-20 w-24 h-24 sm:w-40 sm:h-40 bg-purple-400/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 left-10 w-20 h-20 sm:w-32 sm:h-32 bg-blue-400/20 rounded-full blur-3xl animate-float-soft"></div>
+        <div className="absolute top-40 right-20 w-24 h-24 sm:w-40 sm:h-40 bg-purple-400/20 rounded-full blur-3xl animate-float-soft" style={{ animationDelay: '1.5s' }}></div>
         
-        <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center relative z-10">
+        <PageTransition className="max-w-4xl mx-auto px-6 sm:px-8 text-center relative z-10">
           <div className="inline-block px-4 sm:px-6 py-2 sm:py-2.5 bg-blue-100 text-blue-600 rounded-full text-xs sm:text-sm md:text-base font-semibold mb-6 sm:mb-8">
             Legal Information
           </div>
@@ -30,12 +31,13 @@ export default function TermsOfService() {
           <p className="text-base sm:text-lg md:text-xl text-gray-600">
             Last Updated: December 7, 2025
           </p>
-        </div>
+        </PageTransition>
       </div>
 
       {/* Content */}
       <div className="max-w-4xl mx-auto px-6 sm:px-8 pb-16 sm:pb-20">
         <div className="backdrop-blur-sm bg-white/80 border border-white/50 rounded-3xl p-6 sm:p-10 lg:p-14 shadow-xl">
+          <RevealGroup>
           
           {/* Introduction */}
           <div className="mb-8 sm:mb-12 p-6 sm:p-8 bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl border border-blue-100">
@@ -381,6 +383,7 @@ export default function TermsOfService() {
             </div>
           </section>
 
+          </RevealGroup>
         </div>
       </div>
     </div>

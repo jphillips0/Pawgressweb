@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Baloo_2 } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
+import { ScrollProgressBar } from "@/components/motion";
+import ScrollRestorer from "@/components/ScrollRestorer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -41,6 +43,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${baloo.variable}`}>
       <body className="font-inter antialiased bg-white text-gray-900">
+        <ScrollProgressBar />
+        <ScrollRestorer />
         <div className="min-h-screen flex flex-col">
           <main className="flex-grow">
             {children}

@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import SharedNav from '@/components/SharedNav';
 import { Baloo_2 } from 'next/font/google';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Reveal, PageTransition } from '@/components/motion';
 
 const baloo2 = Baloo_2({ subsets: ['latin'] });
 
@@ -42,8 +43,18 @@ export default function ContactPage() {
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 relative overflow-hidden">
         {/* Decorative elements */}
-        <div className="absolute top-20 right-0 w-96 h-96 bg-gradient-to-br from-blue-400/10 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-indigo-400/10 to-transparent rounded-full blur-3xl"></div>
+        <motion.div
+          aria-hidden
+          className="absolute top-20 right-0 w-96 h-96 bg-gradient-to-br from-blue-400/20 to-transparent rounded-full blur-3xl"
+          animate={{ x: [0, -40, 20, 0], y: [0, 30, -20, 0] }}
+          transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          aria-hidden
+          className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-indigo-400/20 to-transparent rounded-full blur-3xl"
+          animate={{ x: [0, 40, -20, 0], y: [0, -30, 20, 0] }}
+          transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
+        />
         
         {/* Wave at bottom */}
         <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none">
@@ -53,16 +64,26 @@ export default function ContactPage() {
         </div>
         
         <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+          <PageTransition className="max-w-4xl mx-auto text-center">
+            <motion.h1
+              initial={{ opacity: 0, y: 30, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight"
+            >
               <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
                 Contact Us
               </span>
-            </h1>
-            <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="text-xl sm:text-2xl text-gray-600 leading-relaxed max-w-3xl mx-auto"
+            >
               We'd love to hear from you
-            </p>
-          </div>
+            </motion.p>
+          </PageTransition>
         </div>
       </section>
 
@@ -72,7 +93,7 @@ export default function ContactPage() {
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col lg:flex-row gap-12 items-start">
               {/* Left Side - Text Content */}
-              <div className="w-full lg:w-1/2">
+              <Reveal direction="right" className="w-full lg:w-1/2">
                 <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
                   Get In Touch
                 </h2>
@@ -84,7 +105,11 @@ export default function ContactPage() {
                 </p>
 
                 {/* Contact Info */}
-                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl p-8 border border-blue-100">
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 22 }}
+                  className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl p-8 border border-blue-100 shadow-lg shadow-blue-900/5 hover:shadow-xl hover:shadow-blue-900/10 transition-shadow"
+                >
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">Contact Information</h3>
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
@@ -103,23 +128,32 @@ export default function ContactPage() {
                       <span className="text-lg text-gray-700">United States</span>
                     </div>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Image */}
-                <div className="mt-8">
-                  <img
+                <Reveal direction="up" delay={0.1} className="mt-8">
+                  <motion.img
                     src="/dogs.webp"
                     alt="Dogs resting together"
-                    className="rounded-3xl w-full"
+                    className="rounded-3xl w-full shadow-xl shadow-blue-900/10"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ type: 'spring', stiffness: 200, damping: 20 }}
                   />
-                </div>
-              </div>
+                </Reveal>
+              </Reveal>
 
               {/* Right Side - Contact Form */}
-              <div className="w-full lg:w-1/2">
+              <Reveal direction="left" delay={0.1} className="w-full lg:w-1/2">
                 <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-8 shadow-xl border border-blue-100">
+                  <AnimatePresence mode="wait">
                   {!isSubmitted ? (
-                    <>
+                    <motion.div
+                      key="form"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0, y: -12 }}
+                      transition={{ duration: 0.35 }}
+                    >
                       <h3 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h3>
                       <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
@@ -201,35 +235,54 @@ export default function ContactPage() {
                           />
                         </div>
 
-                        <button
+                        <motion.button
                           type="submit"
-                          className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xl font-bold py-4 rounded-xl hover:from-blue-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                          whileHover={{ scale: 1.03, y: -2 }}
+                          whileTap={{ scale: 0.97 }}
+                          transition={{ type: 'spring', stiffness: 350, damping: 20 }}
+                          className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xl font-bold py-4 rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-colors duration-300 shadow-lg shadow-blue-600/25 hover:shadow-xl hover:shadow-blue-600/35"
                         >
                           Submit
-                        </button>
+                        </motion.button>
                       </form>
-                    </>
+                    </motion.div>
                   ) : (
-                    <div className="text-center py-12">
-                      <div className="mb-6">
+                    <motion.div
+                      key="success"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                      className="text-center py-12"
+                    >
+                      <motion.div
+                        className="mb-6"
+                        initial={{ scale: 0, rotate: -30 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{ type: 'spring', stiffness: 260, damping: 16, delay: 0.15 }}
+                      >
                         <svg className="w-20 h-20 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                      </div>
+                      </motion.div>
                       <h3 className="text-3xl font-bold text-gray-900 mb-4">Thank You!</h3>
                       <p className="text-xl text-gray-700 mb-6">
                         Your message has been received. We'll get back to you as soon as possible.
                       </p>
-                      <button
+                      <motion.button
                         onClick={() => setIsSubmitted(false)}
-                        className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-lg font-semibold px-8 py-3 rounded-xl hover:from-blue-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+                        whileHover={{ scale: 1.04, y: -2 }}
+                        whileTap={{ scale: 0.96 }}
+                        transition={{ type: 'spring', stiffness: 350, damping: 20 }}
+                        className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-lg font-semibold px-8 py-3 rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-colors duration-300 shadow-lg shadow-blue-600/25"
                       >
                         Send Another Message
-                      </button>
-                    </div>
+                      </motion.button>
+                    </motion.div>
                   )}
+                  </AnimatePresence>
                 </div>
-              </div>
+              </Reveal>
             </div>
           </div>
         </div>

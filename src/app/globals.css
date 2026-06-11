@@ -60,6 +60,7 @@
 /* Smooth scrolling and better mobile handling */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
 }
 
 body {
@@ -70,6 +71,101 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Modern text selection */
+::selection {
+  background: rgba(99, 102, 241, 0.25);
+  color: #1e1b4b;
+}
+
+/* Sleek custom scrollbar (WebKit) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #818cf8, #6366f1);
+  border-radius: 9999px;
+  border: 2px solid #ffffff;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #6366f1, #4f46e5);
+}
+
+/* Accessible focus rings */
+:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Animated gradient text utility */
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.text-gradient-animated {
+  background-image: linear-gradient(90deg, #2563eb, #6366f1, #9333ea, #6366f1, #2563eb);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientShift 6s ease-in-out infinite;
+}
+
+/* Soft floating utility for decorative elements */
+@keyframes floatSoft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.animate-float-soft {
+  animation: floatSoft 5s ease-in-out infinite;
+}
+
+/* RevealGroup — scroll-triggered reveal for direct children */
+.reveal-group > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-group > .is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Gentle stagger when multiple children reveal together */
+.reveal-group > *:nth-child(2) { transition-delay: 80ms; }
+.reveal-group > *:nth-child(3) { transition-delay: 160ms; }
+.reveal-group > *:nth-child(4) { transition-delay: 240ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-group > * {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* Continuous scroll animation */
