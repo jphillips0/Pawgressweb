@@ -255,7 +255,7 @@ export default function HowItWorks() {
   return (
     <section className="pt-8 sm:pt-12 lg:pt-16 pb-16 sm:pb-20 lg:pb-32 bg-white" id="how-it-works">
       {/* Wide Animated Feature Carousel */}
-      <div className="mb-16 sm:mb-20 lg:mb-24">
+      <div className="mb-6 sm:mb-20 lg:mb-24">
         <div className="rounded-3xl transition-transform duration-300 hover:scale-105 overflow-hidden">
           {/* Carousel Container - Continuous infinite scroll */}
           <div
@@ -343,7 +343,7 @@ export default function HowItWorks() {
             <div aria-hidden className="absolute inset-x-0 top-0 h-32 pointer-events-none"
               style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.6), transparent)' }} />
 
-            <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center p-5 sm:p-12 lg:p-16">
+            <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center p-4 sm:p-12 lg:p-16">
               {/* Left: copy */}
               <div>
                 <div className="wpd-heading inline-flex items-center gap-2 bg-blue-50 text-blue-700 border border-blue-100 px-4 py-1.5 rounded-full text-sm font-semibold mb-5" style={{ opacity: 0 }}>
@@ -353,12 +353,12 @@ export default function HowItWorks() {
                   One place for{' '}
                   <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">every pet's story</span>
                 </h2>
-                <p className="wpd-text text-base sm:text-lg text-gray-600 leading-relaxed mb-6 sm:mb-8" style={{ opacity: 0 }}>
+                <p className="wpd-text text-base sm:text-lg text-gray-600 leading-relaxed sm:mb-8" style={{ opacity: 0 }}>
                   Pawgress organizes the communication between breeder and buyer. Breeders post updates to one or multiple pets, and those updates automatically appear in their chat and timeline. Buyers connect to their specific pet and chat directly with the breeder on that pet's page, keeping conversations clear, organized, and easy to find.
                 </p>
 
                 {/* Feature pills */}
-                <div className="wpd-text flex flex-wrap gap-2.5" style={{ opacity: 0 }}>
+                <div className="wpd-text hidden sm:flex flex-wrap gap-2.5" style={{ opacity: 0 }}>
                   {[
                     { i: '🔗', t: 'Per-pet invite links' },
                     { i: '📸', t: 'Auto-built timeline' },
@@ -390,7 +390,7 @@ export default function HowItWorks() {
                 />
 
                 {/* Floating chips — overlay on desktop, in-flow row on mobile */}
-                <div className="mt-4 flex flex-wrap gap-2.5 lg:mt-0 lg:contents">
+                <div className="hidden sm:flex mt-4 flex-wrap gap-2.5 lg:mt-0 lg:contents">
                 <motion.div
                   className="bg-white rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 px-2.5 py-1.5 lg:px-4 lg:py-2.5 flex items-center gap-2 lg:gap-2.5 lg:absolute lg:-top-4 lg:-left-6"
                   initial={{ opacity: 0, y: -10 }}
