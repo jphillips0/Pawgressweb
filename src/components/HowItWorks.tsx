@@ -62,11 +62,11 @@ export default function HowItWorks() {
   // Animate "What Pawgress Does" panel
   useEffect(() => {
     if (!whatDoesInView || !whatDoesRef.current) return;
-    const heading = whatDoesRef.current.querySelector<HTMLElement>('.wpd-heading');
-    const text = whatDoesRef.current.querySelector<HTMLElement>('.wpd-text');
+    const headings = whatDoesRef.current.querySelectorAll<HTMLElement>('.wpd-heading');
+    const texts = whatDoesRef.current.querySelectorAll<HTMLElement>('.wpd-text');
     const img = whatDoesRef.current.querySelector<HTMLElement>('.wpd-image');
-    if (heading) animate(heading, { opacity: [0, 1], translateY: [30, 0], duration: 800, ease: 'out(3)' });
-    if (text) animate(text, { opacity: [0, 1], translateY: [20, 0], duration: 800, delay: 200, ease: 'out(3)' });
+    if (headings.length) animate(headings, { opacity: [0, 1], translateY: [30, 0], duration: 800, ease: 'out(3)' });
+    if (texts.length) animate(texts, { opacity: [0, 1], translateY: [20, 0], duration: 800, delay: 200, ease: 'out(3)' });
     if (img) animate(img, {
       opacity: [0, 1],
       scale: [0.85, 1],
