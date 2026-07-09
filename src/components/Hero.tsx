@@ -185,14 +185,14 @@ export default function Hero() {
   }, [isDragging]);
 
   const features = [
-    { icon: '🎯', text: 'Track Milestones', color: 'bg-green-400' },
-    { icon: '🏥', text: 'Track Medical Records', color: 'bg-blue-400' },
-    { icon: '💬', text: 'Organize Pet Messages', color: 'bg-purple-400' },
-    { icon: '📈', text: 'Share Growth Updates', color: 'bg-pink-400' },
-    { icon: '📸', text: 'Store Photos & Videos', color: 'bg-yellow-400' },
-    { icon: '🔔', text: 'Get Reminders', color: 'bg-red-400' },
-    { icon: '👨‍⚕️', text: 'Connect with Vets', color: 'bg-indigo-400' },
-    { icon: '🎓', text: 'Training Tips', color: 'bg-teal-400' },
+    { icon: '🐾', text: 'Dedicated Puppy Profiles', color: 'bg-green-400' },
+    { icon: '💬', text: 'Centralize Buyer Messages', color: 'bg-purple-400' },
+    { icon: '📸', text: 'Share Photos & Updates', color: 'bg-yellow-400' },
+    { icon: '🏥', text: 'Log Health Records', color: 'bg-blue-400' },
+    { icon: '🔗', text: 'Invite Buyers Instantly', color: 'bg-pink-400' },
+    { icon: '📊', text: 'Track Litter Milestones', color: 'bg-indigo-400' },
+    { icon: '📋', text: 'Organize Contracts & Docs', color: 'bg-red-400' },
+    { icon: '⭐', text: 'Professional Breeder Profile', color: 'bg-teal-400' },
   ];
 
   useEffect(() => {
@@ -278,7 +278,7 @@ export default function Hero() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
               </span>
-              Now live on iOS &amp; Android
+              Built specifically for breeders
               <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
@@ -286,15 +286,14 @@ export default function Hero() {
 
             {/* Heading */}
             <h1 ref={headingRef} className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] tracking-tight mb-6 sm:mb-8 font-baloo">
-              <span className="text-gray-900">Empowering</span>
-              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent"> Ethical Breeders </span>
-              <span className="text-gray-900">and</span>
-              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent"> Pet Owners</span>
+              <span className="text-gray-900">The All-in-One Platform</span>
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent"> Built for</span>
+              <span className="text-gray-900"> Breeders</span>
             </h1>
 
             {/* Subtitle */}
             <p ref={subtitleRef} style={{ opacity: 0 }} className="text-base sm:text-xl md:text-2xl text-blue-900/80 mb-8 sm:mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Track your pet's journey, from their first steps to forever. Pawgress gives ethical breeders and pet parents a shared, transparent timeline for every pet, with updates, photos, and health records all in one place.
+              Stop juggling Facebook, texts, email, and five other apps. Pawgress brings your buyer conversations, puppy photos, health records, and updates into one place — so you can stay organized and provide a more professional experience for every family.
             </p>
 
             {/* CTA Buttons */}
@@ -306,13 +305,13 @@ export default function Hero() {
                 </DownloadButton>
               </motion.div>
               <motion.a
-                href="/about"
+                href="/for-breeders"
                 whileHover={{ y: -3, scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: 'spring', stiffness: 350, damping: 22 }}
                 className="inline-flex w-full sm:w-auto items-center justify-center gap-2 border-2 border-blue-700/30 bg-white/60 backdrop-blur-md text-blue-800 px-8 py-4 rounded-full hover:bg-white hover:border-blue-700/60 transition-colors font-semibold text-lg text-center"
               >
-                Learn More
+                See How It Works
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
               </motion.a>
             </div>
