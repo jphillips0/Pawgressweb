@@ -293,7 +293,7 @@ export default function Hero() {
 
             {/* Subtitle */}
             <p ref={subtitleRef} style={{ opacity: 0 }} className="text-base sm:text-xl md:text-2xl text-blue-900/80 mb-8 sm:mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Stop juggling Facebook, texts, email, and five other apps. Pawgress brings your buyer conversations, puppy photos, health records, and updates into one place — so you can stay organized and provide a more professional experience for every family.
+              Stop juggling Facebook, texts, email, and five other apps. Pawgress brings your buyer conversations, puppy photos, health records, and updates into one place, so you can stay organized and provide a more professional experience for every family.
             </p>
 
             {/* CTA Buttons */}

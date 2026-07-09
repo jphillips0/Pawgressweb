@@ -151,7 +151,7 @@ export default function PricingPage() {
                     ✨ Always Free
                   </div>
                   <p className="text-lg text-gray-700 font-semibold mb-8">
-                    Buyers never pay to use Pawgress. No hidden fees, no paywalls — ever.
+                    Buyers never pay to use Pawgress. No hidden fees, no paywalls, ever.
                   </p>
                   <ul className="space-y-4">
                     {buyerFeatures.map((feature, i) => (
@@ -240,7 +240,7 @@ export default function PricingPage() {
                   <div>
                     <h3 className="text-2xl font-bold text-gray-900 mb-3">No Commissions. No Sales Cuts.</h3>
                     <p className="text-gray-600 text-lg leading-relaxed">
-                      Pawgress never takes a percentage of your pet sales. You maintain full control over pricing, deposits, contracts, and payments. We operate on a subscription model — not by taking a cut of your business.
+                      Pawgress never takes a percentage of your pet sales. You maintain full control over pricing, deposits, contracts, and payments. We operate on a subscription model, not by taking a cut of your business.
                     </p>
                   </div>
 

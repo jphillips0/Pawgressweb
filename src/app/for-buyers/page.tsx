@@ -317,7 +317,7 @@ export default function ForBuyersPage() {
               }
               paragraphs={[
                 'Pawgress is a pet discovery platform where you browse available pets from ethical breeders through an interactive, swipe-style experience.',
-                'View individual pets, learn about breeders, and express interest — all without digging through social media or scattered listings.',
+                'View individual pets, learn about breeders, and express interest, all without digging through social media or scattered listings.',
               ]}
               pills={[
                 { i: '🔍', t: 'Smart filters' },
@@ -377,7 +377,7 @@ export default function ForBuyersPage() {
                 </>
               }
               paragraphs={[
-                "Your pet's timeline includes medical records, health notes, and growth tracking. Vaccinations, vet visits, weight updates, and milestones are logged in one place — giving you a clear, reliable health history from day one.",
+                "Your pet's timeline includes medical records, health notes, and growth tracking. Vaccinations, vet visits, weight updates, and milestones are logged in one place, giving you a clear, reliable health history from day one.",
               ]}
               pills={[
                 { i: '💉', t: 'Vaccines' },
@@ -422,7 +422,7 @@ export default function ForBuyersPage() {
                 </>
               }
               paragraphs={[
-                "Astro is Pawgress's built-in AI that understands your pet's full profile — health records, weight trends, breed details, and timeline updates — so you can ask questions and get clear, contextual answers using your pet's real data.",
+                "Astro is Pawgress's built-in AI that understands your pet's full profile (health records, weight trends, breed details, and timeline updates) so you can ask questions and get clear, contextual answers using your pet's real data.",
               ]}
               pills={[
                 { i: '🧠', t: 'Knows your pet' },

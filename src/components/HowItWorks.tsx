@@ -239,7 +239,7 @@ export default function HowItWorks() {
     {
       number: '05',
       title: 'Profile Showcase',
-      description: 'Display your pets on your breeder profile — your storefront is always open.',
+      description: 'Display your pets on your breeder profile. Your storefront is always open.',
       icon: '\u{1F464}',
       color: 'from-orange-500 to-red-600',
     },
@@ -856,7 +856,7 @@ export default function HowItWorks() {
               </h2>
               <div className="space-y-4 text-base sm:text-lg text-gray-600 leading-relaxed mb-8">
                 <p>
-                  Pawgress is designed to support responsible breeding and long-term pet care. We prioritize clear documentation, honest communication, and organized records — and we do not support puppy mills or non-transparent practices.
+                  Pawgress is designed to support responsible breeding and long-term pet care. We prioritize clear documentation, honest communication, and organized records, and we do not support puppy mills or non-transparent practices.
                 </p>
               </div>
 

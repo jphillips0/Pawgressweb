@@ -135,7 +135,7 @@ export default function Features() {
     {
       icon: '\u{1F517}',
       title: 'Invite Links & Bulk Updates',
-      description: 'Share unique invite links for each pet—buyers join instantly. Send one update (text, photos, videos) to multiple pets or entire litters at once.',
+      description: 'Share unique invite links for each pet. Buyers join instantly. Send one update (text, photos, videos) to multiple pets or entire litters at once.',
       color: 'from-green-100 to-emerald-100',
       iconBg: 'bg-green-500',
       image: '/Pet-Profiles-Page.jpeg',
@@ -159,7 +159,7 @@ export default function Features() {
     {
       icon: '\u{1F916}',
       title: 'AI Assistant (Astro)',
-      description: 'Ask general pet care or pet-specific questions with context. Get instant guidance on training, health, nutrition, and behavior—powered by AI.',
+      description: 'Ask general pet care or pet-specific questions with context. Get instant guidance on training, health, nutrition, and behavior, powered by AI.',
       color: 'from-teal-100 to-cyan-100',
       iconBg: 'bg-teal-500',
       image: '/Astro.jpeg',

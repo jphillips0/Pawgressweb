@@ -69,7 +69,7 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
           <div className="w-10 h-1 bg-gray-200 rounded-full mx-auto mb-6 sm:hidden" />
 
           <p className="text-gray-500 text-sm text-center mb-6 leading-relaxed">
-            Track milestones, share updates, and stay connected with your pet's journey — all in one place.
+            Track milestones, share updates, and stay connected with your pet's journey, all in one place.
           </p>
 
           {/* Store buttons */}

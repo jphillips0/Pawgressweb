@@ -105,7 +105,7 @@ export default function MissionPage() {
                 </h2>
                 <p className="text-lg sm:text-xl md:text-2xl text-gray-600 leading-relaxed">
                   We believe transparency builds trust, creating better outcomes for pets, breeders, and families. 
-                  Our platform empowers collaboration through growth tracking, health organization, and meaningful updates—so every pet's journey is documented, understood, and celebrated from early weeks to lifelong care.
+                  Our platform empowers collaboration through growth tracking, health organization, and meaningful updates, so every pet's journey is documented, understood, and celebrated from early weeks to lifelong care.
                 </p>
               </motion.div>
 
@@ -188,7 +188,7 @@ export default function MissionPage() {
                       <h3 className="text-xl sm:text-2xl md:text-3xl font-bold">Our Commitment</h3>
                     </div>
                     <p className="text-base sm:text-lg md:text-xl leading-relaxed text-white/95">
-                      Professional, modern, trust-building, and growth-focused—centered on collaboration, 
+                      Professional, modern, trust-building, and growth-focused, centered on collaboration, 
                       clarity, and care for every pet's journey. We're here to strengthen the bond between 
                       ethical breeders and devoted pet owners through technology that serves both.
                     </p>

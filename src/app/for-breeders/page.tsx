@@ -194,7 +194,7 @@ export default function ForBreedersPage() {
                   transition={{ duration: 0.7, delay: 0.35 }}
                   className="text-xl sm:text-2xl text-gray-600 leading-relaxed mx-auto lg:mx-0 max-w-xl"
                 >
-                  Pawgress is built for ethical breeders tired of juggling DMs, resending updates, and losing records. One organized place for updates, buyers, and documents — all tied to each pet.
+                  Pawgress is built for ethical breeders tired of juggling DMs, resending updates, and losing records. One organized place for updates, buyers, and documents, all tied to each pet.
                 </motion.p>
 
                 <motion.div
@@ -370,7 +370,7 @@ export default function ForBreedersPage() {
                 </>
               }
               paragraphs={[
-                'Post one update — text, photos, or video — to a single pet or an entire litter with one click.',
+                'Post one update (text, photos, or video) to a single pet or an entire litter with one click.',
                 'Connect buyers to their pet through unique links that create a dedicated chat and give them access to the full profile.',
               ]}
               pills={[
@@ -507,7 +507,7 @@ export default function ForBreedersPage() {
                 </>
               }
               paragraphs={[
-                "Astro is Pawgress's built-in AI that understands a pet's full profile — health records, weight trends, breed details, and timeline updates — so buyers can ask questions and get clear, contextual answers using your pet's real data.",
+                "Astro is Pawgress's built-in AI that understands a pet's full profile (health records, weight trends, breed details, and timeline updates) so buyers can ask questions and get clear, contextual answers using your pet's real data.",
                 'The result: fewer repeat questions in your inbox.',
               ]}
               pills={[

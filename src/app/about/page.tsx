@@ -144,7 +144,7 @@ export default function AboutPage() {
                   <h3 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-3 sm:mb-4">User-Friendly Design</h3>
                   <p className="text-gray-700 leading-relaxed text-base sm:text-lg">
                     Technology should simplify, not complicate. We've designed smooth, intuitive interfaces 
-                    that work for everyone—from tech-savvy breeders managing dozens of pets to first-time 
+                    that work for everyone, from tech-savvy breeders managing dozens of pets to first-time 
                     buyers checking in on their future companion.
                   </p>
                 </div>
@@ -158,7 +158,7 @@ export default function AboutPage() {
                   <div className="text-4xl sm:text-5xl mb-4 sm:mb-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">🤝</div>
                   <h3 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3 sm:mb-4">Relationship Focused</h3>
                   <p className="text-gray-700 leading-relaxed text-base sm:text-lg">
-                    The breeder-buyer connection doesn't end at adoption—it evolves. Our platform grows 
+                    The breeder-buyer connection doesn't end at adoption. It evolves. Our platform grows 
                     with your relationship, keeping lines of communication open and memories preserved for 
                     the lifetime of your pet.
                   </p>
