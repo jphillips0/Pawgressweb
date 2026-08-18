@@ -9,6 +9,10 @@
             "comment": "Handles Pawgress pet invite deep links"
           },
           {
+            "/": "/kennel/*",
+            "comment": "Handles Pawgress kennel/shelter profile share links"
+          },
+          {
             "/": "/reset-password",
             "comment": "Handles Supabase password recovery links"
           },
