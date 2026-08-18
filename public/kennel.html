@@ -5,51 +5,212 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="apple-itunes-app" content="app-id=6752368171" />
   <title>Opening Pawgress…</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'DM Sans', sans-serif;
-      background: #fff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 35%, #f5f3ff 70%, #fdf4ff 100%);
       min-height: 100dvh;
+      position: relative;
+      overflow-x: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 32px 24px;
       text-align: center;
-      color: #1a1a1a;
+      color: #111827;
     }
-    .paw { font-size: 64px; margin-bottom: 16px; }
-    h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
-    p  { font-size: 15px; color: #666; line-height: 1.5; margin-bottom: 32px; }
+
+    /* Aurora / mesh-gradient background blobs, matching the site's hero section */
+    .aurora {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(60px);
+      will-change: transform;
+    }
+    .blob-1 {
+      top: -14rem; left: -8rem;
+      width: 34rem; height: 34rem;
+      opacity: 0.6;
+      background: radial-gradient(closest-side, rgba(99,102,241,0.65), rgba(99,102,241,0));
+      animation: drift1 18s ease-in-out infinite;
+    }
+    .blob-2 {
+      top: 4rem; right: -10rem;
+      width: 28rem; height: 28rem;
+      opacity: 0.55;
+      background: radial-gradient(closest-side, rgba(56,189,248,0.6), rgba(56,189,248,0));
+      animation: drift2 22s ease-in-out infinite;
+    }
+    .blob-3 {
+      bottom: -6rem; left: 10%;
+      width: 24rem; height: 24rem;
+      opacity: 0.5;
+      background: radial-gradient(closest-side, rgba(99,102,241,0.5), rgba(99,102,241,0));
+      animation: drift3 20s ease-in-out infinite;
+    }
+    .blob-4 {
+      top: 30%; left: 50%;
+      width: 20rem; height: 20rem;
+      opacity: 0.35;
+      background: radial-gradient(closest-side, rgba(217,70,239,0.4), rgba(217,70,239,0));
+      animation: drift4 24s ease-in-out infinite;
+    }
+    .sheen {
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 16rem;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+    }
+
+    @keyframes drift1 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(50px, 35px); }
+    }
+    @keyframes drift2 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(-45px, 45px); }
+    }
+    @keyframes drift3 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(35px, -35px); }
+    }
+    @keyframes drift4 {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(calc(-50% - 25px), 25px); }
+    }
+
+    .content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 420px;
+    }
+
+    .icon {
+      width: 96px;
+      height: 96px;
+      border-radius: 22px;
+      box-shadow: 0 20px 40px -12px rgba(37, 99, 235, 0.45), 0 0 0 1px rgba(255,255,255,0.6);
+      margin-bottom: 24px;
+      animation: pop 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes pop {
+      0% { opacity: 0; transform: translateY(16px) scale(0.85); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    h1 {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+    h1 span {
+      background: linear-gradient(90deg, #2563eb, #4f46e5, #7c3aed);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p.subtitle {
+      font-size: 15px;
+      color: rgba(30, 58, 138, 0.75);
+      line-height: 1.55;
+      margin-bottom: 32px;
+    }
+
     .btn {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       width: 100%;
       max-width: 320px;
       padding: 14px 24px;
-      border-radius: 12px;
+      border-radius: 9999px;
       font-size: 16px;
       font-weight: 600;
       text-decoration: none;
-      margin: 8px auto;
-      cursor: pointer;
+      margin: 6px auto;
       border: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .btn-primary { background: #FF6B9D; color: #fff; }
-    .btn-secondary { background: #f2f2f7; color: #1a1a1a; }
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #2563eb, #4f46e5);
+      color: #fff;
+      box-shadow: 0 12px 24px -8px rgba(37, 99, 235, 0.5);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      color: #1e40af;
+      border: 2px solid rgba(29, 78, 216, 0.25);
+    }
+
+    .paw-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 28px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      border: 1px solid rgba(191, 219, 254, 0.8);
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(8px);
+      font-size: 13px;
+      font-weight: 600;
+      color: #1d4ed8;
+    }
   </style>
 </head>
 <body>
-  <div class="paw">🐾</div>
-  <h1>Opening Pawgress…</h1>
-  <p>Someone shared their Pawgress kennel with you.<br>Download the app to see their profile!</p>
+  <div class="aurora">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+    <div class="sheen"></div>
+  </div>
 
-  <a id="appstore" class="btn btn-primary" href="https://apps.apple.com/app/pawgress/id6752368171">
-    Download on the App Store
-  </a>
-  <a id="playstore" class="btn btn-secondary" href="https://play.google.com/store/apps/details?id=com.timelinesllc.pawgress">
-    Get it on Google Play
-  </a>
+  <div class="content">
+    <img src="/app-icon.png" alt="Pawgress" class="icon" />
+
+    <h1>Opening <span>Pawgress…</span></h1>
+    <p class="subtitle">Someone shared their Pawgress kennel with you.<br>Download the app to see their profile!</p>
+
+    <a id="appstore" class="btn btn-primary" href="https://apps.apple.com/app/pawgress/id6752368171">
+      Download on the App Store
+    </a>
+    <a id="playstore" class="btn btn-secondary" href="https://play.google.com/store/apps/details?id=com.timelinesllc.pawgress">
+      Get it on Google Play
+    </a>
+
+    <div class="paw-badge">🐾 Pawgress</div>
+  </div>
 
   <script>
     // Extract profile id from URL path  e.g. /kennel/ABC123

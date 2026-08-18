@@ -7,6 +7,12 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  async rewrites() {
+    return [
+      { source: "/invite/:token", destination: "/invite.html" },
+      { source: "/kennel/:id", destination: "/kennel.html" },
+    ];
+  },
 };
 
 export default nextConfig;
