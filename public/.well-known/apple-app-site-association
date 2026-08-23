@@ -13,6 +13,14 @@
             "comment": "Handles Pawgress kennel/shelter profile share links"
           },
           {
+            "/": "/pet/*",
+            "comment": "Handles Pawgress pet profile share links"
+          },
+          {
+            "/": "/litter/*",
+            "comment": "Handles Pawgress litter share links"
+          },
+          {
             "/": "/reset-password",
             "comment": "Handles Supabase password recovery links"
           },

@@ -11,6 +11,8 @@ const nextConfig: NextConfig = {
     return [
       { source: "/invite/:token", destination: "/invite.html" },
       { source: "/kennel/:id", destination: "/kennel.html" },
+      { source: "/pet/:id", destination: "/pet.html" },
+      { source: "/litter/:id", destination: "/litter.html" },
     ];
   },
 };
