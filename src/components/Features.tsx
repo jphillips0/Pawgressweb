@@ -122,7 +122,7 @@ export default function Features() {
       description: 'Create rich profiles with photos, breed, DOB, sex, and reservation status. Group pets into litters, assign parents, display verified lineage, plus weight tracking and medical record storage.',
       color: 'from-blue-100 to-indigo-100',
       iconBg: 'bg-blue-500',
-      image: '/Pet-Profile.jpeg',
+      image: '/Pet Profile.PNG',
     },
     {
       icon: '\u{1F4F1}',
@@ -130,7 +130,7 @@ export default function Features() {
       description: 'Every update you send automatically appears in the pet\'s Pawgress timeline. Build chronological galleries with media and age stamps for memory preservation.',
       color: 'from-purple-100 to-violet-100',
       iconBg: 'bg-purple-500',
-      image: '/Pet-Timeline.jpeg',
+      image: '/Follow your pets journey.PNG',
     },
     {
       icon: '\u{1F517}',
@@ -138,7 +138,7 @@ export default function Features() {
       description: 'Share unique invite links for each pet. Buyers join instantly. Send one update (text, photos, videos) to multiple pets or entire litters at once.',
       color: 'from-green-100 to-emerald-100',
       iconBg: 'bg-green-500',
-      image: '/Pet-Profiles-Page.jpeg',
+      image: '/Bulk Updates.PNG',
     },
     {
       icon: '\u{1F3E5}',
@@ -154,7 +154,7 @@ export default function Features() {
       description: 'One-to-one organized chats per pet keep conversations focused. Breeders and buyers communicate directly in dedicated, clean conversations tied to a single animal.',
       color: 'from-orange-100 to-amber-100',
       iconBg: 'bg-orange-500',
-      image: '/Chat-Screen.jpeg',
+      image: '/Chats.PNG',
     },
     {
       icon: '\u{1F916}',

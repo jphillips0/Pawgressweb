@@ -26,8 +26,8 @@ export default function AboutPage() {
           <div className="relative w-full md:w-1/2 h-[35vh] md:h-[80vh] overflow-hidden group">
             <div className="absolute inset-0 md:inset-6 md:rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer md:border md:border-white/50">
               <Image
-                src="/about page image.jpg"
-                alt="Happy family with their pet"
+                src="https://images.unsplash.com/photo-1674242651608-583dd17c29bd?auto=format&fit=crop&w=1200&q=80"
+                alt="Woman holding a litter of puppies"
                 fill
                 style={{ objectFit: 'cover' }}
                 priority

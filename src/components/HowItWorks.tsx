@@ -783,8 +783,8 @@ export default function HowItWorks() {
               >
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-blue-900/20 border-4 border-white">
                   <img
-                    src="https://pyv.hmu.temporary.site/wp-content/uploads/2026/01/african-american-woman-wearing-pink-sweater-holding-puppies-1-1-980x653.png"
-                    alt="Woman with puppies"
+                    src="https://images.unsplash.com/photo-1548858806-e064cf9872c0?auto=format&fit=crop&w=1200&q=80"
+                    alt="Woman with puppy"
                     className="w-full block"
                   />
                 </div>

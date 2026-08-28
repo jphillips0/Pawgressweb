@@ -84,10 +84,9 @@ export default function PricingPage() {
 
               <motion.h1
                 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6"
+                className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold leading-[1.15] mb-6"
               >
-                <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Simple,</span>
-                <br />
+                <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Simple,</span>{' '}
                 <span className="text-gray-900">Fair Pricing</span>
               </motion.h1>
 
@@ -106,11 +105,13 @@ export default function PricingPage() {
               transition={{ duration: 0.7, ease: 'easeOut' }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-3xl blur-2xl scale-95" />
-              <img
-                src="/Pricing.png"
-                alt="Pricing"
-                className="w-full h-auto max-w-lg mx-auto relative z-10 drop-shadow-2xl rounded-2xl"
-              />
+              <div className="relative z-10 max-w-lg mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                <img
+                  src="https://images.unsplash.com/photo-1612977825762-f508c6827843?auto=format&fit=crop&w=1200&q=80"
+                  alt="Curious corgi"
+                  className="w-full h-auto block"
+                />
+              </div>
             </motion.div>
           </div>
         </div>
@@ -180,8 +181,8 @@ export default function PricingPage() {
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-teal-400/10 rounded-3xl blur-2xl scale-95" />
                 <img
-                  src="/Black Dog2.png"
-                  alt="Happy dog"
+                  src="https://images.unsplash.com/photo-1591200687501-65309ec27310?auto=format&fit=crop&w=1200&q=80"
+                  alt="Happy golden retriever"
                   className="w-full h-auto max-w-md mx-auto relative z-10 drop-shadow-xl rounded-2xl"
                 />
               </motion.div>
@@ -288,8 +289,8 @@ export default function PricingPage() {
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-pink-400/10 rounded-3xl blur-2xl scale-95" />
                 <img
-                  src="https://pyv.hmu.temporary.site/wp-content/uploads/2026/01/young-lightskinned-brunette-woman-kisses-her-beloved-dog-tightly-while-holding-arms-pink-background-love-pets-joy-tenderness-1-832x1024.png"
-                  alt="Woman with her dog"
+                  src="https://images.unsplash.com/photo-1513939704630-b6d4f6d389e8?auto=format&fit=crop&w=1200&q=80"
+                  alt="Woman cuddling her dog"
                   className="w-full h-auto max-w-sm mx-auto relative z-10 drop-shadow-xl rounded-2xl"
                 />
               </motion.div>

@@ -179,10 +179,9 @@ export default function ForBreedersPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.2 }}
-                  className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-[1.05] tracking-tight"
+                  className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-gray-900 mb-6 leading-[1.15] tracking-tight"
                 >
-                  Run Your Breeding Program
-                  <br />
+                  <span className="text-gray-900">Run Your Breeding Program</span>{' '}
                   <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
                     Without the Inbox Chaos
                   </span>
@@ -238,14 +237,18 @@ export default function ForBreedersPage() {
                     <path fill="url(#pawGradientBreeders)" d="M226.5 92.9c14.3 42.9-.3 86.2-32.6 96.8s-70.1-15.6-84.4-58.5s.3-86.2 32.6-96.8s70.1 15.6 84.4 58.5zM100.4 198.6c18.9 32.4 14.3 70.1-10.2 84.1s-59.7-.9-78.5-33.3S-2.7 179.3 21.8 165.3s59.7 .9 78.5 33.3zM69.2 401.2C121.6 259.9 214.7 224 256 224s134.4 35.9 186.8 177.2c3.6 9.7 5.2 20.1 5.2 30.5v1.6c0 25.8-20.9 46.7-46.7 46.7c-11.5 0-22.9-1.4-34-4.2l-88-22c-15.3-3.8-31.3-3.8-46.6 0l-88 22c-11.1 2.8-22.5 4.2-34 4.2C84.9 480 64 459.1 64 433.3v-1.6c0-10.4 1.6-20.8 5.2-30.5zM421.8 282.7c-24.5-14-29.1-51.7-10.2-84.1s54-47.3 78.5-33.3s29.1 51.7 10.2 84.1s-54 47.3-78.5 33.3zM310.1 189.7c-32.3-10.6-46.9-53.9-32.6-96.8s52.1-69.1 84.4-58.5s46.9 53.9 32.6 96.8s-52.1 69.1-84.4 58.5z" />
                   </svg>
                 </motion.div>
-                <motion.img
+                <motion.div
                   initial={{ opacity: 0, scale: 0.85 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ type: 'spring', stiffness: 100, damping: 18, delay: 0.3 }}
-                  src="/puppies_full_no_bg_refined (1).png"
-                  alt="Puppies"
-                  className="w-full h-auto relative z-10"
-                />
+                  className="relative z-10 rounded-3xl overflow-hidden shadow-2xl shadow-blue-900/20 border-4 border-white"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1742223059165-d50764c3e0be?auto=format&fit=crop&w=1200&q=80"
+                    alt="Dogs together at sunset"
+                    className="w-full h-auto block"
+                  />
+                </motion.div>
 
                 {/* Floating chips */}
                 <motion.div
@@ -318,8 +321,8 @@ export default function ForBreedersPage() {
                 { i: '📅', t: 'Status' },
               ]}
               image={
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-blue-900/20 max-w-sm mx-auto border-4 border-white">
-                  <img src="/New pet profile.jpeg" alt="Pet profile" className="w-full h-auto block" />
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-blue-900/20 max-w-[230px] sm:max-w-[260px] mx-auto border-4 border-white">
+                  <img src="/Pet Profile.PNG" alt="Pet profile" className="w-full h-auto block" />
                 </div>
               }
             />
@@ -328,6 +331,67 @@ export default function ForBreedersPage() {
 
             <FeatureRow
               step="02"
+              reverse
+              badge="Litters"
+              badgeColor="bg-gradient-to-r from-fuchsia-600 to-pink-600"
+              cardGradient="bg-gradient-to-br from-fuchsia-50 to-pink-50"
+              cardBorder="border border-fuchsia-100"
+              title={
+                <>
+                  <span className="bg-gradient-to-r from-fuchsia-600 to-pink-600 bg-clip-text text-transparent">Litter Profiles</span>{' '}
+                  <span className="text-gray-900">Built In</span>
+                </>
+              }
+              paragraphs={[
+                "Group a litter's puppies under one page with a shared cover photo, birth date, breed, and live counts — how many are in the litter, how many are still available.",
+                "Every puppy on the roster links straight to its own profile, so the litter page works as a hub, not a dead end.",
+              ]}
+              pills={[
+                { i: '🐾', t: 'Shared roster' },
+                { i: '📊', t: 'Live availability' },
+                { i: '🔗', t: 'Linked pet profiles' },
+              ]}
+              image={
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-fuchsia-900/20 max-w-[230px] sm:max-w-[260px] mx-auto border-4 border-white">
+                  <img src="/Litter Profiles.PNG" alt="Litter profile page" className="w-full h-auto block" />
+                </div>
+              }
+            />
+
+            <PawDivider color="fuchsia" emoji="🐕" />
+
+            <FeatureRow
+              step="03"
+              badge="Litter Feed"
+              badgeColor="bg-gradient-to-r from-indigo-600 to-blue-600"
+              cardGradient="bg-gradient-to-br from-indigo-50 to-blue-50"
+              cardBorder="border border-indigo-100"
+              title={
+                <>
+                  <span className="text-gray-900">One Post.</span>{' '}
+                  <span className="bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent">Every Buyer in the Litter.</span>
+                </>
+              }
+              paragraphs={[
+                "Post an update to the whole litter at once and it publishes to a shared litter feed that every buyer with a puppy in that litter can follow, on top of landing in each puppy's own chat and timeline.",
+                "Buyers aren't stuck waiting on a personal message to see how their puppy's littermates are doing — the litter feed holds every post the breeder has made about that litter, in one place, in order.",
+              ]}
+              pills={[
+                { i: '📣', t: 'Post once, reaches all' },
+                { i: '📰', t: 'Shared litter feed' },
+                { i: '🕒', t: 'Full posting history' },
+              ]}
+              image={
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-indigo-900/20 max-w-[230px] sm:max-w-[260px] mx-auto border-4 border-white">
+                  <img src="/Litter Posts.PNG" alt="Litter feed showing every update posted to the litter" className="w-full h-auto block" />
+                </div>
+              }
+            />
+
+            <PawDivider color="indigo" emoji="📣" />
+
+            <FeatureRow
+              step="04"
               reverse
               badge="Discovery"
               badgeColor="bg-gradient-to-r from-purple-600 to-pink-600"
@@ -349,8 +413,8 @@ export default function ForBreedersPage() {
                 { i: '💬', t: 'Tied to pet' },
               ]}
               image={
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-purple-900/20 max-w-sm mx-auto border-4 border-white">
-                  <img src="/New breeder profile.jpeg" alt="Public breeder profile" className="w-full h-auto block" />
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-purple-900/20 max-w-[230px] sm:max-w-[260px] mx-auto border-4 border-white">
+                  <img src="/Breeder Profile.PNG" alt="Public breeder profile" className="w-full h-auto block" />
                 </div>
               }
             />
@@ -358,7 +422,7 @@ export default function ForBreedersPage() {
             <PawDivider color="purple" emoji="💜" />
 
             <FeatureRow
-              step="03"
+              step="05"
               badge="Updates"
               badgeColor="bg-gradient-to-r from-green-600 to-teal-600"
               cardGradient="bg-gradient-to-br from-green-50 to-teal-50"
@@ -379,8 +443,8 @@ export default function ForBreedersPage() {
                 { i: '👥', t: 'Litter-wide' },
               ]}
               image={
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-green-900/20 max-w-sm mx-auto border-4 border-white">
-                  <img src="/newer add page.jpeg" alt="Bulk updates" className="w-full h-auto block" />
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-green-900/20 max-w-[230px] sm:max-w-[260px] mx-auto border-4 border-white">
+                  <img src="/Bulk Updates.PNG" alt="Bulk updates" className="w-full h-auto block" />
                 </div>
               }
             />
@@ -388,7 +452,7 @@ export default function ForBreedersPage() {
             <PawDivider color="green" emoji="❤️" />
 
             <FeatureRow
-              step="04"
+              step="06"
               reverse
               badge="Chat"
               badgeColor="bg-gradient-to-r from-amber-600 to-orange-600"
@@ -410,7 +474,7 @@ export default function ForBreedersPage() {
                 { i: '🔔', t: 'Notifications' },
               ]}
               image={
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-amber-900/20 max-w-sm mx-auto border-4 border-white">
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-amber-900/20 max-w-[230px] sm:max-w-[260px] mx-auto border-4 border-white">
                   <img src="/Breeder Chat page.jpeg" alt="Secure chat" className="w-full h-auto block" />
                 </div>
               }
@@ -419,7 +483,7 @@ export default function ForBreedersPage() {
             <PawDivider color="amber" emoji="✨" />
 
             <FeatureRow
-              step="05"
+              step="07"
               badge="Health"
               badgeColor="bg-gradient-to-r from-pink-600 to-red-600"
               cardGradient="bg-gradient-to-br from-rose-50 to-red-50"
@@ -447,7 +511,7 @@ export default function ForBreedersPage() {
                     initial={{ rotate: -3 }}
                     className="relative ml-0 mt-6 w-full max-w-xs rounded-2xl overflow-hidden shadow-2xl shadow-rose-900/20 border-4 border-white"
                   >
-                    <img src="/New health page in profile.jpeg" alt="Health records" className="w-full h-auto block" />
+                    <img src="/Health.PNG" alt="Health records" className="w-full h-auto block" />
                   </motion.div>
                   <motion.div
                     whileHover={{ rotate: 0, scale: 1.05 }}
@@ -455,7 +519,7 @@ export default function ForBreedersPage() {
                     initial={{ rotate: 2 }}
                     className="relative -mt-48 sm:-mt-56 ml-auto mr-0 w-full max-w-xs rounded-2xl overflow-hidden shadow-2xl shadow-red-900/20 border-4 border-white z-10"
                   >
-                    <img src="/New wieght profile.jpeg" alt="Weight tracking" className="w-full h-auto block" />
+                    <img src="/Weight.PNG" alt="Weight tracking" className="w-full h-auto block" />
                   </motion.div>
                 </div>
               }
@@ -464,7 +528,7 @@ export default function ForBreedersPage() {
             <PawDivider color="rose" emoji="🏥" />
 
             <FeatureRow
-              step="06"
+              step="08"
               reverse
               badge="Timeline"
               badgeColor="bg-gradient-to-r from-cyan-600 to-blue-600"
@@ -486,8 +550,8 @@ export default function ForBreedersPage() {
                 { i: '🎂', t: 'Age stamps' },
               ]}
               image={
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-cyan-900/20 max-w-sm mx-auto border-4 border-white">
-                  <img src="/New timeline.jpeg" alt="Media timeline" className="w-full h-auto block" />
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-cyan-900/20 max-w-[230px] sm:max-w-[260px] mx-auto border-4 border-white">
+                  <img src="/Follow your pets journey.PNG" alt="Media timeline" className="w-full h-auto block" />
                 </div>
               }
             />
@@ -495,7 +559,7 @@ export default function ForBreedersPage() {
             <PawDivider color="cyan" emoji="📸" />
 
             <FeatureRow
-              step="07"
+              step="09"
               badge="AI"
               badgeColor="bg-gradient-to-r from-violet-600 to-purple-600"
               cardGradient="bg-gradient-to-br from-violet-50 to-purple-50"
@@ -516,8 +580,8 @@ export default function ForBreedersPage() {
                 { i: '⏱️', t: 'Saves time' },
               ]}
               image={
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-violet-900/20 max-w-sm mx-auto border-4 border-white">
-                  <img src="/Astro new.jpeg" alt="Astro AI" className="w-full h-auto block" />
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-violet-900/20 max-w-[230px] sm:max-w-[260px] mx-auto border-4 border-white">
+                  <img src="/Astro.PNG" alt="Astro AI" className="w-full h-auto block" />
                 </div>
               }
             />
@@ -594,12 +658,12 @@ export default function ForBreedersPage() {
             viewport={{ once: true }}
             transition={{ type: 'spring', stiffness: 120, damping: 18, delay: 0.2 }}
             whileHover={{ scale: 1.02 }}
-            className="relative max-w-5xl mx-auto"
+            className="relative max-w-2xl mx-auto"
           >
             <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
               <img
-                src="/ChatGPT Image Jan 23, 2026, 05_52_00 PM.png"
-                alt="Happy pets"
+                src="https://images.unsplash.com/photo-1518963794447-3967204b300e?auto=format&fit=crop&w=1200&h=675&q=80"
+                alt="Man playing with his happy dog"
                 className="w-full h-auto block"
               />
             </div>

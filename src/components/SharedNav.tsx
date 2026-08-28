@@ -18,12 +18,13 @@ const NAV_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/for-buyers', label: 'For Buyers' },
   { href: '/for-breeders', label: 'For Breeders' },
+  // { href: '/for-shelters', label: 'For Shelters' }, // hidden until the shelters page content is more accurate
   { href: '/pricing', label: 'Pricing' },
-  { href: '/contact', label: 'Contact' },
 ];
 
 const ABOUT_LINKS = [
   { href: '/about', label: 'About Us' },
+  { href: '/contact', label: 'Contact' },
   { href: '/mission', label: 'Our Mission' },
   { href: '/faq', label: 'FAQ' },
   { href: '/terms', label: 'Terms of Service' },
