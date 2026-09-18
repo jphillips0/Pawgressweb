@@ -37,7 +37,7 @@ export default function CollarRecognition() {
   }, [inView]);
 
   return (
-    <section ref={sectionRef} className="px-4 sm:px-6 lg:px-8 xl:px-12 max-w-[1800px] mx-auto mb-20 sm:mb-24 lg:mb-32">
+    <section ref={sectionRef} className="px-4 sm:px-6 lg:px-8 xl:px-12 max-w-[1800px] mx-auto mb-14 sm:mb-24 lg:mb-32">
       <div
         className="relative rounded-3xl lg:rounded-[2.5rem] border border-white/80 overflow-hidden shadow-2xl shadow-blue-900/15"
         style={{ background: 'linear-gradient(135deg, #eff6ff 0%, #e0f2fe 35%, #eef2ff 70%, #f5f3ff 100%)' }}
@@ -50,7 +50,7 @@ export default function CollarRecognition() {
         <div aria-hidden className="absolute inset-x-0 top-0 h-32 pointer-events-none"
           style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.6), transparent)' }} />
 
-        <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center p-4 sm:p-12 lg:p-16">
+        <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center p-5 sm:p-12 lg:p-16">
           {/* Left: copy */}
           <div>
             <div ref={headingRef}>
@@ -95,7 +95,7 @@ export default function CollarRecognition() {
               <img
                 src="/Bulk Updates.PNG"
                 alt="Posting one video and choosing which collar-tagged puppies it routes to"
-                className="relative w-full max-w-[230px] sm:max-w-[260px] mx-auto rounded-3xl border-4 border-white shadow-2xl shadow-blue-900/20"
+                className="relative w-full max-w-[210px] sm:max-w-[260px] mx-auto rounded-3xl border-4 border-white shadow-2xl shadow-blue-900/20"
               />
             </div>
 

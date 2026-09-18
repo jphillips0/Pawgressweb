@@ -17,10 +17,8 @@ export default function Hero() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
-  const socialRef = useRef<HTMLDivElement>(null);
   const dogImgRef = useRef<HTMLImageElement>(null);
   const pawSvgRef = useRef<HTMLDivElement>(null);
-  const avatarsRef = useRef<HTMLDivElement>(null);
 
   // Orchestrated entrance + ambient animations
   useEffect(() => {
@@ -94,26 +92,6 @@ export default function Hero() {
         scale: [0.85, 1],
         ease: createSpring({ stiffness: 150, damping: 12 }),
         delay: stagger(120, { start: 800 }),
-      });
-    }
-
-    if (avatarsRef.current) {
-      const avatars = avatarsRef.current.querySelectorAll<HTMLElement>(':scope > div');
-      animate(avatars, {
-        opacity: [0, 1],
-        scale: [0, 1],
-        ease: createSpring({ stiffness: 200, damping: 10 }),
-        delay: stagger(80, { start: 1100 }),
-      });
-    }
-
-    if (socialRef.current) {
-      animate(socialRef.current, {
-        opacity: [0, 1],
-        translateX: [-20, 0],
-        duration: 700,
-        delay: 1400,
-        ease: 'out(3)',
       });
     }
 
@@ -260,11 +238,11 @@ export default function Hero() {
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-20 px-5 sm:px-8 lg:px-16 xl:px-32 2xl:px-48 pt-24 sm:pt-28 lg:pt-32 pb-8 sm:pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 xl:gap-16 items-center max-w-[1400px] mx-auto">
+      <div className="relative z-20 px-5 sm:px-8 lg:px-16 xl:px-32 2xl:px-48 pt-20 sm:pt-28 lg:pt-32 pb-14 sm:pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-10 lg:gap-12 xl:gap-16 items-center max-w-[1400px] mx-auto">
 
           {/* Left Content */}
-          <div className="order-1 text-center lg:text-left">
+          <div className="text-center lg:text-left">
             {/* Badge */}
             <motion.a
               href="#features"
@@ -272,7 +250,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               whileHover={{ y: -2 }}
-              className="group inline-flex items-center gap-2 mb-6 rounded-full border border-blue-200/70 bg-white/70 backdrop-blur-md px-4 py-1.5 text-sm font-semibold text-blue-700 shadow-sm shadow-blue-900/5 hover:border-blue-300 hover:bg-white transition-colors"
+              className="group inline-flex items-center gap-2 mb-4 sm:mb-6 rounded-full border border-blue-200/70 bg-white/70 backdrop-blur-md px-4 py-1.5 text-sm font-semibold text-blue-700 shadow-sm shadow-blue-900/5 hover:border-blue-300 hover:bg-white transition-colors"
             >
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -285,19 +263,20 @@ export default function Hero() {
             </motion.a>
 
             {/* Heading */}
-            <h1 ref={headingRef} className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] tracking-tight mb-6 sm:mb-8 font-baloo">
+            <h1 ref={headingRef} className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] tracking-tight mb-4 sm:mb-8 font-baloo">
               <span className="text-gray-900">The All-in-One Platform</span>
               <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent"> Built for</span>
               <span className="text-gray-900"> Breeders</span>
             </h1>
 
             {/* Subtitle */}
-            <p ref={subtitleRef} style={{ opacity: 0 }} className="text-base sm:text-xl md:text-2xl text-blue-900/80 mb-8 sm:mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Stop juggling Facebook, texts, email, and five other apps. Pawgress brings your buyer conversations, puppy photos, health records, and updates into one place, so you can stay organized and provide a more professional experience for every family.
+            <p ref={subtitleRef} style={{ opacity: 0 }} className="text-base sm:text-xl md:text-2xl text-blue-900/80 mb-6 sm:mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
+              <span className="sm:hidden">Buyer chats, puppy photos, and health records. One app, zero juggling.</span>
+              <span className="hidden sm:inline">Stop juggling Facebook, texts, email, and five other apps. Pawgress brings your buyer conversations, puppy photos, health records, and updates into one place, so you can stay organized and provide a more professional experience for every family.</span>
             </p>
 
             {/* CTA Buttons */}
-            <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-8 sm:mb-10 max-w-md mx-auto sm:max-w-none">
+            <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start max-w-md mx-auto sm:max-w-none">
               <motion.div className="w-full sm:w-auto" whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.97 }} transition={{ type: 'spring', stiffness: 350, damping: 22 }}>
                 <DownloadButton className="relative inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl shadow-blue-600/30 hover:shadow-2xl hover:shadow-blue-600/40 transition-shadow text-center">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
@@ -315,35 +294,11 @@ export default function Hero() {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
               </motion.a>
             </div>
-
-            {/* Social Proof — glass card */}
-            <div ref={socialRef} style={{ opacity: 0 }} className="flex w-full sm:w-auto sm:inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-5 rounded-2xl border border-white/60 bg-white/60 backdrop-blur-md px-4 sm:px-5 py-4 sm:py-3 shadow-lg shadow-blue-900/5 max-w-md mx-auto lg:mx-0">
-              <div ref={avatarsRef} className="flex -space-x-2">
-                {[1, 2, 3, 4, 5].map((i) => (
-                  <div key={i} style={{ opacity: 0 }} className="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full border-2 border-white flex items-center justify-center text-white font-bold text-sm shadow-sm">
-                    {String.fromCharCode(65 + i)}
-                  </div>
-                ))}
-              </div>
-              <div className="text-center sm:text-left">
-                <p className="text-sm text-blue-900/80 font-medium">
-                  Trusted by <span className="font-bold text-blue-900">500+</span> breeders & shelters
-                </p>
-                <div className="flex items-center justify-center sm:justify-start gap-1 mt-1">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <svg key={star} className="w-4 h-4 text-yellow-500 fill-current" viewBox="0 0 20 20">
-                      <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                    </svg>
-                  ))}
-                  <span className="ml-2 text-sm font-semibold text-blue-900">4.9/5</span>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Right Content - Dog Image */}
-          <div className="order-2 flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-[280px] sm:max-w-sm lg:max-w-lg">
+          <div className="order-first lg:order-2 flex justify-center lg:justify-end -mb-2 sm:mb-0">
+            <div className="relative w-full max-w-[175px] sm:max-w-sm lg:max-w-lg">
               {/* Soft gradient halo behind dog */}
               <motion.div
                 aria-hidden

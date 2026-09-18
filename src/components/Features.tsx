@@ -199,15 +199,15 @@ export default function Features() {
             {/* Main Image */}
             <div className="mb-6 sm:mb-8 lg:mb-10 relative">
               <div ref={imageRef} style={{ opacity: 0 }} className="relative inline-block">
-                <div className="relative rounded-xl lg:rounded-2xl overflow-hidden shadow-xl shadow-gray-900/20 transform hover:scale-105 transition-all duration-500">
+                <div className="relative rounded-xl lg:rounded-2xl overflow-hidden shadow-xl shadow-gray-900/20 transform sm:hover:scale-105 transition-all duration-500">
                   <img
                     src="/dog fam1.jpg"
                     alt="Happy family with their adopted pet"
-                    className="w-full max-w-md mx-auto"
+                    className="w-full max-w-[320px] sm:max-w-md mx-auto"
                   />
                 </div>
                 {/* Decorative animated elements */}
-                <div ref={ballsRef} className="absolute inset-0 pointer-events-none">
+                <div ref={ballsRef} className="hidden sm:block absolute inset-0 pointer-events-none">
                   <div className="deco-ball absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full opacity-90 shadow-lg"></div>
                   <div className="deco-ball absolute -bottom-4 -left-4 w-7 h-7 bg-gradient-to-br from-pink-400 to-rose-400 rounded-full opacity-90 shadow-lg"></div>
                   <div className="deco-ball absolute top-1/2 -left-6 w-6 h-6 bg-gradient-to-br from-blue-400 to-indigo-400 rounded-full opacity-80"></div>
@@ -229,18 +229,18 @@ export default function Features() {
               every pet's journey with transparency and care.
             </p>
 
-            <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-10 lg:mb-12">
-              <motion.div whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.97 }} transition={{ type: 'spring', stiffness: 350, damping: 22 }}>
-                <DownloadButton className="group relative inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg shadow-xl shadow-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/40 transition-shadow w-full sm:w-auto text-center overflow-hidden">
+            <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center max-w-md mx-auto sm:max-w-none mb-8 sm:mb-10 lg:mb-12">
+              <motion.div className="w-full sm:w-auto" whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.97 }} transition={{ type: 'spring', stiffness: 350, damping: 22 }}>
+                <DownloadButton className="group relative inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 sm:px-8 py-4 rounded-full font-semibold text-lg shadow-xl shadow-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/40 transition-shadow w-full sm:w-auto text-center overflow-hidden">
                   <svg className="w-5 h-5" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zM275.9 92.1c20.6-24.4 18.8-46.7 18.2-54.7-18.3 1.1-39.5 12.5-51.6 26.5-13.3 15-21.1 33.6-19.4 54.3 19.8 1.5 37.9-8.7 52.8-26.1z"/></svg>
                   <span className="relative z-10">Download the App</span>
                 </DownloadButton>
               </motion.div>
               
-              <motion.div whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.97 }} transition={{ type: 'spring', stiffness: 350, damping: 22 }}>
+              <motion.div className="w-full sm:w-auto" whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.97 }} transition={{ type: 'spring', stiffness: 350, damping: 22 }}>
                 <Link 
                   href="/mission" 
-                  className="group relative border-2 border-blue-600/30 bg-white/70 backdrop-blur-md text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-white hover:border-blue-600/60 transition-colors font-semibold text-base sm:text-lg inline-flex items-center justify-center gap-2 w-full sm:w-auto text-center overflow-hidden"
+                  className="group relative border-2 border-blue-600/30 bg-white/70 backdrop-blur-md text-blue-700 px-6 sm:px-8 py-4 rounded-full hover:bg-white hover:border-blue-600/60 transition-colors font-semibold text-base sm:text-lg inline-flex items-center justify-center gap-2 w-full sm:w-auto text-center overflow-hidden"
                 >
                   <span className="relative z-10">Learn Our Mission</span>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
@@ -249,7 +249,7 @@ export default function Features() {
             </div>
 
             {/* Stats */}
-            <div ref={statsRef} className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6">
+            <div ref={statsRef} className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 max-w-md mx-auto sm:max-w-none">
               <motion.div whileHover={{ y: -4 }} transition={{ type: 'spring', stiffness: 300, damping: 22 }} className="stat-card group rounded-2xl border border-white/60 bg-white/60 backdrop-blur-md p-4 sm:p-6 shadow-lg shadow-blue-900/5 hover:shadow-xl hover:shadow-blue-900/10 transition-shadow flex items-center justify-between gap-3 text-left sm:block sm:text-center" style={{ opacity: 0 }}>
                 <div className="stat-number text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-baloo sm:mb-2" data-target="500" data-suffix="+">0+</div>
                 <div className="text-sm sm:text-base text-gray-600 font-semibold">Ethical Breeders</div>

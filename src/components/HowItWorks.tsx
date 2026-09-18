@@ -256,10 +256,10 @@ export default function HowItWorks() {
     <section className="pt-8 sm:pt-12 lg:pt-16 pb-16 sm:pb-20 lg:pb-32 bg-white" id="how-it-works">
       {/* Wide Animated Feature Carousel */}
       <div className="mb-6 sm:mb-20 lg:mb-24">
-        <div className="rounded-3xl transition-transform duration-300 hover:scale-105 overflow-hidden">
+        <div className="rounded-3xl transition-transform duration-300 lg:hover:scale-105 overflow-hidden">
           {/* Carousel Container - Continuous infinite scroll */}
           <div
-            className="relative h-24 sm:h-32 lg:h-36 flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing py-4"
+            className="relative h-20 sm:h-32 lg:h-36 flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing py-4 [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]"
             onMouseDown={(e) => {
               setIsDragging(true);
               setStartX(e.clientX);
@@ -282,7 +282,7 @@ export default function HowItWorks() {
           >
             <div
               ref={scrollRef}
-              className="absolute flex items-center gap-16 sm:gap-20 lg:gap-32 select-none"
+              className="absolute flex items-center gap-10 sm:gap-20 lg:gap-32 select-none"
               style={{
                 transform: `translateX(${translateX}px)`,
                 transition: 'none'
@@ -323,7 +323,7 @@ export default function HowItWorks() {
       <div className="px-4 sm:px-6 lg:px-8 xl:px-12 max-w-[1800px] mx-auto">
         
         {/* What Pawgress Does Section - Split layout with floating chips */}
-        <div ref={whatDoesRef} className="mb-20 sm:mb-24 lg:mb-32">
+        <div ref={whatDoesRef} className="mb-14 sm:mb-24 lg:mb-32">
           <div className="relative rounded-3xl lg:rounded-[2.5rem] border border-white/80 overflow-hidden shadow-2xl shadow-indigo-900/15"
             style={{
               background:
@@ -343,7 +343,7 @@ export default function HowItWorks() {
             <div aria-hidden className="absolute inset-x-0 top-0 h-32 pointer-events-none"
               style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.6), transparent)' }} />
 
-            <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center p-4 sm:p-12 lg:p-16">
+            <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center p-5 sm:p-12 lg:p-16">
               {/* Left: copy */}
               <div>
                 <div className="wpd-heading inline-flex items-center gap-2 bg-blue-50 text-blue-700 border border-blue-100 px-4 py-1.5 rounded-full text-sm font-semibold mb-5" style={{ opacity: 0 }}>
@@ -439,7 +439,7 @@ export default function HowItWorks() {
       </div>
 
       {/* What Pawgress Is Section - Before/After comparison */}
-      <div ref={whatIsRef} className="mb-20 sm:mb-24 lg:mb-32 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-16 sm:py-24 lg:py-28 px-4 sm:px-12 lg:px-16 relative overflow-hidden">
+      <div ref={whatIsRef} className="mb-14 sm:mb-24 lg:mb-32 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-16 sm:py-24 lg:py-28 px-4 sm:px-12 lg:px-16 relative overflow-hidden">
         {/* Wave at top */}
         <div className="absolute top-0 left-0 right-0 w-full overflow-hidden leading-none z-10">
           <svg className="relative block w-full h-16 sm:h-20 md:h-24" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -458,7 +458,7 @@ export default function HowItWorks() {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="text-center mb-14 sm:mb-16">
+          <div className="text-center mb-10 sm:mb-16">
             <div className="wis-item inline-flex items-center gap-2 bg-white/80 backdrop-blur-md border border-blue-200/60 text-blue-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-5 shadow-sm" style={{ opacity: 0 }}>
               <span>💡</span> Why Pawgress
             </div>
@@ -650,7 +650,7 @@ export default function HowItWorks() {
         </div>
 
         {/* For Buyers Panel */}
-        <div ref={stepsRef} className="mb-20 sm:mb-24 lg:mb-32">
+        <div ref={stepsRef} className="mb-16 sm:mb-24 lg:mb-32">
         <AnimatePresence mode="wait">
         {activeTab === 'buyers' && (
           <motion.div
@@ -662,11 +662,11 @@ export default function HowItWorks() {
             transition={{ duration: 0.35, ease: 'easeOut' }}
           >
             {/* Steps grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-5xl mx-auto mb-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5 max-w-5xl mx-auto mb-8 sm:mb-10">
               {buyerSteps.map((step, index) => (
                 <motion.div
                   key={index}
-                  className="timeline-step group relative rounded-3xl border border-gray-100 bg-white p-6 sm:p-7 shadow-lg shadow-blue-900/5 overflow-hidden"
+                  className="timeline-step group relative rounded-3xl border border-gray-100 bg-white p-5 sm:p-7 shadow-lg shadow-blue-900/5 overflow-hidden"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ type: 'spring', stiffness: 220, damping: 22, delay: index * 0.08 }}
@@ -675,20 +675,22 @@ export default function HowItWorks() {
                   {/* Hover glow */}
                   <div aria-hidden className={`absolute -top-20 -right-20 w-48 h-48 rounded-full opacity-0 group-hover:opacity-60 blur-3xl transition-opacity duration-500 bg-gradient-to-br ${step.color}`} />
                   {/* Big watermark number */}
-                  <span className={`absolute -top-2 right-3 text-7xl sm:text-8xl font-black bg-gradient-to-br ${step.color} bg-clip-text text-transparent opacity-10 select-none leading-none`}>
+                  <span className={`absolute -top-1 sm:-top-2 right-3 text-5xl sm:text-8xl font-black bg-gradient-to-br ${step.color} bg-clip-text text-transparent opacity-10 select-none leading-none`}>
                     {step.number}
                   </span>
-                  <div className="relative">
-                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center text-3xl shadow-lg mb-5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}>
+                  <div className="relative flex items-start gap-4 sm:block">
+                    <div className={`flex-shrink-0 w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center text-2xl sm:text-3xl shadow-lg sm:mb-5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}>
                       {step.icon}
                     </div>
-                    <div className="flex items-center gap-2 mb-2">
+                    <div className="min-w-0">
+                    <div className="flex items-center gap-2 mb-1 sm:mb-2">
                       <span className={`text-xs font-bold tracking-wider bg-gradient-to-r ${step.color} bg-clip-text text-transparent`}>
                         STEP {step.number}
                       </span>
                     </div>
-                    <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 leading-snug font-baloo">{step.title}</h4>
+                    <h4 className="text-base sm:text-xl font-bold text-gray-900 mb-1 sm:mb-2 leading-snug font-baloo pr-10 sm:pr-0">{step.title}</h4>
                     <p className="text-sm sm:text-base text-gray-500 leading-relaxed">{step.description}</p>
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -719,31 +721,33 @@ export default function HowItWorks() {
             transition={{ duration: 0.35, ease: 'easeOut' }}
           >
             {/* Steps grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-5xl mx-auto mb-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5 max-w-5xl mx-auto mb-8 sm:mb-10">
               {breederSteps.map((step, index) => (
                 <motion.div
                   key={index}
-                  className="timeline-step group relative rounded-3xl border border-gray-100 bg-white p-6 sm:p-7 shadow-lg shadow-emerald-900/5 overflow-hidden"
+                  className="timeline-step group relative rounded-3xl border border-gray-100 bg-white p-5 sm:p-7 shadow-lg shadow-emerald-900/5 overflow-hidden"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ type: 'spring', stiffness: 220, damping: 22, delay: index * 0.08 }}
                   whileHover={{ y: -6 }}
                 >
                   <div aria-hidden className={`absolute -top-20 -right-20 w-48 h-48 rounded-full opacity-0 group-hover:opacity-60 blur-3xl transition-opacity duration-500 bg-gradient-to-br ${step.color}`} />
-                  <span className={`absolute -top-2 right-3 text-7xl sm:text-8xl font-black bg-gradient-to-br ${step.color} bg-clip-text text-transparent opacity-10 select-none leading-none`}>
+                  <span className={`absolute -top-1 sm:-top-2 right-3 text-5xl sm:text-8xl font-black bg-gradient-to-br ${step.color} bg-clip-text text-transparent opacity-10 select-none leading-none`}>
                     {step.number}
                   </span>
-                  <div className="relative">
-                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center text-3xl shadow-lg mb-5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}>
+                  <div className="relative flex items-start gap-4 sm:block">
+                    <div className={`flex-shrink-0 w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center text-2xl sm:text-3xl shadow-lg sm:mb-5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}>
                       {step.icon}
                     </div>
-                    <div className="flex items-center gap-2 mb-2">
+                    <div className="min-w-0">
+                    <div className="flex items-center gap-2 mb-1 sm:mb-2">
                       <span className={`text-xs font-bold tracking-wider bg-gradient-to-r ${step.color} bg-clip-text text-transparent`}>
                         STEP {step.number}
                       </span>
                     </div>
-                    <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 leading-snug font-baloo">{step.title}</h4>
+                    <h4 className="text-base sm:text-xl font-bold text-gray-900 mb-1 sm:mb-2 leading-snug font-baloo pr-10 sm:pr-0">{step.title}</h4>
                     <p className="text-sm sm:text-base text-gray-500 leading-relaxed">{step.description}</p>
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -766,8 +770,8 @@ export default function HowItWorks() {
         </div>
 
         {/* Built On Transparency Section */}
-        <div ref={transparencyRef} className="mb-20 sm:mb-24 lg:mb-32">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div ref={transparencyRef} className="mb-14 sm:mb-24 lg:mb-32">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
             {/* Left Image with floating trust badges */}
             <div className="relative">
               {/* Background blob */}
@@ -776,7 +780,7 @@ export default function HowItWorks() {
 
               <motion.div
                 style={{ opacity: 0 }}
-                className="tr-image relative"
+                className="tr-image relative mx-2 lg:mx-0"
                 whileHover={{ rotate: 0, scale: 1.01 }}
                 initial={{ rotate: -2 }}
                 transition={{ type: 'spring', stiffness: 200, damping: 18 }}
