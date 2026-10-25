@@ -3,6 +3,8 @@
 import { Baloo_2 } from 'next/font/google';
 import { motion } from 'framer-motion';
 import SharedNav from '@/components/SharedNav';
+import AstroWorkflow from '@/components/astro/AstroWorkflow';
+import { BuyerHomeScreen, HealthPair } from '@/components/app-screens/screens';
 
 const baloo = Baloo_2({
   subsets: ['latin'],
@@ -384,24 +386,7 @@ export default function ForBuyersPage() {
                 { i: '🏆', t: 'Milestones' },
               ]}
               image={
-                <div className="relative w-full pt-4 pb-8 px-4 sm:px-8">
-                  <motion.div
-                    whileHover={{ rotate: 0, scale: 1.05 }}
-                    transition={{ type: 'spring', stiffness: 200, damping: 18 }}
-                    initial={{ rotate: -3 }}
-                    className="relative ml-0 mt-6 w-full max-w-xs rounded-2xl overflow-hidden shadow-2xl shadow-green-900/20 border-4 border-white"
-                  >
-                    <img src="/Health.PNG" alt="Health records" className="w-full h-auto block" />
-                  </motion.div>
-                  <motion.div
-                    whileHover={{ rotate: 0, scale: 1.05 }}
-                    transition={{ type: 'spring', stiffness: 200, damping: 18 }}
-                    initial={{ rotate: 2 }}
-                    className="relative -mt-48 sm:-mt-56 ml-auto mr-0 w-full max-w-xs rounded-2xl overflow-hidden shadow-2xl shadow-teal-900/20 border-4 border-white z-10"
-                  >
-                    <img src="/Weight.PNG" alt="Weight tracking" className="w-full h-auto block" />
-                  </motion.div>
-                </div>
+                <HealthPair />
               }
             />
 
@@ -410,35 +395,6 @@ export default function ForBuyersPage() {
             <FeatureRow
               step="04"
               reverse
-              badge="AI Assistant"
-              badgeColor="bg-gradient-to-r from-amber-600 to-orange-600"
-              cardGradient="bg-gradient-to-br from-amber-50 to-orange-50"
-              cardBorder="border border-amber-100"
-              title={
-                <>
-                  <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">Astro AI</span>{' '}
-                  <span className="text-gray-900">assistant</span>
-                </>
-              }
-              paragraphs={[
-                "Astro is Pawgress's built-in AI that understands your pet's full profile (health records, weight trends, breed details, and timeline updates) so you can ask questions and get clear, contextual answers using your pet's real data.",
-              ]}
-              pills={[
-                { i: '🧠', t: 'Knows your pet' },
-                { i: '💬', t: 'Natural Q&A' },
-                { i: '⚡', t: 'Instant answers' },
-              ]}
-              image={
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-amber-900/20 max-w-[230px] sm:max-w-[260px] mx-auto border-4 border-white">
-                  <img src="/Astro.PNG" alt="Astro AI assistant" className="w-full h-auto block" />
-                </div>
-              }
-            />
-
-            <PawDivider color="amber" emoji="✨" />
-
-            <FeatureRow
-              step="05"
               badge="Lifelong"
               badgeColor="bg-gradient-to-r from-pink-600 to-red-600"
               cardGradient="bg-gradient-to-br from-rose-50 to-red-50"
@@ -459,15 +415,16 @@ export default function ForBuyersPage() {
                 { i: '🐶', t: 'Lifetime memories' },
               ]}
               image={
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-rose-900/20 max-w-[230px] sm:max-w-[260px] mx-auto border-4 border-white">
-                  <img src="/Pet Profile.PNG" alt="Pet profile" className="w-full h-auto block" />
-                </div>
+                <div className="flex justify-center"><BuyerHomeScreen width={260} /></div>
               }
             />
 
           </div>
         </div>
       </section>
+
+      {/* ===== ASTRO FOR BUYERS ===== */}
+      <AstroWorkflow variant="buyer" />
 
       {/* ===== CTA ===== */}
       <section

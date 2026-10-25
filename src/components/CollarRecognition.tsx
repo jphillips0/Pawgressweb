@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { animate, createSpring } from 'animejs';
 import { useInView } from '@/hooks/useInView';
+import { PostUpdateScreen } from '@/components/app-screens/screens';
 
 export default function CollarRecognition() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -92,11 +93,7 @@ export default function CollarRecognition() {
           {/* Right: screenshot with floating chips */}
           <div className="relative">
             <div ref={imageRef} style={{ opacity: 0 }} className="relative">
-              <img
-                src="/Bulk Updates.PNG"
-                alt="Posting one video and choosing which collar-tagged puppies it routes to"
-                className="relative w-full max-w-[210px] sm:max-w-[260px] mx-auto rounded-3xl border-4 border-white shadow-2xl shadow-blue-900/20"
-              />
+              <div className="flex justify-center"><PostUpdateScreen width={260} /></div>
             </div>
 
             <motion.div
@@ -110,7 +107,7 @@ export default function CollarRecognition() {
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center text-white text-lg shadow-md flex-shrink-0">🔵</div>
               <div>
                 <div className="text-[10px] text-gray-400 font-medium leading-tight">Detected</div>
-                <div className="text-sm font-bold text-gray-900 leading-tight">Blue collar · Benny</div>
+                <div className="text-sm font-bold text-gray-900 leading-tight">Blue collar · Pumpkin</div>
               </div>
             </motion.div>
 
@@ -125,7 +122,7 @@ export default function CollarRecognition() {
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white text-lg shadow-md flex-shrink-0">✓</div>
               <div>
                 <div className="text-[10px] text-gray-400 font-medium leading-tight">Sent to</div>
-                <div className="text-sm font-bold text-gray-900 leading-tight">3 buyer chats</div>
+                <div className="text-sm font-bold text-gray-900 leading-tight">4 buyer chats</div>
               </div>
             </motion.div>
           </div>

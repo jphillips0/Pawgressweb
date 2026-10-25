@@ -3,6 +3,7 @@
 import { Baloo_2 } from 'next/font/google';
 import { motion } from 'framer-motion';
 import SharedNav from '@/components/SharedNav';
+import { MedicalScreen } from '@/components/app-screens/screens';
 
 const baloo = Baloo_2({
   subsets: ['latin'],
@@ -441,9 +442,7 @@ export default function ForSheltersPage() {
                 { i: '📎', t: 'Handoff at adoption' },
               ]}
               image={
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-red-900/20 max-w-[230px] sm:max-w-[260px] mx-auto border-4 border-white">
-                  <img src="/Health.PNG" alt="Medical records" className="w-full h-auto block" />
-                </div>
+                <div className="flex justify-center"><MedicalScreen width={260} /></div>
               }
             />
 

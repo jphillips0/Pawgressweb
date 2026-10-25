@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Baloo_2 } from "next/font/google";
+import { Inter, Baloo_2, Nunito } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import { ScrollProgressBar } from "@/components/motion";
@@ -15,6 +15,14 @@ const baloo = Baloo_2({
   subsets: ["latin"],
   variable: "--font-baloo",
   weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+// Rounded face for the app-screen mockups (stands in for SF Pro Rounded off Apple devices).
+const nunito = Nunito({
+  subsets: ["latin"],
+  variable: "--font-nunito",
+  weight: ["400", "600", "700", "800", "900"],
   display: "swap",
 });
 
@@ -41,7 +49,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${baloo.variable}`}>
+    <html lang="en" className={`${inter.variable} ${baloo.variable} ${nunito.variable}`}>
       <body className="font-inter antialiased bg-white text-gray-900">
         <ScrollProgressBar />
         <ScrollRestorer />

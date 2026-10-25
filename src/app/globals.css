@@ -212,6 +212,27 @@ body {
   animation: buttonPulse 2s ease-in-out infinite;
 }
 
+/* Astro section: starfield twinkle and jetpack flame */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+@keyframes flameFlicker {
+  0%, 100% { transform: scaleY(1) scaleX(1); opacity: 0.9; }
+  33% { transform: scaleY(1.25) scaleX(0.9); opacity: 1; }
+  66% { transform: scaleY(0.85) scaleX(1.05); opacity: 0.8; }
+}
+
+.animate-flame {
+  animation: flameFlicker 0.35s ease-in-out infinite;
+  transform-origin: top center;
+}
+
 /* Button shimmer animation */
 @keyframes shimmer {
   0% {

@@ -3,6 +3,10 @@
 import { Baloo_2 } from 'next/font/google';
 import { motion } from 'framer-motion';
 import SharedNav from '@/components/SharedNav';
+import AstroWorkflow from '@/components/astro/AstroWorkflow';
+import {
+  BreederProfileScreen, FamilyChatScreen, HealthPair, PetOverviewScreen, PetProfilesScreen, PostUpdateScreen,
+} from '@/components/app-screens/screens';
 
 const baloo = Baloo_2({
   subsets: ['latin'],
@@ -207,6 +211,7 @@ export default function ForBreedersPage() {
                     { i: '📢', t: 'Bulk updates' },
                     { i: '🔗', t: 'Buyer invites' },
                     { i: '🏥', t: 'Health logs' },
+                    { i: '✨', t: 'Astro AI assistant' },
                   ].map((q) => (
                     <motion.span
                       key={q.t}
@@ -321,9 +326,7 @@ export default function ForBreedersPage() {
                 { i: '📅', t: 'Status' },
               ]}
               image={
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-blue-900/20 max-w-[230px] sm:max-w-[260px] mx-auto border-4 border-white">
-                  <img src="/Pet Profile.PNG" alt="Pet profile" className="w-full h-auto block" />
-                </div>
+                <div className="flex justify-center"><PetOverviewScreen width={260} /></div>
               }
             />
 
@@ -352,9 +355,7 @@ export default function ForBreedersPage() {
                 { i: '🔗', t: 'Linked pet profiles' },
               ]}
               image={
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-fuchsia-900/20 max-w-[230px] sm:max-w-[260px] mx-auto border-4 border-white">
-                  <img src="/Litter Profiles.PNG" alt="Litter profile page" className="w-full h-auto block" />
-                </div>
+                <div className="flex justify-center"><PetProfilesScreen width={260} /></div>
               }
             />
 
@@ -413,9 +414,7 @@ export default function ForBreedersPage() {
                 { i: '💬', t: 'Tied to pet' },
               ]}
               image={
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-purple-900/20 max-w-[230px] sm:max-w-[260px] mx-auto border-4 border-white">
-                  <img src="/Breeder Profile.PNG" alt="Public breeder profile" className="w-full h-auto block" />
-                </div>
+                <div className="flex justify-center"><BreederProfileScreen width={260} /></div>
               }
             />
 
@@ -443,9 +442,7 @@ export default function ForBreedersPage() {
                 { i: '👥', t: 'Litter-wide' },
               ]}
               image={
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-green-900/20 max-w-[230px] sm:max-w-[260px] mx-auto border-4 border-white">
-                  <img src="/Bulk Updates.PNG" alt="Bulk updates" className="w-full h-auto block" />
-                </div>
+                <div className="flex justify-center"><PostUpdateScreen width={260} /></div>
               }
             />
 
@@ -474,9 +471,7 @@ export default function ForBreedersPage() {
                 { i: '🔔', t: 'Notifications' },
               ]}
               image={
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-amber-900/20 max-w-[230px] sm:max-w-[260px] mx-auto border-4 border-white">
-                  <img src="/Breeder Chat page.jpeg" alt="Secure chat" className="w-full h-auto block" />
-                </div>
+                <div className="flex justify-center"><FamilyChatScreen width={260} /></div>
               }
             />
 
@@ -504,24 +499,7 @@ export default function ForBreedersPage() {
                 { i: '📑', t: 'Auto-shared' },
               ]}
               image={
-                <div className="relative w-full pt-4 pb-8 px-4 sm:px-8">
-                  <motion.div
-                    whileHover={{ rotate: 0, scale: 1.05 }}
-                    transition={{ type: 'spring', stiffness: 200, damping: 18 }}
-                    initial={{ rotate: -3 }}
-                    className="relative ml-0 mt-6 w-full max-w-xs rounded-2xl overflow-hidden shadow-2xl shadow-rose-900/20 border-4 border-white"
-                  >
-                    <img src="/Health.PNG" alt="Health records" className="w-full h-auto block" />
-                  </motion.div>
-                  <motion.div
-                    whileHover={{ rotate: 0, scale: 1.05 }}
-                    transition={{ type: 'spring', stiffness: 200, damping: 18 }}
-                    initial={{ rotate: 2 }}
-                    className="relative -mt-48 sm:-mt-56 ml-auto mr-0 w-full max-w-xs rounded-2xl overflow-hidden shadow-2xl shadow-red-900/20 border-4 border-white z-10"
-                  >
-                    <img src="/Weight.PNG" alt="Weight tracking" className="w-full h-auto block" />
-                  </motion.div>
-                </div>
+<HealthPair />
               }
             />
 
@@ -556,39 +534,12 @@ export default function ForBreedersPage() {
               }
             />
 
-            <PawDivider color="cyan" emoji="📸" />
-
-            <FeatureRow
-              step="09"
-              badge="AI"
-              badgeColor="bg-gradient-to-r from-violet-600 to-purple-600"
-              cardGradient="bg-gradient-to-br from-violet-50 to-purple-50"
-              cardBorder="border border-violet-100"
-              title={
-                <>
-                  <span className="bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">AI Assistant</span>{' '}
-                  <span className="text-gray-900">(Astro)</span>
-                </>
-              }
-              paragraphs={[
-                "Astro is Pawgress's built-in AI that understands a pet's full profile (health records, weight trends, breed details, and timeline updates) so buyers can ask questions and get clear, contextual answers using your pet's real data.",
-                'The result: fewer repeat questions in your inbox.',
-              ]}
-              pills={[
-                { i: '🧠', t: 'Knows the pet' },
-                { i: '💬', t: 'Buyer self-serve' },
-                { i: '⏱️', t: 'Saves time' },
-              ]}
-              image={
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-violet-900/20 max-w-[230px] sm:max-w-[260px] mx-auto border-4 border-white">
-                  <img src="/Astro.PNG" alt="Astro AI" className="w-full h-auto block" />
-                </div>
-              }
-            />
-
           </div>
         </div>
       </section>
+
+      {/* ===== ASTRO KENNEL ASSISTANT ===== */}
+      <AstroWorkflow variant="breeder" />
 
       {/* ===== CTA ===== */}
       <section

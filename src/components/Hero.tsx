@@ -1,51 +1,51 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { animate, stagger, createSpring } from 'animejs';
 import SharedNav from './SharedNav';
 import DownloadButton from './DownloadButton';
+import { BreederHomeScreen, PetProfilesScreen } from './app-screens/screens';
+import { CollarDot, Photo } from './app-screens/kit';
+import { IMG } from './app-screens/demoData';
+import { AstroArt } from './astro/AstroArt';
+
+const PROOF = [
+  { icon: '📣', title: 'Post once', sub: 'Every family, chat and timeline' },
+  { icon: '📈', title: 'Age-stamped', sub: 'Weights, photos and records' },
+  { icon: '✨', title: 'Astro AI', sub: 'Does the busywork for you' },
+];
 
 export default function Hero() {
-  const [currentFeatureIndex, setCurrentFeatureIndex] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [translateX, setTranslateX] = useState(0);
-  const animationRef = useRef<number | null>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
-  const dogImgRef = useRef<HTMLImageElement>(null);
-  const pawSvgRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
 
-  // Orchestrated entrance + ambient animations
+  // Subtle parallax: the phones lean toward the cursor on desktop.
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const sx = useSpring(mx, { stiffness: 60, damping: 18 });
+  const sy = useSpring(my, { stiffness: 60, damping: 18 });
+  const frontX = useTransform(sx, (v) => v * 14);
+  const frontY = useTransform(sy, (v) => v * 10);
+  const backX = useTransform(sx, (v) => v * -10);
+  const backY = useTransform(sy, (v) => v * -6);
+  const chipX = useTransform(sx, (v) => v * 24);
+
   useEffect(() => {
-    // Split heading into per-word spans for staggered reveal
+    // Split heading into per-word spans for a staggered reveal
     if (headingRef.current) {
       headingRef.current.querySelectorAll<HTMLElement>(':scope > span').forEach((span) => {
         if (span.dataset.split === 'true') return;
-        // Detect gradient classes so we can re-apply them to each word span
-        // (background-clip: text on the parent does NOT extend through inline-block children)
-        const parentClasses = span.className;
-        const isGradient = /bg-clip-text/.test(parentClasses);
+        // background-clip: text on the parent does NOT extend through inline-block children,
+        // so gradient classes are re-applied to each word span.
+        const isGradient = /bg-clip-text/.test(span.className);
         const gradientClasses = isGradient
-          ? parentClasses
-              .split(/\s+/)
-              .filter((c) =>
-                /^bg-(gradient|clip-text)/.test(c) ||
-                /^from-/.test(c) ||
-                /^via-/.test(c) ||
-                /^to-/.test(c) ||
-                c === 'text-transparent',
-              )
-              .join(' ')
+          ? span.className.split(/\s+/).filter((c) => /^bg-(gradient|clip-text)/.test(c) || /^(from|via|to)-/.test(c) || c === 'text-transparent').join(' ')
           : '';
-
-        const text = span.textContent ?? '';
+        const parts = (span.textContent ?? '').split(/(\s+)/);
         span.textContent = '';
-        const parts = text.split(/(\s+)/); // keep whitespace tokens
         parts.forEach((part) => {
           if (!part) return;
           if (/^\s+$/.test(part)) {
@@ -53,9 +53,7 @@ export default function Hero() {
             return;
           }
           const w = document.createElement('span');
-          w.className =
-            'word inline-block will-change-transform' +
-            (gradientClasses ? ' ' + gradientClasses : '');
+          w.className = 'word inline-block will-change-transform' + (gradientClasses ? ' ' + gradientClasses : '');
           w.style.opacity = '0';
           w.textContent = part;
           span.appendChild(w);
@@ -63,287 +61,246 @@ export default function Hero() {
         span.dataset.split = 'true';
       });
 
-      const words = headingRef.current.querySelectorAll<HTMLElement>('.word');
-      animate(words, {
+      animate(headingRef.current.querySelectorAll<HTMLElement>('.word'), {
         opacity: [0, 1],
         translateY: [40, 0],
         rotate: [-6, 0],
         filter: ['blur(8px)', 'blur(0px)'],
         ease: createSpring({ stiffness: 120, damping: 14 }),
-        delay: stagger(60),
+        delay: stagger(70),
       });
     }
 
     if (subtitleRef.current) {
-      animate(subtitleRef.current, {
-        opacity: [0, 1],
-        translateY: [20, 0],
-        duration: 900,
-        delay: 600,
-        ease: 'out(3)',
-      });
+      animate(subtitleRef.current, { opacity: [0, 1], translateY: [20, 0], duration: 900, delay: 550, ease: 'out(3)' });
     }
 
     if (ctaRef.current) {
-      const buttons = ctaRef.current.querySelectorAll<HTMLElement>(':scope > *');
-      animate(buttons, {
+      animate(ctaRef.current.querySelectorAll<HTMLElement>(':scope > *'), {
         opacity: [0, 1],
         translateY: [30, 0],
-        scale: [0.85, 1],
-        ease: createSpring({ stiffness: 150, damping: 12 }),
-        delay: stagger(120, { start: 800 }),
-      });
-    }
-
-    // Dog image entrance + persistent float
-    if (dogImgRef.current) {
-      animate(dogImgRef.current, {
-        opacity: [0, 1],
-        translateY: [60, 0],
         scale: [0.9, 1],
-        duration: 1100,
-        delay: 300,
-        ease: createSpring({ stiffness: 80, damping: 12 }),
-      });
-
-      // Ambient floating loop
-      animate(dogImgRef.current, {
-        translateY: [0, -18, 0],
-        duration: 4500,
-        loop: true,
-        ease: 'inOutSine',
-        delay: 1400,
-      });
-    }
-
-    // Paw print: gentle clockwise / counter-clockwise sway + breathing scale
-    if (pawSvgRef.current) {
-      animate(pawSvgRef.current, {
-        rotate: [
-          { to: 18, ease: 'inOutSine', duration: 3500 },
-          { to: -18, ease: 'inOutSine', duration: 3500 },
-          { to: 0, ease: 'inOutSine', duration: 1800 },
-        ],
-        loop: true,
-      });
-      animate(pawSvgRef.current, {
-        scale: [1, 1.08, 1],
-        opacity: [0.45, 0.7, 0.45],
-        duration: 5000,
-        loop: true,
-        ease: 'inOutSine',
+        ease: createSpring({ stiffness: 150, damping: 13 }),
+        delay: stagger(110, { start: 750 }),
       });
     }
   }, []);
 
-  useEffect(() => {
-    if (!isDragging) {
-      const animate = () => {
-        setTranslateX(prev => {
-          const newVal = prev - 0.5;
-          // Calculate approximate width of one set of features (8 features)
-          // Assuming average feature width of ~400px + gap of ~128px (lg:gap-32)
-          const oneSetWidth = (400 + 128) * 8; // ~4224px per set
-
-          // When we've scrolled through one complete set, jump back by one set width
-          if (newVal <= -oneSetWidth) {
-            return newVal + oneSetWidth;
-          }
-          return newVal;
-        });
-        animationRef.current = requestAnimationFrame(animate);
-      };
-      animationRef.current = requestAnimationFrame(animate);
-      return () => {
-        if (animationRef.current) {
-          cancelAnimationFrame(animationRef.current);
-        }
-      };
-    }
-  }, [isDragging]);
-
-  const features = [
-    { icon: '🐾', text: 'Dedicated Puppy Profiles', color: 'bg-green-400' },
-    { icon: '💬', text: 'Centralize Buyer Messages', color: 'bg-purple-400' },
-    { icon: '📸', text: 'Share Photos & Updates', color: 'bg-yellow-400' },
-    { icon: '🏥', text: 'Log Health Records', color: 'bg-blue-400' },
-    { icon: '🔗', text: 'Invite Buyers Instantly', color: 'bg-pink-400' },
-    { icon: '📊', text: 'Track Litter Milestones', color: 'bg-indigo-400' },
-    { icon: '📋', text: 'Organize Contracts & Docs', color: 'bg-red-400' },
-    { icon: '⭐', text: 'Professional Breeder Profile', color: 'bg-teal-400' },
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentFeatureIndex((prev) => (prev + 1) % features.length);
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, []);
+  const onMove = (e: React.MouseEvent) => {
+    const r = stageRef.current?.getBoundingClientRect();
+    if (!r) return;
+    mx.set(((e.clientX - r.left) / r.width - 0.5) * 2);
+    my.set(((e.clientY - r.top) / r.height - 0.5) * 2);
+  };
+  const onLeave = () => {
+    mx.set(0);
+    my.set(0);
+  };
 
   return (
-    <section className="relative font-baloo overflow-hidden pb-8 sm:pb-12 md:pb-16"
-      style={{
-        background:
-          'linear-gradient(135deg, #eff6ff 0%, #e0e7ff 35%, #f5f3ff 70%, #fdf4ff 100%)',
-      }}
+    <section
+      className="relative font-baloo overflow-hidden pb-10 sm:pb-16"
+      style={{ background: 'linear-gradient(135deg, #eff6ff 0%, #e0e7ff 35%, #f5f3ff 70%, #fdf4ff 100%)' }}
     >
       <SharedNav />
 
-      {/* Aurora / mesh-gradient background blobs */}
+      {/* Aurora background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <motion.div
           aria-hidden
           className="absolute -top-40 -left-32 w-[48rem] h-[48rem] rounded-full opacity-60 blur-3xl"
-          style={{
-            background:
-              'radial-gradient(closest-side, rgba(99,102,241,0.65), rgba(99,102,241,0))',
-          }}
+          style={{ background: 'radial-gradient(closest-side, rgba(99,102,241,0.6), rgba(99,102,241,0))' }}
           animate={{ x: [0, 60, -40, 0], y: [0, 40, -30, 0] }}
           transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
           aria-hidden
-          className="absolute top-20 -right-40 w-[40rem] h-[40rem] rounded-full opacity-55 blur-3xl"
-          style={{
-            background:
-              'radial-gradient(closest-side, rgba(217,70,239,0.55), rgba(217,70,239,0))',
-          }}
+          className="absolute top-24 -right-40 w-[40rem] h-[40rem] rounded-full opacity-50 blur-3xl"
+          style={{ background: 'radial-gradient(closest-side, rgba(217,70,239,0.5), rgba(217,70,239,0))' }}
           animate={{ x: [0, -50, 30, 0], y: [0, 50, -20, 0] }}
           transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
           aria-hidden
-          className="absolute bottom-0 left-1/4 w-[34rem] h-[34rem] rounded-full opacity-50 blur-3xl"
-          style={{
-            background:
-              'radial-gradient(closest-side, rgba(56,189,248,0.6), rgba(56,189,248,0))',
-          }}
+          className="absolute bottom-0 left-1/4 w-[34rem] h-[34rem] rounded-full opacity-45 blur-3xl"
+          style={{ background: 'radial-gradient(closest-side, rgba(56,189,248,0.55), rgba(56,189,248,0))' }}
           animate={{ x: [0, 40, -30, 0], y: [0, -40, 30, 0] }}
           transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
         />
-        <motion.div
+        {/* Faint dot grid for texture */}
+        <div
           aria-hidden
-          className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[28rem] h-[28rem] rounded-full opacity-40 blur-3xl"
-          style={{
-            background:
-              'radial-gradient(closest-side, rgba(244,114,182,0.45), rgba(244,114,182,0))',
-          }}
-          animate={{ x: [0, -30, 50, 0], y: [0, 30, -40, 0] }}
-          transition={{ duration: 24, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute inset-0 opacity-[0.35]"
+          style={{ backgroundImage: 'radial-gradient(rgba(79,70,229,0.18) 1px, transparent 1px)', backgroundSize: '22px 22px', maskImage: 'radial-gradient(ellipse at 70% 40%, #000 20%, transparent 70%)', WebkitMaskImage: 'radial-gradient(ellipse at 70% 40%, #000 20%, transparent 70%)' }}
         />
-        {/* Soft top sheen */}
-        <div aria-hidden className="absolute inset-x-0 top-0 h-64"
-          style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.55), transparent)' }} />
+        <div aria-hidden className="absolute inset-x-0 top-0 h-64" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.55), transparent)' }} />
       </div>
 
-      {/* Hero Content */}
-      <div className="relative z-20 px-5 sm:px-8 lg:px-16 xl:px-32 2xl:px-48 pt-20 sm:pt-28 lg:pt-32 pb-14 sm:pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-10 lg:gap-12 xl:gap-16 items-center max-w-[1400px] mx-auto">
-
-          {/* Left Content */}
+      <div className="relative z-20 px-5 sm:px-8 lg:px-16 xl:px-24 pt-24 sm:pt-32 lg:pt-36 pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-14 lg:gap-6 items-center max-w-[1320px] mx-auto">
+          {/* Copy */}
           <div className="text-center lg:text-left">
-            {/* Badge */}
             <motion.a
-              href="#features"
+              href="#astro"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               whileHover={{ y: -2 }}
-              className="group inline-flex items-center gap-2 mb-4 sm:mb-6 rounded-full border border-blue-200/70 bg-white/70 backdrop-blur-md px-4 py-1.5 text-sm font-semibold text-blue-700 shadow-sm shadow-blue-900/5 hover:border-blue-300 hover:bg-white transition-colors"
+              className="group inline-flex items-center gap-2 mb-6 rounded-full border border-blue-200/70 bg-white/75 backdrop-blur-md pl-1.5 pr-4 py-1.5 text-sm font-semibold text-blue-800 shadow-sm shadow-blue-900/5 hover:border-blue-300 hover:bg-white transition-colors"
             >
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-              </span>
-              Built specifically for breeders
-              <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
+              <span className="rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs px-2.5 py-1">For breeders</span>
+              <span className="sm:hidden">Now with Astro AI</span>
+              <span className="hidden sm:inline">Now with Astro, your AI kennel assistant</span>
+              <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
             </motion.a>
 
-            {/* Heading */}
-            <h1 ref={headingRef} className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] tracking-tight mb-4 sm:mb-8 font-baloo">
-              <span className="text-gray-900">The All-in-One Platform</span>
-              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent"> Built for</span>
-              <span className="text-gray-900"> Breeders</span>
+            <h1 ref={headingRef} className="text-[2.6rem] sm:text-6xl xl:text-7xl font-bold leading-[1.02] tracking-tight mb-6 font-baloo">
+              <span className="text-gray-900">Run your litter,</span>{' '}
+              <br className="hidden sm:block" />
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">not your inbox.</span>
             </h1>
 
-            {/* Subtitle */}
-            <p ref={subtitleRef} style={{ opacity: 0 }} className="text-base sm:text-xl md:text-2xl text-blue-900/80 mb-6 sm:mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
-              <span className="sm:hidden">Buyer chats, puppy photos, and health records. One app, zero juggling.</span>
-              <span className="hidden sm:inline">Stop juggling Facebook, texts, email, and five other apps. Pawgress brings your buyer conversations, puppy photos, health records, and updates into one place, so you can stay organized and provide a more professional experience for every family.</span>
+            <p ref={subtitleRef} style={{ opacity: 0 }} className="text-lg sm:text-xl md:text-[1.4rem] text-blue-950/75 mb-8 sm:mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
+              Every puppy gets an age-stamped growth timeline and every family gets their own chat. Post one update and it reaches them all, while Astro logs the weigh-ins, files the vet paperwork and drafts your replies.
             </p>
 
-            {/* CTA Buttons */}
             <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start max-w-md mx-auto sm:max-w-none">
-              <motion.div className="w-full sm:w-auto" whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.97 }} transition={{ type: 'spring', stiffness: 350, damping: 22 }}>
+              <motion.div className="w-full sm:w-auto" style={{ opacity: 0 }} whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.97 }} transition={{ type: 'spring', stiffness: 350, damping: 22 }}>
                 <DownloadButton className="relative inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl shadow-blue-600/30 hover:shadow-2xl hover:shadow-blue-600/40 transition-shadow text-center">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                  <svg className="w-5 h-5" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zM275.9 92.1c20.6-24.4 18.8-46.7 18.2-54.7-18.3 1.1-39.5 12.5-51.6 26.5-13.3 15-21.1 33.6-19.4 54.3 19.8 1.5 37.9-8.7 52.8-26.1z" /></svg>
                   Download the App
                 </DownloadButton>
               </motion.div>
               <motion.a
                 href="/for-breeders"
+                style={{ opacity: 0 }}
                 whileHover={{ y: -3, scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: 'spring', stiffness: 350, damping: 22 }}
-                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 border-2 border-blue-700/30 bg-white/60 backdrop-blur-md text-blue-800 px-8 py-4 rounded-full hover:bg-white hover:border-blue-700/60 transition-colors font-semibold text-lg text-center"
+                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 border-2 border-blue-700/25 bg-white/70 backdrop-blur-md text-blue-800 px-8 py-4 rounded-full hover:bg-white hover:border-blue-700/50 transition-colors font-semibold text-lg text-center"
               >
-                See How It Works
+                See how it works
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
               </motion.a>
             </div>
+
+            {/* Product facts, not vanity stats */}
+            <div className="mt-10 grid grid-cols-3 gap-2 sm:gap-3 max-w-xl mx-auto lg:mx-0">
+              {PROOF.map((p, i) => (
+                <motion.div
+                  key={p.title}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.1 + i * 0.12, duration: 0.5 }}
+                  className="rounded-2xl border border-white/80 bg-white/55 backdrop-blur-md px-3 py-3 text-left shadow-sm"
+                >
+                  <div className="text-lg leading-none">{p.icon}</div>
+                  <div className="mt-1.5 text-sm sm:text-base font-bold text-gray-900 leading-tight">{p.title}</div>
+                  <div className="text-[11px] sm:text-xs text-gray-500 leading-snug font-inter">{p.sub}</div>
+                </motion.div>
+              ))}
+            </div>
           </div>
 
-          {/* Right Content - Dog Image */}
-          <div className="order-first lg:order-2 flex justify-center lg:justify-end -mb-2 sm:mb-0">
-            <div className="relative w-full max-w-[175px] sm:max-w-sm lg:max-w-lg">
-              {/* Soft gradient halo behind dog */}
-              <motion.div
-                aria-hidden
-                className="absolute inset-0 -z-0 rounded-[40%] blur-3xl"
-                style={{
-                  background:
-                    'radial-gradient(closest-side, rgba(99,102,241,0.45), rgba(99,102,241,0) 70%)',
-                }}
-                animate={{ scale: [1, 1.08, 1], opacity: [0.7, 0.95, 0.7] }}
-                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              />
-              {/* Decorative paw print behind dog */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full z-0 pointer-events-none">
-                <div ref={pawSvgRef} className="w-full h-full opacity-40 will-change-transform">
-                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                  <defs>
-                    <linearGradient id="pawGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" style={{ stopColor: 'rgb(37, 99, 235)', stopOpacity: 1 }} />
-                      <stop offset="50%" style={{ stopColor: 'rgb(29, 78, 216)', stopOpacity: 1 }} />
-                      <stop offset="100%" style={{ stopColor: 'rgb(30, 64, 175)', stopOpacity: 1 }} />
-                    </linearGradient>
-                  </defs>
-                  <path fill="url(#pawGradient)" d="M226.5 92.9c14.3 42.9-.3 86.2-32.6 96.8s-70.1-15.6-84.4-58.5s.3-86.2 32.6-96.8s70.1 15.6 84.4 58.5zM100.4 198.6c18.9 32.4 14.3 70.1-10.2 84.1s-59.7-.9-78.5-33.3S-2.7 179.3 21.8 165.3s59.7 .9 78.5 33.3zM69.2 401.2C121.6 259.9 214.7 224 256 224s134.4 35.9 186.8 177.2c3.6 9.7 5.2 20.1 5.2 30.5v1.6c0 25.8-20.9 46.7-46.7 46.7c-11.5 0-22.9-1.4-34-4.2l-88-22c-15.3-3.8-31.3-3.8-46.6 0l-88 22c-11.1 2.8-22.5 4.2-34 4.2C84.9 480 64 459.1 64 433.3v-1.6c0-10.4 1.6-20.8 5.2-30.5zM421.8 282.7c-24.5-14-29.1-51.7-10.2-84.1s54-47.3 78.5-33.3s29.1 51.7 10.2 84.1s-54 47.3-78.5 33.3zM310.1 189.7c-32.3-10.6-46.9-53.9-32.6-96.8s52.1-69.1 84.4-58.5s46.9 53.9 32.6 96.8s-52.1 69.1-84.4 58.5z" />
-                </svg>
-                </div>
-              </div>
-              <img
-                ref={dogImgRef}
-                src="https://pyv.hmu.temporary.site/wp-content/uploads/2026/01/front-view-cute-dog-costume-1-980x1468.png"
-                alt="Cute dog in costume"
-                style={{ opacity: 0 }}
-                className="w-full h-auto object-contain relative z-10"
-              />
+          {/* Live app composition */}
+          <div ref={stageRef} onMouseMove={onMove} onMouseLeave={onLeave} className="relative h-[600px] sm:h-[660px] lg:h-[690px]">
+            {/* Halo + paw */}
+            <motion.div
+              aria-hidden
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] rounded-full blur-3xl"
+              style={{ background: 'radial-gradient(closest-side, rgba(99,102,241,0.4), rgba(99,102,241,0))' }}
+              animate={{ scale: [1, 1.08, 1], opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+            />
+
+            {/* Back phone: the litter */}
+            {/* Layers: position (CSS) → parallax (style) → entrance (animate) */}
+            <div className="absolute left-1/2 top-6 hidden sm:block -translate-x-[92%]">
+              <motion.div style={{ x: backX, y: backY }}>
+                <motion.div
+                  initial={{ opacity: 0, rotate: -14, y: 60 }}
+                  animate={{ opacity: 1, rotate: -8, y: 0 }}
+                  transition={{ type: 'spring', stiffness: 70, damping: 16, delay: 0.35 }}
+                >
+                  <PetProfilesScreen width={250} />
+                </motion.div>
+              </motion.div>
             </div>
+
+            {/* Front phone: breeder home */}
+            <div className="absolute left-1/2 top-0 sm:top-12 z-10 -translate-x-1/2 sm:-translate-x-[28%]">
+              <motion.div style={{ x: frontX, y: frontY }}>
+                <motion.div
+                  initial={{ opacity: 0, rotate: 8, y: 90 }}
+                  animate={{ opacity: 1, rotate: 3, y: 0 }}
+                  transition={{ type: 'spring', stiffness: 70, damping: 15, delay: 0.15 }}
+                >
+                  <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}>
+                    <BreederHomeScreen width={270} />
+                  </motion.div>
+                </motion.div>
+              </motion.div>
+            </div>
+
+            {/* Floating proof chips */}
+            <motion.div
+              style={{ x: chipX }}
+              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 1.2, type: 'spring', stiffness: 220, damping: 18 }}
+              className="absolute z-20 left-0 sm:-left-2 lg:-left-10 top-[58%] flex items-center gap-3 rounded-2xl bg-white/95 backdrop-blur px-3.5 py-2.5 shadow-2xl shadow-indigo-900/15 border border-white"
+            >
+              <div className="flex -space-x-2">
+                {[IMG.oakley, IMG.pumpkin, IMG.murphy, IMG.maple].map((s) => (
+                  <Photo key={s} src={s} className="w-8 h-8 rounded-full border-2 border-white" />
+                ))}
+              </div>
+              <div className="font-inter">
+                <div className="text-[10px] text-gray-400 font-medium leading-tight">Bath day update sent</div>
+                <div className="text-sm font-bold text-gray-900 leading-tight">4 families · 1 post</div>
+              </div>
+              <span className="w-6 h-6 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center">✓</span>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: [0, -6, 0] }}
+              transition={{ opacity: { delay: 1.45 }, scale: { delay: 1.45, type: 'spring', stiffness: 220, damping: 18 }, y: { duration: 3.6, repeat: Infinity, ease: 'easeInOut', delay: 2 } }}
+              className="absolute z-20 right-0 sm:right-4 lg:-right-2 top-28 sm:top-40 flex items-center gap-2.5 rounded-2xl bg-white/95 backdrop-blur px-3.5 py-2.5 shadow-2xl shadow-indigo-900/15 border border-white font-inter"
+            >
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white">
+                <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round"><path d="m3 17 6-6 4 4 8-8" /><path d="M15 7h6v6" /></svg>
+              </div>
+              <div>
+                <div className="text-[10px] text-gray-400 font-medium leading-tight flex items-center gap-1"><CollarDot collar="red" size={8} ring={false} /> Oakley · 7 weeks</div>
+                <div className="text-sm font-bold text-gray-900 leading-tight">6.4 lbs <span className="text-emerald-600">+0.9</span></div>
+              </div>
+            </motion.div>
+
+            {/* Astro flies in and points the way to his section */}
+            <motion.a
+              href="#astro"
+              aria-label="Meet Astro, the AI kennel assistant"
+              initial={{ opacity: 0, x: 120, y: -80, rotate: 10 }}
+              animate={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
+              transition={{ delay: 1.7, type: 'spring', stiffness: 60, damping: 14 }}
+              className="group absolute z-30 -right-1 sm:-right-6 lg:-right-14 -bottom-8 sm:-bottom-10 flex flex-col items-end"
+            >
+              <span className="-mb-2 mr-2 rounded-2xl rounded-br-sm bg-gray-900 text-white text-xs sm:text-sm font-semibold font-inter px-3 py-2 shadow-xl whitespace-nowrap group-hover:bg-indigo-600 transition-colors">
+                I can do the weigh-ins ✨
+              </span>
+              <AstroArt pose="jetpack" flame className="w-24 sm:w-32" />
+            </motion.a>
           </div>
         </div>
       </div>
 
-      {/* Wave cutoff at bottom */}
+      {/* Wave cutoff */}
       <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none">
         <svg className="relative block w-full h-16 sm:h-20 md:h-24" viewBox="0 0 1200 120" preserveAspectRatio="none" style={{ transform: 'rotate(180deg)' }}>
           <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#ffffff"></path>
         </svg>
       </div>
-      
     </section>
   );
 }
