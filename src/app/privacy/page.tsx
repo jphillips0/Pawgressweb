@@ -3,7 +3,7 @@ import Link from 'next/link';
 import SharedNav from '@/components/SharedNav';
 import { Baloo_2 } from 'next/font/google';
 import { PageTransition, RevealGroup } from '@/components/motion';
-import { H3, List, Mail, P, Ph, Section } from '@/components/legal/LegalBlocks';
+import { H3, List, Mail, P, Section } from '@/components/legal/LegalBlocks';
 
 const baloo = Baloo_2({
   subsets: ['latin'],
@@ -33,7 +33,7 @@ export default function PrivacyPolicy() {
             Privacy Policy
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-gray-600">
-            Last Updated: October 25, 2026
+            Last Updated: October 26, 2026
           </p>
         </PageTransition>
       </div>
@@ -46,7 +46,7 @@ export default function PrivacyPolicy() {
           {/* Introduction */}
           <div className="mb-8 sm:mb-12 p-6 sm:p-8 bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl border border-purple-100">
             <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed mb-4">
-              Pawgress is operated by <strong className="text-purple-600">Timelines, LLC</strong>, a <Ph>[STATE OF FORMATION]</Ph> limited liability company doing business as Pawgress (“Pawgress,” “we,” “our,” “us”). This Privacy Policy explains what information we collect when you use the Pawgress app for iOS and Android and our website, pawgressapp.com, how we use it, who we share it with, and the choices you have.
+              Pawgress is operated by <strong className="text-purple-600">Timelines, LLC</strong>, a Virginia limited liability company doing business as Pawgress (“Pawgress,” “we,” “our,” “us”). This Privacy Policy explains what information we collect when you use the Pawgress app for iOS and Android and our website, pawgressapp.com, how we use it, who we share it with, and the choices you have.
             </p>
             <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed">
               The short version: we use your information to run Pawgress. We do not sell your personal information, and we do not show ads. Pawgress is for adults 18 and older. This policy works together with our <Link href="/terms" className="text-purple-600 hover:text-purple-700 font-semibold">Terms of Service</Link>.
@@ -96,18 +96,13 @@ export default function PrivacyPolicy() {
             <List accent={a} items={['Reviews you write, and the pets and profiles you swipe on, like, bookmark, or follow', 'Inquiries you send about public pet listings']} />
 
             <H3>Location (only with your permission)</H3>
-            <P>If you allow it, we use your device’s GPS at an accuracy of roughly 100 meters to show pets and litters near you. You can turn this off at any time in your device settings, and Pawgress still works without it. <Ph>[CONFIRM: whether we store this location, and if so, for how long]</Ph></P>
+            <P>If you allow it, we use your device’s GPS at an accuracy of roughly 100 meters to show pets and litters near you. You can turn this off at any time in your device settings, and Pawgress still works without it. We save the location you use for your profile and for search (map coordinates plus city and state) until you change it or delete your account. A breeder’s or shelter’s city and state show on their public profile; the exact coordinates are never shown.</P>
 
             <H3>Microphone (only with your permission)</H3>
-            <P>If you allow it, we record audio while you hold the talk button to speak to Astro, our AI assistant. The audio clip is sent to OpenAI to be turned into text (see Section 4). <Ph>[CONFIRM: whether we store voice clips after transcription]</Ph></P>
+            <P>If you allow it, we record audio while you hold the talk button to speak to Astro, our AI assistant. The audio clip is sent to OpenAI to be turned into text (see Section 4). We don’t store the audio. Only the transcribed text is kept, in your conversation with Astro.</P>
 
             <H3>Notifications</H3>
             <List accent={a} items={['A push notification token for your device, so we can send you alerts you’ve allowed']} />
-
-            <H3>Subscriptions and purchases</H3>
-            <List accent={a} items={[
-              <>Your subscription status, plan, and renewal dates, from <Ph>[APPLE / GOOGLE IN-APP PURCHASE, STRIPE ON THE WEB, OR BOTH]</Ph>. We do not receive or store your full card number.</>,
-            ]} />
 
             <H3>Device and diagnostic information</H3>
             <List accent={a} items={[
@@ -131,7 +126,6 @@ export default function PrivacyPolicy() {
               'provide the AI features you choose to use (see Section 4)',
               'show nearby pets and litters, if you allow location',
               'send notifications you have allowed',
-              'manage subscriptions',
               'keep Pawgress safe: review reports, block abuse, prevent fraud, and enforce our Terms of Service',
               'find and fix bugs and crashes, and understand how Pawgress is used so we can improve it',
               'answer your questions and support requests',
@@ -156,7 +150,7 @@ export default function PrivacyPolicy() {
               'Updates sent to a family, visible in that family’s chat and the pet’s timeline',
               'Medical records, photos of vet paperwork, and the pet health profile, visible to the pet’s owner and the linked family',
               'Puppy application answers, visible to you and the breeder you applied to',
-              'Your email address, phone number, and location',
+              'Your email address, phone number, and exact location coordinates',
             ]} />
             <P>Please think before you post something publicly. Once content is public, others may have seen, saved, or shared it.</P>
           </Section>
@@ -179,14 +173,14 @@ export default function PrivacyPolicy() {
             <P>Collar recognition matches the puppies in your photos and videos by the color of their collars, so an update reaches the right families.</P>
             <List accent={a} items={[
               <>Photos are sent to <strong>OpenAI</strong> to identify collar colors.</>,
-              <>Frames from videos are sent to <strong>Google Gemini</strong> to identify collar colors.</>,
+              <>Frames from videos are sent to <strong>another AI service provider</strong> to identify collar colors.</>,
             ]} />
 
             <H3>How these providers use your data</H3>
-            <P>We send this data only to provide the feature you are using. How long the providers keep it, and whether they may use it to train their models, is set by their terms:</P>
+            <P>We send this data only to provide the feature you are using.</P>
             <List accent={a} items={[
-              <>OpenAI: <Ph>[OPENAI RETENTION PERIOD AND TRAINING TERMS]</Ph></>,
-              <>Google Gemini: <Ph>[GOOGLE GEMINI RETENTION PERIOD AND TRAINING TERMS]</Ph></>,
+              <><strong>OpenAI:</strong> under OpenAI’s API terms, data we send isn’t used to train OpenAI’s models. OpenAI may keep it for up to 30 days to check for abuse, then deletes it.</>,
+              <><strong>Another AI service provider:</strong> only video frames are sent, never your name, account or messages. The provider may keep them for a limited time and, depending on its terms, use them to improve its services.</>,
             ]} />
             <P>AI can make mistakes. Astro’s answers, records read from photos, collar matches, and drafted messages may be wrong and are not veterinary advice. Please check them before you save or send anything. Our Terms of Service say more about this.</P>
           </Section>
@@ -197,12 +191,11 @@ export default function PrivacyPolicy() {
               <><strong>Supabase</strong>: our database, sign-in system, and file storage. It holds your account, profile, pets, records, photos, videos, and other app data.</>,
               <><strong>Stream</strong>: chat. It receives chat messages, reactions, and the photos and videos sent in chat.</>,
               <><strong>OpenAI</strong>: Astro and collar recognition, as described in Section 4.</>,
-              <><strong>Google Gemini</strong>: video frames for collar recognition, as described in Section 4.</>,
+              <><strong>Another AI service provider</strong>: video frames for collar recognition, as described in Section 4.</>,
               <><strong>PostHog</strong>: product analytics, such as which screens and features are used.</>,
               <><strong>Sentry</strong>: crash and error reports, linked to your user ID and account type so we can fix problems.</>,
               <><strong>Apple and Google</strong>: Sign in with Apple, Google Sign-In, and push notifications.</>,
               <><strong>Vercel</strong>: hosting for our website.</>,
-              <><strong><Ph>[APPLE / GOOGLE / STRIPE]</Ph></strong>: subscription purchases and billing.</>,
             ]} />
             <P>We may also share information:</P>
             <List accent={a} marker="muted" items={[
@@ -216,6 +209,7 @@ export default function PrivacyPolicy() {
 
           <Section accent={a} icon="🚫" title="6. No Selling and No Ads">
             <P strong>We do not sell your personal information. We do not share it for cross-context behavioral advertising, and we do not show ads in Pawgress.</P>
+            <P>Pawgress is free today. If we add paid plans, we’ll update this policy first.</P>
           </Section>
 
           <Section accent={a} id="delete-account" icon="🗑️" title="7. Deleting Your Account">
@@ -230,7 +224,7 @@ export default function PrivacyPolicy() {
             <P>Email <Mail accent={a} /> from the address on your account with the subject “Delete my account.” We may ask you to confirm the request. We complete email requests within 30 days.</P>
 
             <H3>What is deleted</H3>
-            <P>Your account, profile, and the pets, posts, photos, videos, records, and other content stored in your account are deleted from our live systems within 30 days. Copies in backups are removed as backups expire, within <Ph>[BACKUP RETENTION PERIOD]</Ph>.</P>
+            <P>Your account, profile, and the pets, posts, photos, videos, records, and other content stored in your account are deleted from our live systems within 30 days. Copies in backups are removed as backups expire, within 30 days.</P>
 
             <H3>What stays with other people</H3>
             <P>Deleting your account doesn’t pull back things you already shared with other people:</P>
@@ -253,13 +247,13 @@ export default function PrivacyPolicy() {
             <List accent={a} items={[
               <><strong>Account, profile, pets, posts, media, and records:</strong> until you delete them or your account, then removed within 30 days (subject to the shared-content rules in Section 7)</>,
               <><strong>Chat messages:</strong> until the conversation or your account is deleted. Copies delivered to others stay with them.</>,
-              <><strong>Puppy applications:</strong> until the breeder or the applicant deletes their account <Ph>[CONFIRM]</Ph></>,
-              <><strong>Location:</strong> <Ph>[CONFIRM: not stored / stored for X]</Ph></>,
-              <><strong>Voice clips:</strong> <Ph>[CONFIRM: not stored after transcription / stored for X]</Ph></>,
+              <><strong>Puppy applications:</strong> until the breeder or the applicant deletes their account</>,
+              <><strong>Location:</strong> until you change it or delete your account</>,
+              <><strong>Voice clips:</strong> not stored; only the transcribed text is kept</>,
               <><strong>Push tokens:</strong> until you sign out, turn off notifications, or delete your account</>,
-              <><strong>Crash reports (Sentry):</strong> up to <Ph>[SENTRY RETENTION, e.g. 90 days]</Ph></>,
-              <><strong>Analytics (PostHog):</strong> up to <Ph>[POSTHOG RETENTION]</Ph></>,
-              <><strong>Backups:</strong> up to <Ph>[BACKUP RETENTION PERIOD]</Ph></>,
+              <><strong>Crash reports (Sentry):</strong> up to 90 days</>,
+              <><strong>Analytics (PostHog):</strong> up to 1 year</>,
+              <><strong>Backups:</strong> up to 30 days</>,
               <><strong>Purchase records:</strong> as long as tax and accounting law requires</>,
             ]} />
             <P>We may keep information longer if the law requires it or if it’s needed for an active dispute or investigation.</P>
@@ -289,14 +283,13 @@ export default function PrivacyPolicy() {
               <><strong>No discrimination:</strong> we won’t treat you differently for using any of these rights</>,
             ]} />
             <H3>What we collect, in legal terms</H3>
-            <P>In the past 12 months we have collected these categories of personal information, all for the purposes in Section 2: identifiers (name, email, phone, account IDs, IP address); customer records; commercial information (subscriptions); internet or app activity (usage analytics, crash reports); geolocation (if you allow it); audio (hold-to-talk, if you allow it); photos and videos; and content of messages and applications. We get this information from you, your device, and other users (for example, when a breeder adds a pet you’ve reserved). We disclosed these categories to the service providers in Section 5 for business purposes. We have not sold or shared personal information.</P>
+            <P>In the past 12 months we have collected these categories of personal information, all for the purposes in Section 2: identifiers (name, email, phone, account IDs, IP address); customer records; internet or app activity (usage analytics, crash reports); geolocation (if you allow it); audio (hold-to-talk, if you allow it); photos and videos; and content of messages and applications. We get this information from you, your device, and other users (for example, when a breeder adds a pet you’ve reserved). We disclosed these categories to the service providers in Section 5 for business purposes. We have not sold or shared personal information.</P>
             <P>Some of this is “sensitive personal information” under certain state laws: your account login, your precise location (if you allow location), and some puppy application answers about your household. We use it only to provide Pawgress, not to infer things about you.</P>
             <H3>How to make a request</H3>
             <P>Email <Mail accent={a} /> or use the in-app options. We will confirm your identity by matching your request to the email on your account, and respond within 45 days (we’ll tell you if we need up to 45 more). You can use an authorized agent if you give them signed permission. If we deny your request, you can appeal by replying with “Appeal” in the subject line. We will respond within 60 days, and if you’re not satisfied you can contact your state attorney general.</P>
           </Section>
 
           <Section accent={a} icon="🇪🇺" title="12. Users in the EU and UK">
-            <P><Ph>[IF WE DO NOT ACCEPT USERS IN THE EU, EEA, OR UK, DELETE THIS SECTION]</Ph></P>
             <P>If you are in the European Economic Area or the United Kingdom, Timelines, LLC is the controller of your personal information.</P>
             <H3>Legal bases</H3>
             <List accent={a} items={[
@@ -309,11 +302,10 @@ export default function PrivacyPolicy() {
             <P>You have the right to access, correct, delete, restrict, or move your information, and to object to processing based on legitimate interests. You can also complain to your local data protection authority (in the UK, the Information Commissioner’s Office).</P>
             <H3>International transfers</H3>
             <P>Pawgress is based in the United States, and your information is processed there. When we transfer information from the EEA or UK, we rely on the European Commission’s Standard Contractual Clauses (with the UK Addendum), or on the EU-U.S. Data Privacy Framework where a provider is certified.</P>
-            <P>EU representative: <Ph>[EU REPRESENTATIVE, IF REQUIRED]</Ph>. UK representative: <Ph>[UK REPRESENTATIVE, IF REQUIRED]</Ph>.</P>
           </Section>
 
           <Section accent={a} icon="🍪" title="13. Cookies, Do Not Track, and Global Privacy Control">
-            <P>Our website uses cookies and similar storage only where needed to work, for example to keep you signed in while you reset your password. <Ph>[CONFIRM: whether PostHog or other analytics run on the website]</Ph> We do not use advertising cookies.</P>
+            <P>Our website uses cookies and similar storage only where needed to work, for example to keep you signed in while you reset your password. We don’t run analytics on our website, and we do not use advertising cookies.</P>
             <P><strong>Do Not Track:</strong> there is no common standard for Do Not Track signals, so our website doesn’t respond to them. We don’t track you across other companies’ websites or apps.</P>
             <P><strong>Global Privacy Control:</strong> we treat a Global Privacy Control signal as a request to opt out of the sale or sharing of your information. We don’t sell or share it in the first place.</P>
           </Section>
@@ -331,7 +323,7 @@ export default function PrivacyPolicy() {
             <P>
               <strong>Timelines, LLC</strong> (doing business as Pawgress)
               <br />
-              <Ph>[MAILING ADDRESS]</Ph>
+              11345 Stonehouse Place, Potomac Falls, VA 20165
             </P>
             <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-full">
               <span className="text-lg">✉️</span>

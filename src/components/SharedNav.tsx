@@ -74,13 +74,13 @@ export default function SharedNav() {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 px-2.5 sm:px-5 lg:px-8 transition-all duration-500 ${baloo.className} ${
-        isScrolled
-          ? 'pt-[calc(8px+env(safe-area-inset-top))] sm:pt-[calc(12px+env(safe-area-inset-top))]'
-          : 'pt-[calc(10px+env(safe-area-inset-top))] sm:pt-[calc(16px+env(safe-area-inset-top))]'
+      className={`fixed left-0 right-0 z-50 px-2.5 sm:px-5 lg:px-8 transition-all duration-500 ${baloo.className} ${
+        isScrolled ? 'pt-2 sm:pt-3' : 'pt-2.5 sm:pt-4'
       }`}
-      // The nav strip itself is see-through; only the glass pill inside it is visible.
-      style={{ background: 'transparent', pointerEvents: 'none' }}
+      // Starts below the iPhone status bar rather than at the screen edge: iOS Safari
+      // tints its status-bar area from fixed elements that touch the top edge. The strip
+      // is see-through and click-through; only the glass pill inside it is visible.
+      style={{ top: 'env(safe-area-inset-top)', background: 'transparent', pointerEvents: 'none' }}
     >
       {/* Liquid glass pill: translucent, blurred and saturated, with a specular top edge */}
       <div

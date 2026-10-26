@@ -3,7 +3,7 @@ import Link from 'next/link';
 import SharedNav from '@/components/SharedNav';
 import { Baloo_2 } from 'next/font/google';
 import { PageTransition, RevealGroup } from '@/components/motion';
-import { Callout, Caps, H3, List, Mail, P, Ph, Section } from '@/components/legal/LegalBlocks';
+import { Callout, Caps, H3, List, Mail, P, Section } from '@/components/legal/LegalBlocks';
 
 const baloo = Baloo_2({
   subsets: ['latin'],
@@ -37,7 +37,7 @@ export default function TermsOfService() {
             Terms of Service
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-gray-600">
-            Last Updated: October 25, 2026
+            Last Updated: October 26, 2026
           </p>
         </PageTransition>
       </div>
@@ -50,7 +50,7 @@ export default function TermsOfService() {
           {/* Introduction */}
           <div className="mb-8 sm:mb-12 p-6 sm:p-8 bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl border border-blue-100">
             <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed mb-4">
-              These Terms of Service (“Terms”) are an agreement between you and <strong className="text-blue-600">Timelines, LLC</strong>, a <Ph>[STATE OF FORMATION]</Ph> limited liability company doing business as <strong className="text-blue-600">Pawgress</strong> (“Pawgress,” “we,” “our,” or “us”). They cover the Pawgress app for iOS and Android and our website, pawgressapp.com (together, the “Service”). By creating an account or using the Service, you agree to these Terms and to our {privacyLink()}. If you don’t agree, please don’t use Pawgress.
+              These Terms of Service (“Terms”) are an agreement between you and <strong className="text-blue-600">Timelines, LLC</strong>, a Virginia limited liability company doing business as <strong className="text-blue-600">Pawgress</strong> (“Pawgress,” “we,” “our,” or “us”). They cover the Pawgress app for iOS and Android and our website, pawgressapp.com (together, the “Service”). By creating an account or using the Service, you agree to these Terms and to our {privacyLink()}. If you don’t agree, please don’t use Pawgress.
             </p>
             <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed font-semibold">
               Please read Section 20 carefully. It requires most disputes to be settled by binding individual arbitration instead of in court, and it waives class actions and jury trials. You can opt out within 30 days.
@@ -121,7 +121,7 @@ export default function TermsOfService() {
               'other people’s private information without their permission',
             ]} />
             <H3>Reporting and blocking</H3>
-            <P>You can report any profile, listing, post, review, or message in the app, and you can block any user so they can no longer contact you. We review reports and act on them <Ph>[within 24 hours]</Ph>: we remove content that breaks these rules and ban the users who post it. We may also remove content or suspend accounts on our own when we believe it’s needed to protect users or animals.</P>
+            <P>You can report any profile, listing, post, review, message or user from within the app, and you can block any user so they can no longer contact you. You can also email <Mail accent={a} /> with a link or screenshot. We review reports within 24 hours: we remove content that breaks these rules and ban the users who post it. We may also remove content or suspend accounts on our own when we believe it’s needed to protect users or animals.</P>
           </Section>
 
           <Section accent={a} icon="⚠️" title="7. Acceptable Use">
@@ -153,15 +153,8 @@ export default function TermsOfService() {
             <P>You are responsible for anything you save or send. For a medical concern or emergency, contact a veterinarian. To provide these features, we send some of your data to OpenAI and Google, as described in Section 4 of our {privacyLink()}. AI features may have daily usage limits.</P>
           </Section>
 
-          <Section accent={a} icon="💳" title="10. Subscriptions and Payments">
-            <P>Some features require a paid subscription, sold through <Ph>[APPLE / GOOGLE IN-APP PURCHASE, STRIPE ON THE WEB, OR BOTH]</Ph>. The price and billing period are shown before you buy.</P>
-            <List accent={a} items={[
-              <><strong>Auto-renewal:</strong> subscriptions renew automatically at the end of each period at the then-current price, unless you cancel at least 24 hours before the period ends.</>,
-              <><strong>How to cancel:</strong> on iPhone, go to Settings › your name › Subscriptions. On Android, open Google Play › Payments &amp; subscriptions › Subscriptions. For web subscriptions, <Ph>[HOW TO CANCEL A WEB SUBSCRIPTION]</Ph>. Deleting the app or your account does not cancel a subscription bought through Apple or Google.</>,
-              <><strong>Free trials:</strong> a free trial becomes a paid subscription when it ends, unless you cancel at least 24 hours before it ends. Any unused part of a trial ends when you buy a subscription.</>,
-              <><strong>Price changes:</strong> we will tell you about price changes in advance, as the app stores and the law require.</>,
-              <><strong>Refunds:</strong> refunds for purchases made through the App Store or Google Play are handled by Apple or Google under their refund policies; we can’t issue them. For web purchases, <Ph>[WEB REFUND POLICY]</Ph>, except where the law requires otherwise.</>,
-            ]} />
+          <Section accent={a} icon="💳" title="10. Pricing">
+            <P>Pawgress is free today and we don’t charge for any feature. If we add paid plans, the price and how to cancel will be shown before you buy, and we’ll update these Terms first.</P>
           </Section>
 
           <Section accent={a} icon="📱" title="11. App Store Terms">
@@ -174,7 +167,7 @@ export default function TermsOfService() {
               'We, not Apple, are responsible for any claims about the app, including product liability claims, claims that the app fails to meet a legal or regulatory requirement, and consumer protection and privacy claims.',
               'If anyone claims the app infringes their intellectual property, we, not Apple, are responsible for investigating, defending, settling, and resolving that claim.',
               'You confirm you are not in a country subject to a U.S. Government embargo or designated as “terrorist supporting,” and you are not on any U.S. Government list of prohibited or restricted parties.',
-              <>Questions, complaints, or claims about the app go to Timelines, LLC, <Ph>[MAILING ADDRESS]</Ph>, <Mail accent={a} />.</>,
+              <>Questions, complaints, or claims about the app go to Timelines, LLC, 11345 Stonehouse Place, Potomac Falls, VA 20165, <Mail accent={a} />.</>,
               'You must follow any third-party terms that apply when you use the app, such as your wireless data agreement.',
               'Apple and its subsidiaries are third-party beneficiaries of these Terms. Once you accept them, Apple may enforce them against you.',
             ]} />
@@ -201,7 +194,7 @@ export default function TermsOfService() {
               'a statement, under penalty of perjury, that your notice is accurate and that you are the owner or authorized to act for the owner',
             ]} />
             <P>
-              Copyright agent: <Ph>[COPYRIGHT AGENT NAME]</Ph>, Timelines, LLC, <Ph>[COPYRIGHT AGENT ADDRESS]</Ph>, <Mail accent={a} />
+              Copyright agent: Timelines, LLC, Attn: Copyright Agent, 11345 Stonehouse Place, Potomac Falls, VA 20165, <Mail accent={a} />
             </P>
             <P>If your content was removed and you believe it was a mistake, you can send a counter-notice to the same agent. We terminate the accounts of repeat infringers. Knowingly making a false claim can make you liable for damages.</P>
           </Section>
@@ -247,7 +240,7 @@ export default function TermsOfService() {
             <H3>Try to resolve it informally first</H3>
             <P>Before starting arbitration or a lawsuit, email <Mail accent={a} /> with a description of the dispute. We will both try in good faith to resolve it within 60 days.</P>
             <H3>Binding arbitration</H3>
-            <P>If we can’t resolve it, any dispute arising out of or relating to these Terms or the Service will be resolved by binding individual arbitration administered by <Ph>[ARBITRATION PROVIDER]</Ph> under its consumer arbitration rules. The Federal Arbitration Act governs this section. The arbitrator decides all questions about whether a dispute must be arbitrated. Hearings may be held by phone or video, or in the county where you live. Fees are paid as the provider’s consumer rules require.</P>
+            <P>If we can’t resolve it, any dispute arising out of or relating to these Terms or the Service will be resolved by binding individual arbitration administered by the American Arbitration Association (AAA) under its Consumer Arbitration Rules. The Federal Arbitration Act governs this section. The arbitrator decides all questions about whether a dispute must be arbitrated. Hearings may be held by phone or video, or in the county where you live. Fees are paid as the provider’s consumer rules require.</P>
             <H3>Exceptions</H3>
             <List accent={a} items={[
               'Either of us may bring an individual claim in small claims court if it qualifies.',
@@ -259,7 +252,7 @@ export default function TermsOfService() {
             <H3>Opting out</H3>
             <P>You can opt out of arbitration by emailing <Mail accent={a} /> within 30 days of first accepting these Terms. Include your name, the email on your account, and a statement that you opt out of arbitration. Opting out doesn’t affect anything else in these Terms. If we make a material change to this section, you can reject the change by emailing us within 30 days of it taking effect.</P>
             <H3>Governing law and venue</H3>
-            <P>These Terms are governed by the laws of <Ph>[GOVERNING-LAW STATE]</Ph>, without regard to its conflict-of-law rules, except that the Federal Arbitration Act governs this section. Any claim not subject to arbitration must be brought in the state or federal courts located in <Ph>[COUNTY]</Ph>, <Ph>[STATE]</Ph>, and you and we consent to those courts’ jurisdiction.</P>
+            <P>These Terms are governed by the laws of the Commonwealth of Virginia, without regard to its conflict-of-law rules, except that the Federal Arbitration Act governs this section. Any claim not subject to arbitration must be brought in the state or federal courts located in Virginia, and you and we consent to those courts’ jurisdiction.</P>
           </Section>
 
           <Section accent={a} icon="📜" title="21. General Terms">
@@ -282,7 +275,7 @@ export default function TermsOfService() {
             <P>
               <strong>Timelines, LLC</strong> (doing business as Pawgress)
               <br />
-              <Ph>[MAILING ADDRESS]</Ph>
+              11345 Stonehouse Place, Potomac Falls, VA 20165
             </P>
             <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-full">
               <span className="text-lg">✉️</span>

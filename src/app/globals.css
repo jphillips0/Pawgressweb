@@ -61,6 +61,9 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
+  /* iOS Safari fills the status-bar and toolbar areas with the root background.
+     Match the top of the hero (instead of white) so no solid bands show. */
+  background-color: #eceffd;
 }
 
 body {
