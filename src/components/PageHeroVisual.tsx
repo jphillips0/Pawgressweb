@@ -28,8 +28,7 @@ const EVENTS: Record<Variant, Event[]> = {
   ],
 };
 
-const STATIC_CHIP: Record<Variant, Event> = {
-  breeder: { icon: '⏱', label: 'Astro saved you', value: '2.7 hrs this week', tint: 'from-amber-300 to-orange-400' },
+const STATIC_CHIP: Partial<Record<Variant, Event>> = {
   buyer: { icon: '❤', label: 'Following', value: 'Oakley’s timeline', tint: 'from-pink-400 to-rose-500' },
 };
 
@@ -125,14 +124,16 @@ export default function PageHeroVisual({ variant }: { variant: Variant }) {
       </motion.div>
 
       {/* Static chip: its own row below the phones, right side */}
-      <motion.div
-        className="absolute z-20 right-2 sm:right-6 bottom-0"
-        initial={{ opacity: 0, x: 24 }}
-        animate={{ opacity: 1, x: 0, y: [0, -6, 0] }}
-        transition={{ opacity: { delay: 1.2 }, x: { delay: 1.2, type: 'spring', stiffness: 200, damping: 18 }, y: { duration: 3.6, repeat: Infinity, ease: 'easeInOut', delay: 2 } }}
-      >
-        <Chip e={STATIC_CHIP[variant]} />
-      </motion.div>
+      {STATIC_CHIP[variant] && (
+        <motion.div
+          className="absolute z-20 right-2 sm:right-6 bottom-0"
+          initial={{ opacity: 0, x: 24 }}
+          animate={{ opacity: 1, x: 0, y: [0, -6, 0] }}
+          transition={{ opacity: { delay: 1.2 }, x: { delay: 1.2, type: 'spring', stiffness: 200, damping: 18 }, y: { duration: 3.6, repeat: Infinity, ease: 'easeInOut', delay: 2 } }}
+        >
+          <Chip e={STATIC_CHIP[variant]!} />
+        </motion.div>
+      )}
 
       {/* Astro: bottom row, left side, clear of the phones */}
       <motion.div
