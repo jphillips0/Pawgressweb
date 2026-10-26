@@ -3,6 +3,7 @@
 import { Baloo_2 } from 'next/font/google';
 import { motion } from 'framer-motion';
 import SharedNav from '@/components/SharedNav';
+import PageHeroVisual from '@/components/PageHeroVisual';
 import AstroWorkflow from '@/components/astro/AstroWorkflow';
 import {
   BreederProfileScreen, FamilyChatScreen, HealthPair, PetOverviewScreen, PetProfilesScreen, PostUpdateScreen,
@@ -124,7 +125,7 @@ export default function ForBreedersPage() {
 
       {/* ===== HERO ===== */}
       <section
-        className="relative pt-32 pb-32 overflow-hidden"
+        className="relative pt-24 sm:pt-32 pb-16 sm:pb-32 overflow-hidden"
         style={{
           background:
             'linear-gradient(135deg, #eff6ff 0%, #e0e7ff 35%, #f5f3ff 70%, #fdf4ff 100%)',
@@ -164,7 +165,7 @@ export default function ForBreedersPage() {
 
         <div className="container mx-auto px-6 relative z-20">
           <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col lg:flex-row items-center gap-12">
+            <div className="flex flex-col lg:flex-row items-center gap-4 sm:gap-8 lg:gap-12">
               <div className="lg:w-1/2 text-center lg:text-left">
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
@@ -183,7 +184,7 @@ export default function ForBreedersPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.2 }}
-                  className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-gray-900 mb-6 leading-[1.15] tracking-tight"
+                  className="text-[2.4rem] sm:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-gray-900 mb-4 sm:mb-6 leading-[1.15] tracking-tight"
                 >
                   <span className="text-gray-900">Run Your Breeding Program</span>{' '}
                   <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
@@ -195,16 +196,16 @@ export default function ForBreedersPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.35 }}
-                  className="text-xl sm:text-2xl text-gray-600 leading-relaxed mx-auto lg:mx-0 max-w-xl"
+                  className="text-lg sm:text-2xl text-gray-600 leading-relaxed mx-auto lg:mx-0 max-w-xl"
                 >
-                  Pawgress is built for ethical breeders tired of juggling DMs, resending updates, and losing records. One organized place for updates, buyers, and documents, all tied to each pet.
+                  <span className="sm:hidden">One place for every update, buyer and record, all tied to each pet.</span><span className="hidden sm:inline">Pawgress is built for ethical breeders tired of juggling DMs, resending updates, and losing records. One organized place for updates, buyers, and documents, all tied to each pet.</span>
                 </motion.p>
 
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.5 }}
-                  className="mt-8 flex flex-wrap justify-center lg:justify-start gap-3"
+                  className="mt-8 hidden sm:flex flex-wrap justify-center lg:justify-start gap-3"
                 >
                   {[
                     { i: '📋', t: 'Pet profiles' },
@@ -225,74 +226,8 @@ export default function ForBreedersPage() {
                 </motion.div>
               </div>
 
-              <div className="lg:w-1/2 relative">
-                <motion.div
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[95%] h-[95%] opacity-20 z-0"
-                  animate={{ rotate: [0, 4, -4, 0] }}
-                  transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-                >
-                  <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                    <defs>
-                      <linearGradient id="pawGradientBreeders" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style={{ stopColor: 'rgb(37, 99, 235)', stopOpacity: 1 }} />
-                        <stop offset="50%" style={{ stopColor: 'rgb(79, 70, 229)', stopOpacity: 1 }} />
-                        <stop offset="100%" style={{ stopColor: 'rgb(147, 51, 234)', stopOpacity: 1 }} />
-                      </linearGradient>
-                    </defs>
-                    <path fill="url(#pawGradientBreeders)" d="M226.5 92.9c14.3 42.9-.3 86.2-32.6 96.8s-70.1-15.6-84.4-58.5s.3-86.2 32.6-96.8s70.1 15.6 84.4 58.5zM100.4 198.6c18.9 32.4 14.3 70.1-10.2 84.1s-59.7-.9-78.5-33.3S-2.7 179.3 21.8 165.3s59.7 .9 78.5 33.3zM69.2 401.2C121.6 259.9 214.7 224 256 224s134.4 35.9 186.8 177.2c3.6 9.7 5.2 20.1 5.2 30.5v1.6c0 25.8-20.9 46.7-46.7 46.7c-11.5 0-22.9-1.4-34-4.2l-88-22c-15.3-3.8-31.3-3.8-46.6 0l-88 22c-11.1 2.8-22.5 4.2-34 4.2C84.9 480 64 459.1 64 433.3v-1.6c0-10.4 1.6-20.8 5.2-30.5zM421.8 282.7c-24.5-14-29.1-51.7-10.2-84.1s54-47.3 78.5-33.3s29.1 51.7 10.2 84.1s-54 47.3-78.5 33.3zM310.1 189.7c-32.3-10.6-46.9-53.9-32.6-96.8s52.1-69.1 84.4-58.5s46.9 53.9 32.6 96.8s-52.1 69.1-84.4 58.5z" />
-                  </svg>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.85 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ type: 'spring', stiffness: 100, damping: 18, delay: 0.3 }}
-                  className="relative z-10 rounded-3xl overflow-hidden shadow-2xl shadow-blue-900/20 border-4 border-white"
-                >
-                  <img
-                    src="/photos/breeders-hero.webp"
-                    alt="Dogs together at sunset"
-                    className="w-full h-auto block"
-                  />
-                </motion.div>
-
-                {/* Floating chips */}
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0, y: [0, -6, 0] }}
-                  transition={{
-                    opacity: { delay: 0.7, duration: 0.5 },
-                    x: { delay: 0.7, duration: 0.5 },
-                    y: { duration: 3, repeat: Infinity, ease: 'easeInOut' },
-                  }}
-                  className="hidden lg:flex absolute -top-4 -left-4 xl:-left-10 bg-white rounded-2xl shadow-xl border border-gray-100 px-4 py-2.5 items-center gap-2.5 z-20"
-                >
-                  <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white text-lg shadow-md">
-                    📢
-                  </div>
-                  <div>
-                    <div className="text-[10px] text-gray-400 font-medium">Update sent</div>
-                    <div className="text-sm font-bold text-gray-900">Litter · 6 buyers</div>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0, y: [0, 5, 0] }}
-                  transition={{
-                    opacity: { delay: 0.9, duration: 0.5 },
-                    x: { delay: 0.9, duration: 0.5 },
-                    y: { duration: 3.4, repeat: Infinity, ease: 'easeInOut' },
-                  }}
-                  className="hidden lg:flex absolute -bottom-4 -right-4 xl:-right-10 bg-white rounded-2xl shadow-xl border border-gray-100 px-4 py-2.5 items-center gap-2.5 z-20"
-                >
-                  <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white text-lg shadow-md">
-                    ✓
-                  </div>
-                  <div>
-                    <div className="text-[10px] text-gray-400 font-medium">Reserved</div>
-                    <div className="text-sm font-bold text-gray-900">Bella · 7 wks</div>
-                  </div>
-                </motion.div>
+              <div className="lg:w-1/2 w-full relative">
+                <PageHeroVisual variant="breeder" />
               </div>
             </div>
           </div>
