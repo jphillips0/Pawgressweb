@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { IMG, PETS } from './demoData';
+import { fmtMinutes, savedFor } from '../astro/timeModel';
 import { AstroAvatar, C, Card, CollarDot, Glass, phoneSize, IconCake, IconChatBubble, IconCheck, IconDoc, IconMedkit, IconScale, Paw, Phone, Photo, Sparkle } from './kit';
 import { AstroChatBar, AstroHeader, AstroIntro, BREEDER_CHIPS, BUYER_CHIPS, Bubble, ChatComposer, ChatMsg, Composer, FamilyChatFrame, PumpkinChatHistory } from './screens';
 
@@ -37,39 +38,49 @@ export type SceneMeta = {
   title: string;
   ask: string;
   manual: string[];
+  /** Minutes saved by this exact demo (from the shared time model). */
   saved: number;
+  /** How the saving grows with bigger or more litters (breeder tasks only). */
+  scale?: string;
 };
+
+const r = (m: number) => Math.round(m);
 
 export const SCENE_META: Record<SceneId, SceneMeta> = {
   draft: {
     title: 'Family updates, written for you',
     ask: '“Draft an update for the Riveras about Oakley’s week.”',
     manual: ['Dig through the camera roll for Oakley', 'Look up his latest weights', 'Write the message from scratch', 'Send it, then post it to his timeline'],
-    saved: 8,
+    saved: r(savedFor('update')),
+    scale: `Weekly updates for a litter of 10: about ${fmtMinutes(savedFor('update', { families: 10 }))} saved. Two litters: ${fmtMinutes(savedFor('update', { families: 20 }))}.`,
   },
   weigh: {
     title: 'A whole litter weighed in one photo',
     ask: 'Snap the weigh sheet: “Weighed the litter this morning.”',
     manual: ['Open each puppy’s profile', 'Tap Log weight six times', 'Type every weight and date', 'Double-check which collar is which'],
-    saved: 10,
+    saved: r(savedFor('weigh', { puppies: 6 })),
+    scale: `A litter of 10: about ${fmtMinutes(savedFor('weigh', { puppies: 10 }))} saved every weigh-in. Two litters of 10: ${fmtMinutes(savedFor('weigh', { puppies: 20, litters: 2 }))}.`,
   },
   records: {
     title: 'Vet paperwork, filed from a photo',
     ask: 'Snap the vaccine card: “Murphy’s vet visit today, file this.”',
     manual: ['Type each vaccine name and date', 'Work out when the next dose is due', 'Update the vet on his health profile', 'Attach the paperwork'],
-    saved: 7,
+    saved: r(savedFor('records', { records: 3 })),
+    scale: `A vet visit for a litter of 10 (about 20 records): ${fmtMinutes(savedFor('records', { records: 20 }))} saved. Two litters: ${fmtMinutes(savedFor('records', { records: 40 }))}.`,
   },
   litter: {
     title: 'One litter post, personal for every family',
     ask: '“Post a litter update about first bath day. Use today’s photos.”',
     manual: ['Write the update', 'Rewrite it with each puppy’s name', 'Send it in four separate chats', 'Post it again to the litter feed'],
-    saved: 12,
+    saved: r(savedFor('litterPost', { families: 4 })),
+    scale: `A litter of 10 families: about ${fmtMinutes(savedFor('litterPost', { families: 10 }))} saved per post. Two litters: ${fmtMinutes(savedFor('litterPost', { families: 20, litters: 2 }))}.`,
   },
   reply: {
     title: 'Replies that already know the answer',
     ask: 'Tap Suggest reply under the family’s chat.',
     manual: ['Look up the pickup schedule', 'Check what she’s eating', 'Type out the answer'],
-    saved: 4,
+    saved: Math.ceil(savedFor('reply')),
+    scale: `About 3 questions a week from each of 10 families: ${fmtMinutes(savedFor('reply', { families: 30 }))} saved a week.`,
   },
   'b-weight': {
     title: 'Log a weight by saying it',

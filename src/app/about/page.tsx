@@ -196,7 +196,7 @@ export default function AboutPage() {
                     </li>
                     <li className="flex items-start">
                       <span className="text-blue-200 mr-2 sm:mr-3 text-lg sm:text-xl">✓</span>
-                      <span className="text-base sm:text-lg">Present your program professionally with detailed profiles and verified lineage</span>
+                      <span className="text-base sm:text-lg">Present your program professionally with detailed profiles and parentage</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-blue-200 mr-2 sm:mr-3 text-lg sm:text-xl">✓</span>

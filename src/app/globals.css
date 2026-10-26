@@ -233,6 +233,20 @@ body {
   transform-origin: top center;
 }
 
+/* Mobile hero reel: two copies side by side, slide by half for a seamless loop */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 38s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee 44s linear infinite reverse;
+}
+
 /* Button shimmer animation */
 @keyframes shimmer {
   0% {

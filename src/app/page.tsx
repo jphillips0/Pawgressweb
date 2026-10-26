@@ -5,6 +5,7 @@ import Features from '@/components/Features'
 import HowItWorks from '@/components/HowItWorks'
 import CollarRecognition from '@/components/CollarRecognition'
 import AstroHomeSection from '@/components/astro/AstroHomeSection'
+import MobileDownloadBar from '@/components/MobileDownloadBar'
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <HowItWorks />
       <CollarRecognition />
       <Features />
+      <MobileDownloadBar />
     </main>
   );
 }

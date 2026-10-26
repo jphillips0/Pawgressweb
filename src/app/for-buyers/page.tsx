@@ -323,7 +323,7 @@ export default function ForBuyersPage() {
               pills={[
                 { i: '🔍', t: 'Smart filters' },
                 { i: '💕', t: 'Swipe to match' },
-                { i: '✅', t: 'Verified breeders' },
+                { i: '⭐', t: 'Breeder reviews' },
               ]}
               image={
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-blue-900/20 max-w-[230px] sm:max-w-[260px] mx-auto border-4 border-white">

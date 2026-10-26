@@ -127,7 +127,7 @@ export default function MissionPage() {
                       </li>
                       <li className="flex items-start group/item">
                         <span className="text-blue-600 mr-2 sm:mr-3 text-lg sm:text-xl font-bold group-hover/item:scale-125 transition-transform duration-300">✓</span>
-                        <span className="text-base sm:text-lg"><strong className="text-gray-900">Present professionally</strong> with organized profiles and verified lineage</span>
+                        <span className="text-base sm:text-lg"><strong className="text-gray-900">Present professionally</strong> with organized profiles and parentage</span>
                       </li>
                       <li className="flex items-start group/item">
                         <span className="text-blue-600 mr-2 sm:mr-3 text-lg sm:text-xl font-bold group-hover/item:scale-125 transition-transform duration-300">✓</span>

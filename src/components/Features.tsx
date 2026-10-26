@@ -6,6 +6,13 @@ import { motion } from 'framer-motion';
 import { animate, stagger, createSpring } from 'animejs';
 import DownloadButton from './DownloadButton';
 import { useInView } from '@/hooks/useInView';
+import { savedFor, weeklyMinutes } from './astro/timeModel';
+
+// Real, model-based numbers instead of user-count claims.
+const EIGHT = weeklyMinutes(1, 8);
+const WEEKLY_HRS = (EIGHT.saved / 60).toFixed(1);
+const LITTER_HRS = String(Math.round((EIGHT.saved * 8) / 60));
+const UPDATE_MIN = String(Math.round(savedFor('update')));
 
 export default function Features() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -96,22 +103,24 @@ export default function Features() {
 
       // Count-up numbers
       const numbers = statsRef.current.querySelectorAll<HTMLElement>('.stat-number');
+      // The final value is already rendered; this just counts up to it and always lands on it.
       numbers.forEach((el) => {
-        const target = parseFloat(el.dataset.target ?? '0');
+        const raw = el.dataset.target ?? '0';
+        const target = parseFloat(raw);
+        const decimals = raw.includes('.') ? raw.split('.')[1].length : 0;
         const suffix = el.dataset.suffix ?? '';
-        const obj = { v: 0 };
-        animate(obj, {
-          v: target,
-          duration: 1800,
-          delay: 800,
-          ease: 'out(3)',
-          onUpdate: () => {
-            const formatted = target % 1 === 0
-              ? Math.round(obj.v).toLocaleString()
-              : obj.v.toFixed(1);
-            el.textContent = formatted + suffix;
-          },
-        });
+        const start = performance.now() + 800;
+        const tick = (now: number) => {
+          if (now < start) {
+            requestAnimationFrame(tick);
+            return;
+          }
+          const p = Math.min(1, (now - start) / 1800);
+          const v = target * (1 - Math.pow(1 - p, 3));
+          el.textContent = (p < 1 ? v.toFixed(decimals) : raw) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
       });
     }
   }, [inView]);
@@ -119,7 +128,7 @@ export default function Features() {
     {
       icon: '\u{1F4CB}',
       title: 'Pet Profile Management',
-      description: 'Create rich profiles with photos, breed, DOB, sex, and reservation status. Group pets into litters, assign parents, display verified lineage, plus weight tracking and medical record storage.',
+      description: 'Create rich profiles with photos, breed, DOB, sex, and reservation status. Group pets into litters, assign parents and show lineage, plus weight tracking and medical record storage.',
       color: 'from-blue-100 to-indigo-100',
       iconBg: 'bg-blue-500',
       image: '/Pet Profile.PNG',
@@ -226,7 +235,7 @@ export default function Features() {
             
             <p ref={subRef} style={{ opacity: 0 }} className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8 lg:mb-10 leading-relaxed max-w-2xl mx-auto">
               Join ethical breeders and devoted pet owners who trust Pawgress to document, organize, and celebrate 
-              every pet's journey with transparency and care.
+              every pet&apos;s journey with transparency and care.
             </p>
 
             <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center max-w-md mx-auto sm:max-w-none mb-8 sm:mb-10 lg:mb-12">
@@ -251,18 +260,22 @@ export default function Features() {
             {/* Stats */}
             <div ref={statsRef} className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 max-w-md mx-auto sm:max-w-none">
               <motion.div whileHover={{ y: -4 }} transition={{ type: 'spring', stiffness: 300, damping: 22 }} className="stat-card group rounded-2xl border border-white/60 bg-white/60 backdrop-blur-md p-4 sm:p-6 shadow-lg shadow-blue-900/5 hover:shadow-xl hover:shadow-blue-900/10 transition-shadow flex items-center justify-between gap-3 text-left sm:block sm:text-center" style={{ opacity: 0 }}>
-                <div className="stat-number text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-baloo sm:mb-2" data-target="500" data-suffix="+">0+</div>
-                <div className="text-sm sm:text-base text-gray-600 font-semibold">Ethical Breeders</div>
+                <div className="stat-number text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-baloo sm:mb-2" data-target={WEEKLY_HRS} data-suffix=" hrs">{WEEKLY_HRS} hrs</div>
+                <div className="text-sm sm:text-base text-gray-600 font-semibold">back every week</div>
               </motion.div>
               <motion.div whileHover={{ y: -4 }} transition={{ type: 'spring', stiffness: 300, damping: 22 }} className="stat-card group rounded-2xl border border-white/60 bg-white/60 backdrop-blur-md p-4 sm:p-6 shadow-lg shadow-blue-900/5 hover:shadow-xl hover:shadow-blue-900/10 transition-shadow flex items-center justify-between gap-3 text-left sm:block sm:text-center" style={{ opacity: 0 }}>
-                <div className="stat-number text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent font-baloo sm:mb-2" data-target="10" data-suffix="K+">0K+</div>
-                <div className="text-sm sm:text-base text-gray-600 font-semibold">Pet Journeys Documented</div>
+                <div className="stat-number text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent font-baloo sm:mb-2" data-target={LITTER_HRS} data-suffix=" hrs">{LITTER_HRS} hrs</div>
+                <div className="text-sm sm:text-base text-gray-600 font-semibold">saved over one litter</div>
               </motion.div>
               <motion.div whileHover={{ y: -4 }} transition={{ type: 'spring', stiffness: 300, damping: 22 }} className="stat-card group rounded-2xl border border-white/60 bg-white/60 backdrop-blur-md p-4 sm:p-6 shadow-lg shadow-blue-900/5 hover:shadow-xl hover:shadow-blue-900/10 transition-shadow flex items-center justify-between gap-3 text-left sm:block sm:text-center" style={{ opacity: 0 }}>
-                <div className="stat-number text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-baloo sm:mb-2" data-target="98" data-suffix="%">0%</div>
-                <div className="text-sm sm:text-base text-gray-600 font-semibold">Trust & Transparency</div>
+                <div className="stat-number text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-baloo sm:mb-2" data-target={UPDATE_MIN} data-suffix=" min">{UPDATE_MIN} min</div>
+                <div className="text-sm sm:text-base text-gray-600 font-semibold">saved per family update</div>
               </motion.div>
             </div>
+            <p className="mt-4 text-xs sm:text-sm text-gray-500">
+              Estimates for one 8-puppy litter using Astro.{' '}
+              <a href="/for-breeders#astro" className="text-blue-600 hover:underline">See how we calculate this</a>
+            </p>
           </div>
         </div>
       

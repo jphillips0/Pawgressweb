@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { SceneStage, SCENE_META, type SceneId } from '@/components/app-screens/astroScenes';
 import { AstroArt, Starfield } from './AstroArt';
+import TimeCalculator from './TimeCalculator';
 
 const TASKS: { id: SceneId; label: string; icon: string }[] = [
   { id: 'draft', label: 'Family updates', icon: '💬' },
@@ -13,29 +14,9 @@ const TASKS: { id: SceneId; label: string; icon: string }[] = [
   { id: 'litter', label: 'Litter posts', icon: '📣' },
 ];
 
-const TOTAL_MIN = TASKS.reduce((n, t) => n + SCENE_META[t.id].saved, 0);
-
-function CountUp({ to, run }: { to: number; run: boolean }) {
-  const [v, setV] = useState(0);
-  useEffect(() => {
-    if (!run) return;
-    let raf = 0;
-    const start = performance.now();
-    const tick = (now: number) => {
-      const p = Math.min(1, (now - start) / 1600);
-      setV(Math.round(to * (1 - Math.pow(1 - p, 3))));
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [run, to]);
-  return <>{v}</>;
-}
-
 export default function AstroHomeSection() {
   const ref = useRef<HTMLElement>(null);
   const phoneRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { amount: 0.25 });
   const phoneVisible = useInView(phoneRef, { amount: 0.4 });
   const [active, setActive] = useState(0);
   const [round, setRound] = useState(0);
@@ -72,9 +53,9 @@ export default function AstroHomeSection() {
       </svg>
 
       <div className="relative z-20 max-w-7xl mx-auto px-5 sm:px-10 pt-28 sm:pt-36 pb-28 sm:pb-36">
-        <div className="grid lg:grid-cols-[1.05fr_1fr] gap-14 lg:gap-10 items-center">
-          {/* Copy */}
-          <div>
+        <div className="grid lg:grid-cols-[1.05fr_1fr] lg:grid-rows-[auto_auto] gap-10 lg:gap-x-10 lg:gap-y-8 items-center">
+          {/* Copy, top half (headline). On phones the demo phone follows straight after. */}
+          <div className="lg:col-start-1 lg:row-start-1 lg:self-end">
             <motion.div
               initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 backdrop-blur-md px-4 py-1.5 text-sm font-semibold"
@@ -102,74 +83,10 @@ export default function AstroHomeSection() {
               Astro is an AI agent built into Pawgress. Tell him what happened today, like a weigh-in, a vet visit or bath day. He writes the family updates, logs every weight and files the paperwork for every puppy. You read it over and tap Send.
             </motion.p>
 
-            {/* Time saved */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.3 }}
-              className="mt-8 flex items-stretch gap-3 sm:gap-4 max-w-xl"
-            >
-              <div className="flex-1 rounded-3xl border border-white/10 bg-white/[0.06] backdrop-blur-md p-4 sm:p-5">
-                <div className="text-xs font-bold uppercase tracking-widest text-indigo-200/70">By hand</div>
-                <div className="font-baloo text-3xl sm:text-5xl font-bold mt-1 text-white/90 whitespace-nowrap"><CountUp to={TOTAL_MIN} run={inView} /> min</div>
-                <div className="text-sm text-indigo-200/70">of taps, typing and copy-paste</div>
-              </div>
-              <div className="hidden sm:flex items-center text-2xl text-indigo-200/60" aria-hidden>→</div>
-              <div className="flex-1 rounded-3xl border border-amber-200/30 bg-gradient-to-br from-amber-200/20 to-orange-300/10 backdrop-blur-md p-4 sm:p-5">
-                <div className="text-xs font-bold uppercase tracking-widest text-amber-200/90">With Astro</div>
-                <div className="font-baloo text-3xl sm:text-5xl font-bold mt-1 whitespace-nowrap">4 prompts</div>
-                <div className="text-sm text-amber-100/80">and four taps on Send</div>
-              </div>
-            </motion.div>
-
-            {/* Task list, synced with the phone */}
-            <div className="mt-8 grid grid-cols-2 gap-2.5 max-w-xl" role="tablist" aria-label="Astro tasks">
-              {TASKS.map((t, i) => (
-                <button
-                  key={t.id}
-                  role="tab"
-                  aria-selected={i === active}
-                  onClick={() => pick(i)}
-                  className={`relative overflow-hidden text-left rounded-2xl px-4 py-3 border transition-colors ${i === active ? 'bg-white/15 border-white/30' : 'bg-white/[0.04] border-white/10 hover:bg-white/10'}`}
-                >
-                  <div className="flex items-center gap-2 font-semibold text-sm sm:text-base">
-                    <span>{t.icon}</span> {t.label}
-                  </div>
-                  <div className="text-xs text-indigo-200/70 mt-0.5">~{SCENE_META[t.id].saved} min → 1 prompt</div>
-                  {i === active && phoneVisible && (
-                    <motion.span
-                      key={round}
-                      className="absolute left-0 bottom-0 h-[3px] bg-gradient-to-r from-sky-300 to-amber-200"
-                      initial={{ width: '0%' }} animate={{ width: '100%' }}
-                      transition={{ duration: 15, ease: 'linear' }}
-                    />
-                  )}
-                </button>
-              ))}
-            </div>
-
-            {/* Buyer mention */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-6 max-w-xl flex items-center gap-4 rounded-3xl border border-white/10 bg-white/[0.06] backdrop-blur-md p-4"
-            >
-              <AstroArt pose="wave" className="w-16 shrink-0" />
-              <p className="text-sm sm:text-base text-indigo-100/85 leading-relaxed">
-                <span className="font-semibold text-white">Families get Astro too.</span> Buyers can log weights, file shot records and ask questions about their puppy just by saying it. No forms to fill in.{' '}
-                <Link href="/for-buyers#astro" className="font-semibold text-sky-300 hover:text-sky-200 whitespace-nowrap">For buyers →</Link>
-              </p>
-            </motion.div>
-
-            <div className="mt-8 flex flex-wrap gap-3">
-              <motion.div whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.97 }}>
-                <Link href="/for-breeders#astro" className="inline-flex items-center gap-2 rounded-full bg-white text-indigo-900 px-6 py-3.5 font-semibold shadow-xl shadow-indigo-950/40">
-                  See how Astro works
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
-                </Link>
-              </motion.div>
-            </div>
           </div>
 
           {/* Phone + flying Astro */}
-          <div className="relative flex justify-center lg:justify-end lg:pr-10">
+          <div className="relative flex justify-center lg:justify-end lg:pr-10 lg:col-start-2 lg:row-start-1 lg:row-span-2">
             {/* Orbit rings */}
             <div aria-hidden className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] sm:w-[620px] sm:h-[620px]">
               <motion.div className="absolute inset-0 rounded-full border border-white/10" animate={{ rotate: 360 }} transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}>
@@ -216,10 +133,68 @@ export default function AstroHomeSection() {
               </motion.div>
             </motion.div>
 
-            <motion.div style={{ y: astroY, x: astroX }} className="absolute -top-24 -left-4 sm:-left-10 lg:left-0 w-36 sm:w-48 lg:w-56 z-30 pointer-events-none">
+            <motion.div style={{ y: astroY, x: astroX }} className="hidden lg:block absolute -top-24 lg:left-0 lg:w-56 z-30 pointer-events-none">
               <AstroArt pose="jetpack" flame alt="Astro, the Pawgress kennel assistant" />
             </motion.div>
           </div>
+          {/* Copy, bottom half */}
+          <div className="lg:col-start-1 lg:row-start-2 lg:self-start">
+            {/* Time saved, sized to the breeder's own litters */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.3 }}
+              className="mt-8 max-w-xl"
+            >
+              <TimeCalculator compact initialPuppies={8} />
+            </motion.div>
+
+            {/* Task list, synced with the phone */}
+            <div className="mt-8 grid grid-cols-2 gap-2.5 max-w-xl" role="tablist" aria-label="Astro tasks">
+              {TASKS.map((t, i) => (
+                <button
+                  key={t.id}
+                  role="tab"
+                  aria-selected={i === active}
+                  onClick={() => pick(i)}
+                  className={`relative overflow-hidden text-left rounded-2xl px-4 py-3 border transition-colors ${i === active ? 'bg-white/15 border-white/30' : 'bg-white/[0.04] border-white/10 hover:bg-white/10'}`}
+                >
+                  <div className="flex items-center gap-2 font-semibold text-sm sm:text-base">
+                    <span>{t.icon}</span> {t.label}
+                  </div>
+                  <div className="text-xs text-indigo-200/70 mt-0.5">Saves ~{SCENE_META[t.id].saved} min each time</div>
+                  {i === active && phoneVisible && (
+                    <motion.span
+                      key={round}
+                      className="absolute left-0 bottom-0 h-[3px] bg-gradient-to-r from-sky-300 to-amber-200"
+                      initial={{ width: '0%' }} animate={{ width: '100%' }}
+                      transition={{ duration: 15, ease: 'linear' }}
+                    />
+                  )}
+                </button>
+              ))}
+            </div>
+
+            {/* Buyer mention */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
+              className="mt-6 max-w-xl flex items-center gap-4 rounded-3xl border border-white/10 bg-white/[0.06] backdrop-blur-md p-4"
+            >
+              <AstroArt pose="wave" className="w-16 shrink-0" />
+              <p className="text-sm sm:text-base text-indigo-100/85 leading-relaxed">
+                <span className="font-semibold text-white">Families get Astro too.</span> Buyers can log weights, file shot records and ask questions about their puppy just by saying it. No forms to fill in.{' '}
+                <Link href="/for-buyers#astro" className="font-semibold text-sky-300 hover:text-sky-200 whitespace-nowrap">For buyers →</Link>
+              </p>
+            </motion.div>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <motion.div whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.97 }}>
+                <Link href="/for-breeders#astro" className="inline-flex items-center gap-2 rounded-full bg-white text-indigo-900 px-6 py-3.5 font-semibold shadow-xl shadow-indigo-950/40">
+                  See how Astro works
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
+                </Link>
+              </motion.div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

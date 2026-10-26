@@ -808,8 +808,8 @@ export default function HowItWorks() {
                   <svg className="w-3.5 h-3.5 lg:w-5 lg:h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
                 </div>
                 <div className="min-w-0">
-                  <div className="text-[10px] lg:text-xs text-gray-500 font-medium leading-tight">Verified</div>
-                  <div className="text-xs lg:text-sm font-bold text-gray-900 leading-tight">Ethical breeders only</div>
+                  <div className="text-[10px] lg:text-xs text-gray-500 font-medium leading-tight">Public</div>
+                  <div className="text-xs lg:text-sm font-bold text-gray-900 leading-tight">Breeder reviews</div>
                 </div>
               </motion.div>
 
@@ -869,7 +869,7 @@ export default function HowItWorks() {
                 {[
                   { i: '✓', t: 'Every timeline is private and invite-only' },
                   { i: '✓', t: 'Records travel with the pet for life' },
-                  { i: '✓', t: 'Breeders are reviewed for ethical standards' },
+                  { i: '✓', t: 'Families can review the breeders they buy from' },
                 ].map((row) => (
                   <div key={row.t} className="flex items-center gap-3">
                     <span className="flex-shrink-0 w-7 h-7 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center font-bold shadow-md">{row.i}</span>

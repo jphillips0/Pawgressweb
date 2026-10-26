@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { SceneStage, SCENE_META, type SceneId } from '@/components/app-screens/astroScenes';
 import { AstroArt, Starfield, type AstroPose } from './AstroArt';
+import TimeCalculator from './TimeCalculator';
 
 type Step = { id: SceneId; pose: AstroPose; blurb: string };
 
@@ -104,10 +105,17 @@ function StepCard({ step, index, active, onActive }: { step: Step; index: number
             transition={{ type: 'spring', stiffness: 200, damping: 16 }}
             className="justify-self-start sm:justify-self-end rounded-2xl bg-gradient-to-br from-amber-200 to-orange-300 text-indigo-950 px-4 py-3 shadow-lg shadow-orange-500/20"
           >
-            <div className="text-[10px] font-bold uppercase tracking-widest opacity-70">Saves about</div>
-            <div className="font-baloo text-3xl font-bold leading-none">{meta.saved} min</div>
+            <div className="text-[10px] font-bold uppercase tracking-widest opacity-70">This one saves</div>
+            <div className="font-baloo text-3xl font-bold leading-none">~{meta.saved} min</div>
           </motion.div>
         </div>
+
+        {meta.scale && (
+          <div className="mt-4 flex items-start gap-2.5 rounded-2xl border border-amber-200/20 bg-amber-200/[0.07] px-4 py-3 text-sm sm:text-base text-amber-50/90">
+            <span aria-hidden className="mt-0.5">📈</span>
+            <span><span className="font-semibold text-amber-200">At scale:</span> {meta.scale}</span>
+          </div>
+        )}
 
         {/* Mobile: each step carries its own phone */}
         <div className="lg:hidden mt-8 flex justify-center">
@@ -207,7 +215,7 @@ export default function AstroWorkflow({ variant }: { variant: 'breeder' | 'buyer
                     <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-300 to-orange-400 flex items-center justify-center text-white text-lg">⏱</div>
                     <div>
                       <div className="text-[10px] text-gray-400 font-medium leading-tight">Step 0{active + 1} · {SCENE_META[steps[active].id].title}</div>
-                      <div className="text-sm font-bold leading-tight">Saves ~{SCENE_META[steps[active].id].saved} minutes</div>
+                      <div className="text-sm font-bold leading-tight">This one saves ~{SCENE_META[steps[active].id].saved} minutes</div>
                     </div>
                   </motion.div>
                 </AnimatePresence>
@@ -222,6 +230,15 @@ export default function AstroWorkflow({ variant }: { variant: 'breeder' | 'buyer
         </div>
 
         {/* Total */}
+        {variant === 'breeder' ? (
+          <div className="mt-16 rounded-[2rem] border border-white/15 bg-white/[0.06] backdrop-blur-md p-6 sm:p-10">
+            <div className="text-xs font-bold uppercase tracking-widest text-indigo-200/70">Add it up for your kennel</div>
+            <div className="font-baloo text-3xl sm:text-4xl font-bold leading-tight mt-1 mb-6">
+              Bigger litters, <span className="text-amber-200">bigger savings.</span>
+            </div>
+            <TimeCalculator initialPuppies={10} />
+          </div>
+        ) : (
         <div ref={totalRef} className="mt-16 rounded-[2rem] border border-white/15 bg-white/[0.06] backdrop-blur-md p-6 sm:p-10">
           <div className="grid md:grid-cols-[auto_1fr] gap-8 items-center">
             <div>
@@ -248,6 +265,7 @@ export default function AstroWorkflow({ variant }: { variant: 'breeder' | 'buyer
             </div>
           </div>
         </div>
+        )}
 
         {/* Trust */}
         <div className="mt-6 grid md:grid-cols-3 gap-4">

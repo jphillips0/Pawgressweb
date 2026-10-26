@@ -9,6 +9,7 @@ import { BreederHomeScreen, PetProfilesScreen } from './app-screens/screens';
 import { CollarDot, Photo } from './app-screens/kit';
 import { IMG } from './app-screens/demoData';
 import { AstroArt } from './astro/AstroArt';
+import MobileHero from './MobileHero';
 
 const PROOF = [
   { icon: '📣', title: 'Post once', sub: 'Every family, chat and timeline' },
@@ -136,7 +137,12 @@ export default function Hero() {
         <div aria-hidden className="absolute inset-x-0 top-0 h-64" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.55), transparent)' }} />
       </div>
 
-      <div className="relative z-20 px-5 sm:px-8 lg:px-16 xl:px-24 pt-24 sm:pt-32 lg:pt-36 pb-16">
+      {/* Phones and small tablets get their own animated hero */}
+      <div className="lg:hidden">
+        <MobileHero />
+      </div>
+
+      <div className="hidden lg:block relative z-20 px-5 sm:px-8 lg:px-16 xl:px-24 pt-24 sm:pt-32 lg:pt-36 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-14 lg:gap-6 items-center max-w-[1320px] mx-auto">
           {/* Copy */}
           <div className="text-center lg:text-left">
