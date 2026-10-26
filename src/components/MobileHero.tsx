@@ -140,7 +140,7 @@ function Reel({ items, reverse = false }: { items: typeof REEL_A; reverse?: bool
 
 export default function MobileHero() {
   return (
-    <div className="relative z-20 pt-24 [@media(max-height:780px)]:pt-[88px] pb-14 font-baloo">
+    <div className="relative z-20 pt-[72px] pb-14 font-baloo">
       {/* Headline */}
       <div className="px-5 text-center">
         <motion.a

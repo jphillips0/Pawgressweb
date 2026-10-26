@@ -107,7 +107,7 @@ export default function PricingPage() {
               <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-3xl blur-2xl scale-95" />
               <div className="relative z-10 max-w-lg mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
                 <img
-                  src="https://images.unsplash.com/photo-1612977825762-f508c6827843?auto=format&fit=crop&w=1200&q=80"
+                  src="/photos/pricing-hero.webp"
                   alt="Curious corgi"
                   className="w-full h-auto block"
                 />
@@ -181,7 +181,7 @@ export default function PricingPage() {
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-teal-400/10 rounded-3xl blur-2xl scale-95" />
                 <img
-                  src="https://images.unsplash.com/photo-1591200687501-65309ec27310?auto=format&fit=crop&w=1200&q=80"
+                  src="/photos/pricing-buyers.webp"
                   alt="Happy golden retriever"
                   className="w-full h-auto max-w-md mx-auto relative z-10 drop-shadow-xl rounded-2xl"
                 />
@@ -289,7 +289,7 @@ export default function PricingPage() {
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-pink-400/10 rounded-3xl blur-2xl scale-95" />
                 <img
-                  src="https://images.unsplash.com/photo-1513939704630-b6d4f6d389e8?auto=format&fit=crop&w=1200&q=80"
+                  src="/photos/pricing-breeders.webp"
                   alt="Woman cuddling her dog"
                   className="w-full h-auto max-w-sm mx-auto relative z-10 drop-shadow-xl rounded-2xl"
                 />

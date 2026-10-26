@@ -74,14 +74,34 @@ export default function SharedNav() {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${baloo.className} ${
-        isScrolled
-          ? 'px-4 py-2.5 sm:px-6 sm:py-3 bg-white/80 backdrop-blur-xl shadow-lg shadow-blue-900/5 border-b border-white/60'
-          : 'px-4 py-5 sm:px-6 sm:py-6 lg:px-8 bg-white/60 backdrop-blur-md'
+      className={`fixed top-0 left-0 right-0 z-50 px-2.5 sm:px-5 lg:px-8 transition-all duration-500 ${baloo.className} ${
+        isScrolled ? 'pt-2 sm:pt-3' : 'pt-2.5 sm:pt-4'
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between">
-        <div className="flex items-center gap-3 sm:gap-4">
+      {/* Liquid glass pill: translucent, blurred and saturated, with a specular top edge */}
+      <div
+        className={`relative container mx-auto flex items-center justify-between rounded-full border transition-all duration-500 ${
+          isScrolled ? 'pl-2.5 pr-3 py-1 sm:px-3 sm:py-1.5' : 'pl-2.5 pr-3 py-1.5 sm:px-4 sm:py-2.5'
+        }`}
+        style={{
+          background: isScrolled ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.18)',
+          backdropFilter: 'blur(14px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(14px) saturate(180%)',
+          borderColor: 'rgba(255,255,255,0.6)',
+          boxShadow:
+            'inset 0 1px 0 rgba(255,255,255,0.95), inset 0 -1px 0 rgba(255,255,255,0.35), 0 10px 30px -12px rgba(30,27,75,0.28), 0 2px 6px -2px rgba(30,27,75,0.08)',
+        }}
+      >
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-0 rounded-full"
+          style={{
+            background:
+              'linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 45%), radial-gradient(120% 140% at 15% -40%, rgba(255,255,255,0.4), rgba(255,255,255,0) 60%)',
+            mixBlendMode: 'soft-light',
+          }}
+        />
+        <div className="flex items-center gap-2 sm:gap-4">
           <Link href="/" aria-label="Pawgress home">
             <motion.img
               src="/pawgress-logo.png"
@@ -89,7 +109,7 @@ export default function SharedNav() {
               whileHover={{ rotate: -8, scale: 1.08 }}
               transition={{ type: 'spring', stiffness: 300, damping: 15 }}
               className={`transition-all duration-300 ${
-                isScrolled ? 'w-8 h-8 sm:w-10 sm:h-10' : 'w-10 h-10 sm:w-12 sm:h-12'
+                isScrolled ? 'w-7 h-7 sm:w-10 sm:h-10' : 'w-8 h-8 sm:w-12 sm:h-12'
               }`}
             />
           </Link>
@@ -97,13 +117,13 @@ export default function SharedNav() {
             <Link
               href="/"
               className={`font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent transition-all duration-300 leading-tight ${
-                isScrolled ? 'text-xl sm:text-2xl' : 'text-2xl sm:text-3xl'
+                isScrolled ? 'text-lg sm:text-2xl' : 'text-xl sm:text-3xl'
               }`}
             >
               Pawgress
             </Link>
             <span
-              className={`text-gray-500 transition-all duration-300 ${
+              className={`hidden sm:block text-gray-500 transition-all duration-300 ${
                 isScrolled ? 'text-[10px] sm:text-xs' : 'text-xs sm:text-sm'
               }`}
             >
@@ -220,12 +240,12 @@ export default function SharedNav() {
           {/* Mobile Menu Button */}
           <motion.button
             whileTap={{ scale: 0.9 }}
-            className="lg:hidden p-2 text-gray-600 hover:text-blue-600 focus:outline-none focus:text-blue-600"
+            className="lg:hidden p-1.5 -mr-1.5 text-gray-600 hover:text-blue-600 focus:outline-none focus:text-blue-600"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
           >
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileMenuOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               ) : (
@@ -244,7 +264,13 @@ export default function SharedNav() {
             initial="closed"
             animate="open"
             exit="closed"
-            className="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-gray-200 shadow-2xl shadow-blue-900/10 z-40 overflow-hidden max-h-[calc(100vh-4.5rem)] overflow-y-auto"
+            className="lg:hidden absolute top-full left-2.5 right-2.5 sm:left-5 sm:right-5 mt-2 rounded-[28px] border border-white/75 z-40 overflow-hidden max-h-[calc(100vh-5.5rem)] overflow-y-auto"
+            style={{
+              background: 'rgba(255,255,255,0.74)',
+              backdropFilter: 'blur(24px) saturate(180%)',
+              WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.95), 0 24px 48px -16px rgba(30,27,75,0.3)',
+            }}
           >
             <div className="px-4 py-6 space-y-1">
               {NAV_LINKS.map((link) => (

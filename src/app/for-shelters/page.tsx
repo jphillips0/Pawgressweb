@@ -245,7 +245,7 @@ export default function ForSheltersPage() {
                   className="relative z-10 rounded-3xl overflow-hidden shadow-2xl shadow-blue-900/20 border-4 border-white"
                 >
                   <img
-                    src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1200&q=80"
+                    src="/photos/shelters-hero.webp"
                     alt="A dog and a cat, both up for adoption"
                     className="w-full h-auto block"
                   />
@@ -552,7 +552,7 @@ export default function ForSheltersPage() {
           >
             <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
               <img
-                src="https://images.unsplash.com/photo-1638766211854-6c4fd0b9de4f?auto=format&fit=crop&w=1200&h=675&q=80"
+                src="/photos/shelters-cta.webp"
                 alt="Dogs playing together at the park"
                 className="w-full h-auto block"
               />

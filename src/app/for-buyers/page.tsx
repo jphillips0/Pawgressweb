@@ -500,7 +500,7 @@ export default function ForBuyersPage() {
           >
             <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
               <img
-                src="https://images.unsplash.com/photo-1722653229417-cdcef799d8c4?auto=format&fit=crop&w=1200&h=675&q=80"
+                src="/photos/buyers-cta.webp"
                 alt="Two puppies playing together"
                 className="w-full h-auto block"
               />

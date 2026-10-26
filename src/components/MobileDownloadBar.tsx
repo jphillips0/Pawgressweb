@@ -26,16 +26,24 @@ export default function MobileDownloadBar() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 120, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          className="lg:hidden fixed inset-x-3 z-[60] flex items-center gap-3 rounded-[22px] border border-white/15 px-3 py-2.5 font-inter"
-          style={{ bottom: 'calc(12px + env(safe-area-inset-bottom))', background: 'rgba(17,16,40,0.88)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', boxShadow: '0 18px 40px -16px rgba(0,0,0,0.6)' }}
+          // Liquid glass pill, matching the header: the page stays visible through it.
+          className="lg:hidden fixed left-1/2 -translate-x-1/2 w-[calc(100%-24px)] max-w-sm z-[60] flex items-center gap-2.5 rounded-full border pl-1.5 pr-1.5 py-1.5 font-inter"
+          style={{
+            bottom: 'calc(12px + env(safe-area-inset-bottom))',
+            background: 'rgba(255,255,255,0.42)',
+            backdropFilter: 'blur(14px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(14px) saturate(180%)',
+            borderColor: 'rgba(255,255,255,0.6)',
+            boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.9), 0 10px 28px -12px rgba(30,27,75,0.35)',
+          }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/app-icon.png" alt="" className="w-11 h-11 rounded-xl" />
+          <img src="/app-icon.png" alt="" className="w-9 h-9 rounded-full shrink-0" />
           <div className="flex-1 min-w-0 leading-tight">
-            <div className="text-white font-semibold text-[15px]">Pawgress</div>
-            <div className="text-white/60 text-xs whitespace-nowrap">Free download · iOS &amp; Android</div>
+            <div className="font-semibold text-[14px] text-gray-900 truncate">Pawgress</div>
+            <div className="text-[11.5px] text-gray-700 truncate">iOS &amp; Android</div>
           </div>
-          <DownloadButton className="rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/30">
+          <DownloadButton className="shrink-0 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-md shadow-blue-600/30">
             Get the app
           </DownloadButton>
         </motion.div>

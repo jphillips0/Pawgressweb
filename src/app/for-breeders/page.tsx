@@ -249,7 +249,7 @@ export default function ForBreedersPage() {
                   className="relative z-10 rounded-3xl overflow-hidden shadow-2xl shadow-blue-900/20 border-4 border-white"
                 >
                   <img
-                    src="https://images.unsplash.com/photo-1742223059165-d50764c3e0be?auto=format&fit=crop&w=1200&q=80"
+                    src="/photos/breeders-hero.webp"
                     alt="Dogs together at sunset"
                     className="w-full h-auto block"
                   />
@@ -613,7 +613,7 @@ export default function ForBreedersPage() {
           >
             <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
               <img
-                src="https://images.unsplash.com/photo-1518963794447-3967204b300e?auto=format&fit=crop&w=1200&h=675&q=80"
+                src="/photos/breeders-cta.webp"
                 alt="Man playing with his happy dog"
                 className="w-full h-auto block"
               />

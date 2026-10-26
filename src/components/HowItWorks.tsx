@@ -381,7 +381,7 @@ export default function HowItWorks() {
               {/* Right: image with floating chips */}
               <div className="relative">
                 <motion.img
-                  src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1200&q=80"
+                  src="/photos/home-dog-cat.webp"
                   alt="Dog and cat resting together"
                   style={{ opacity: 0 }}
                   className="wpd-image relative w-full h-56 sm:h-72 lg:h-80 object-cover rounded-2xl shadow-2xl shadow-blue-900/15"
@@ -787,7 +787,7 @@ export default function HowItWorks() {
               >
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-blue-900/20 border-4 border-white">
                   <img
-                    src="https://images.unsplash.com/photo-1548858806-e064cf9872c0?auto=format&fit=crop&w=1200&q=80"
+                    src="/photos/home-trust.webp"
                     alt="Woman with puppy"
                     className="w-full block"
                   />
