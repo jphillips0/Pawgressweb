@@ -41,6 +41,10 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  // Edge-to-edge on iPhone: the page shows through behind the status bar and home
+  // indicator instead of solid bands. The header and download bar pad themselves
+  // with env(safe-area-inset-*) so their content clears the notch and home bar.
+  viewportFit: 'cover',
 };
 
 export default function RootLayout({

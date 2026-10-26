@@ -12,10 +12,5 @@
         { "key": "Content-Type", "value": "application/json" }
       ]
     }
-  ],
-  "rewrites": [
-    { "source": "/invite/:token", "destination": "/invite.html" },
-    { "source": "/kennel/:id", "destination": "/kennel.html" },
-    { "source": "/pet/:id", "destination": "/pet.html" }
   ]
 }

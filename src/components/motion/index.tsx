@@ -147,7 +147,7 @@ export function ScrollProgressBar() {
   return (
     <motion.div
       aria-hidden
-      className="fixed top-0 left-0 right-0 h-[3px] z-[60] origin-left bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"
+      className="hidden lg:block fixed top-0 left-0 right-0 h-[3px] z-[60] origin-left bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"
       style={{ scaleX }}
     />
   );

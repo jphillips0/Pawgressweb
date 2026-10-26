@@ -70,7 +70,7 @@ export function isUuid(value: string | undefined | null): value is string {
 
 let _client: SupabaseClient | null = null;
 
-function getServerSupabase(): SupabaseClient | null {
+export function getServerSupabase(): SupabaseClient | null {
   if (_client) return _client;
   if (!SUPABASE_ANON_KEY) {
     console.error('NEXT_PUBLIC_SUPABASE_ANON_KEY is not set; /litter pages cannot load data.');

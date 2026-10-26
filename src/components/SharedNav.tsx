@@ -75,8 +75,12 @@ export default function SharedNav() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 px-2.5 sm:px-5 lg:px-8 transition-all duration-500 ${baloo.className} ${
-        isScrolled ? 'pt-2 sm:pt-3' : 'pt-2.5 sm:pt-4'
+        isScrolled
+          ? 'pt-[calc(8px+env(safe-area-inset-top))] sm:pt-[calc(12px+env(safe-area-inset-top))]'
+          : 'pt-[calc(10px+env(safe-area-inset-top))] sm:pt-[calc(16px+env(safe-area-inset-top))]'
       }`}
+      // The nav strip itself is see-through; only the glass pill inside it is visible.
+      style={{ background: 'transparent', pointerEvents: 'none' }}
     >
       {/* Liquid glass pill: translucent, blurred and saturated, with a specular top edge */}
       <div
@@ -84,6 +88,7 @@ export default function SharedNav() {
           isScrolled ? 'pl-2.5 pr-3 py-1 sm:px-3 sm:py-1.5' : 'pl-2.5 pr-3 py-1.5 sm:px-4 sm:py-2.5'
         }`}
         style={{
+          pointerEvents: 'auto',
           background: isScrolled ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.18)',
           backdropFilter: 'blur(14px) saturate(180%)',
           WebkitBackdropFilter: 'blur(14px) saturate(180%)',
@@ -266,6 +271,7 @@ export default function SharedNav() {
             exit="closed"
             className="lg:hidden absolute top-full left-2.5 right-2.5 sm:left-5 sm:right-5 mt-2 rounded-[28px] border border-white/75 z-40 overflow-hidden max-h-[calc(100vh-5.5rem)] overflow-y-auto"
             style={{
+              pointerEvents: 'auto',
               background: 'rgba(255,255,255,0.74)',
               backdropFilter: 'blur(24px) saturate(180%)',
               WebkitBackdropFilter: 'blur(24px) saturate(180%)',

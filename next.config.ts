@@ -24,13 +24,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  async rewrites() {
-    return [
-      { source: "/invite/:token", destination: "/invite.html" },
-      { source: "/kennel/:id", destination: "/kennel.html" },
-      { source: "/pet/:id", destination: "/pet.html" },
-    ];
-  },
 };
 
 export default nextConfig;

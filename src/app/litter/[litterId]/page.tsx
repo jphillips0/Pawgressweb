@@ -8,6 +8,7 @@ import {
   type PublicPost,
   type PublicPuppy,
 } from '@/lib/publicLitter';
+import { previewImage } from '@/lib/linkPreviews';
 
 export const revalidate = 60;
 
@@ -161,8 +162,8 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const description = truncate(
     post?.content?.trim() || `Follow ${litterName}'s puppies as they grow on Pawgress`
   );
-  const image =
-    resizedImage(firstPostPhoto(post) ?? litter.cover_photo_url, 1200) ?? `${SITE_URL}/app-icon.png`;
+  // Stored _sized/1200 copy, not the billed-per-image render endpoint.
+  const image = previewImage(firstPostPhoto(post) ?? litter.cover_photo_url);
 
   return {
     title,
@@ -174,7 +175,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
       title,
       description,
       url,
-      images: [{ url: image, width: 1200, alt: litterName }],
+      images: [{ url: image, alt: litterName }],
     },
     twitter: { card: 'summary_large_image', title, description, images: [image] },
     other: { 'apple-itunes-app': `app-id=6752368171, app-argument=${url}` },
